@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
-    "start": "node server.js && eleventy --serve"
+    "prestart": "eleventy --serve",
+    "start": "node server.js"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.11.1",
