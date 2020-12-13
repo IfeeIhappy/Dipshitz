@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
-    "prestart": "eleventy --serve",
-    "start": "node server.js"
+    "start": "concurrently \"eleventy --serve\" \"node server.js\""
   },
   "dependencies": {
     "@11ty/eleventy": "^0.11.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "concurrently": "^5.3.0"
   },
   "engines": {
     "node": "12.x"

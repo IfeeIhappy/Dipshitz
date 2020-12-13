@@ -8,10 +8,14 @@ const app = express();
 
 // make all the files in 'src' available
 // https://expressjs.com/en/starter/static-files.html
-app.use(express.static("src"));
+app.use(express.static("dist"));
 
 app.get("/create-post", (request, response) => {
-  response.status(200);
+  if (request.query.key == process.env.api_key) {
+    response.sendStatus(200);
+  } else {
+    response.sendStatus(401);
+  }
 });
 
 // listen for requests :)
