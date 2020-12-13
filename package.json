@@ -1,21 +1,19 @@
 {
-  "name": "eleventy-on-glitch",
-  "description": "A starter template for 11ty (eleventy) static site generator on glitch.com",
-  "tags": [
-    "eleventy",
-    "11ty",
-    "ssr",
-    "static",
-    "glitch",
-    "template"
-  ],
+  "name": "webhook-to-eleventy-post",
+  "description": "Using 11ty (eleventy) as a blog, with webhook-enabled posting",
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve && node server.js"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.5.4"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
   },
   "license": "MIT"
 }

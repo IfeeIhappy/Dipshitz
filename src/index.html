@@ -8,3 +8,8 @@ Welcome to {{ siteData.name }}
 <p>
   This is test content. This live updates while you type!
 </p>
+<ul>
+{%- for post in collections.post -%}
+  <li>{{ post.data.title }}</li>
+{%- endfor -%}
+</ul>
