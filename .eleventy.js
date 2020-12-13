@@ -3,6 +3,12 @@
 module.exports = function(eleventyConfig) {
   
   // eleventyConfig.addFilter( "myFilter", function() {});
+  eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addCollection("posts", collection => {
+    return [...collection.getFilteredByGlob("./src/**/*.md")]
+      .filter(p => !p.data.draft)
+      .reverse();
+  });
  
   return {
     dir: {

@@ -3,13 +3,13 @@ layout: layouts/default.njk
 title: Hi 👋 I'm Tyler
 ---
 <h1>
-Welcome to {{ siteData.name }}
+{{ title }}
 </h1>
 <p>
   This is test content. This live updates while you type!
 </p>
 <ul>
-{%- for post in collections.post -%}
-  <li>{{ post.data.title }}</li>
+{%- for post in collections.posts -%}
+  <li><a href="{{ post.url }}">{{ post.url }}</a></li>
 {%- endfor -%}
 </ul>

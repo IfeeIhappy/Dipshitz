@@ -1,13 +1,14 @@
 {
-  "name": "webhook-to-eleventy-post",
-  "description": "Using 11ty (eleventy) as a blog, with webhook-enabled posting",
+  "name": "tylers-experimental-blogging-site",
+  "description": "Using 11ty (eleventy) as a blog, with express-hook-enabled posting",
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve && node server.js"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.5.4"
+    "@11ty/eleventy": "^0.11.1",
+    "express": "^4.17.1"
   },
   "engines": {
     "node": "12.x"
