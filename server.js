@@ -21,8 +21,8 @@ app.get("/create-post", (request, response) => {
       fs.writeFileSync(`src/${title}.md`, request.query.text, function (err) {
         if (err) return console.log(err);
         console.log('File created:', title);
+        response.send("Post published! <a href='/'>Check it out.</a>");
       });
-      response.sendStatus(200);
     }
     response.sendStatus(400);
   } else {

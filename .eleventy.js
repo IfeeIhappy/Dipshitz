@@ -8,8 +8,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addCollection("posts", collection => {
     return [...collection.getFilteredByGlob("./src/**/*.md")]
-      .filter(p => !p.data.draft)
-      .reverse();
+      .filter(p => !p.data.draft);
   });
  
   return {
