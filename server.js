@@ -4,6 +4,7 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
+const fs = require("fs");
 const app = express();
 
 // make all the files in 'src' available
@@ -12,7 +13,15 @@ app.use(express.static("dist"));
 
 app.get("/create-post", (request, response) => {
   if (request.query.key == process.env.api_key) {
-    response.sendStatus(200);
+    if (typeof request.query.text !== 'undefined') {
+      const title = Date.now() + ".md";
+      fs.writeFile(title, request.query.text, function (err) {
+        if (err) return console.log(err);
+        console.log('File created:', title);
+      });
+      response.sendStatus(200);
+    }
+    response.sendStatus(400);
   } else {
     response.sendStatus(401);
   }
