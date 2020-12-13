@@ -11,12 +11,14 @@ const app = express();
 // make all the files in 'src' available
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("dist"));
+app.use(express.static("src"));
 
 app.get("/create-post", (request, response) => {
   if (request.query.key == process.env.api_key) {
     if (typeof request.query.text !== 'undefined') {
-      const title = Date.now() + ".md";
-      fs.writeFileSync(`src/${title}`, request.query.text, function (err) {
+      const body = request.query.text;
+      const title = request.query.title.replace(" ","-");
+      fs.writeFileSync(`src/${title}.md`, request.query.text, function (err) {
         if (err) return console.log(err);
         console.log('File created:', title);
       });
