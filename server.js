@@ -21,7 +21,7 @@ app.get("/create-post", (request, response) => {
       fs.writeFileSync(`src/${title}.md`, request.query.text, function (err) {
         if (err) return console.log(err);
         console.log('File created:', title);
-        response.redirect("/");
+        response.redirect(window.location.hostname);
       });
     }
     response.sendStatus(400);
