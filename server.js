@@ -18,7 +18,7 @@ app.get("/create-post", (request, response) => {
     if (typeof request.query.text !== 'undefined') {
       const body = request.query.text;
       const title = request.query.title.replace(" ","-");
-      fs.writeFileSync(`src/${title}.md`, request.query.text, function (err) {
+      fs.writeFileSync(`src/${title}.md`, body, function (err) {
         if (err) return console.log(err);
         console.log('File created:', title);
         response.redirect(window.location.hostname);
