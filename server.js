@@ -11,9 +11,10 @@ const app = express();
 // make all the files in 'src' available
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("dist"));
-app.use(express.static("src"));
+app.use(express.json());
 
 app.get("/write-from-drafts", (request, response) => {
+  const data = 
   if (request.query.key == process.env.api_key) {
     if (typeof request.query.draft !== 'undefined') {
       const body = request.query.draft;
