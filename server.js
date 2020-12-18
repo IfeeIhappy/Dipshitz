@@ -13,15 +13,15 @@ const app = express();
 app.use(express.static("dist"));
 app.use(express.static("src"));
 
-app.get("/create-post", (request, response) => {
+app.get("/write-from-drafts", (request, response) => {
   if (request.query.key == process.env.api_key) {
-    if (typeof request.query.text !== 'undefined') {
-      const body = request.query.text;
-      const title = request.query.title.replace(" ","-");
-      fs.writeFileSync(`src/${title}.md`, body, function (err) {
+    if (typeof request.query.draft !== 'undefined') {
+      const body = request.query.draft;
+      const filename = request.query.title.replace(/\s/,"-");
+      fs.writeFileSync(`src/${filename}.md`, body, function (err) {
         if (err) return console.log(err);
-        console.log('File created:', title);
-        response.redirect(window.location.hostname);
+        console.log('File created:', filename);
+        response.sendStatus(200);
       });
     }
     response.sendStatus(400);
