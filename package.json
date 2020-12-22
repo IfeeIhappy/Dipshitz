@@ -1,6 +1,6 @@
 {
   "name": "tylers-experimental-blogging-site",
-  "description": "Using 11ty (eleventy) as a blog, with express-API-enabled posting",
+  "description": "tyler's trying to find a new way to write",
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js"

@@ -1,8 +1,8 @@
 # tyler's experiments in blogging
 
-Here's what I'm using:
+The goal: to have a clean, minimal writing surface that lets me:
 
-- [eleventy-on-glitch](https://glitch.com/~eleventy-on-glitch)
-- [geoglitchies](https://glitch.com/~geoglitchies)
-- [hello-express](https://glitch.com/~hello-express)
-- [Drafts](https://getdrafts.com/)
+1. Write with markdown
+2. Post from my phone (using Drafts)
+3. Quickly share individual posts to Twitter
+4. Own and quickly export my content 
