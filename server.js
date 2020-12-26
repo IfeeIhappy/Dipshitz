@@ -39,13 +39,12 @@ app.get("/", (req, res) => {
 app.post("/write", (req, res) => {
   if(req.body.key == process.env.key){
     res.sendStatus(200);
-    console.log(req.body.title, req.body.content);
-    fs.writeFile('helloworld.txt', 'Hello World!', function (err) {
+    fs.writeFile(`./posts/${req.body.title}.md`, req.body.content, function (err) {
       if (err) return console.log(err);
-      console.log('Hello World > helloworld.txt');
+      console.log('Wrote file', req.body.title);
     });
   } else {
-    req.sendStatus(401);
+    req.send('Unauthorized');
   }
 });
 
