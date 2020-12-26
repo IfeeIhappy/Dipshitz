@@ -14,3 +14,5 @@ To have a clean, minimal writing surface that lets me:
 - [Drafts](https://getdrafts.com/)
 - [Glitch](https://glitch.com/)
 - [Express](http://expressjs.com/)
+- [Pug](https://pugjs.org/)
+- [Showdown](http://showdownjs.com/)

@@ -6,7 +6,7 @@ const port = 3000;
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Hey', content: 'Hello there!' })
+  res.render('default', { title: 'Hey', content: 'Hello there!' })
 });
 
 app.listen(port, () => {
