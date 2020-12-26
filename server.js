@@ -5,8 +5,13 @@ const port = 3000;
 
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-  res.render('default', { title: 'Hey', content: 'Hello there!' })
+app.get('/:post', (req, res) => {
+  if (req.params.post == "") {
+    res.render('default', { title: 'Post', content: req
+                           .params.post });
+  } else {
+    res.render('default', { title: 'Hey', content: 'Hello there!' });
+  }
 });
 
 app.listen(port, () => {
