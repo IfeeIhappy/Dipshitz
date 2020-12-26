@@ -1,23 +1,39 @@
 const fs = require('fs');
 const express = require('express');
+const showdown  = require('showdown');
+const converter = new showdown.Converter();
+
 const app = express();
 const port = 3000;
-const path = 'posts';
+const path = require('./posts'); 
 
 app.set('view engine', 'pug');
 
 app.get('/read/:post', (req, res) => {
   if (typeof(req.params.post) !== "undefined") {
-    const path = require(path); 
-    const files = fs.readdirSync(__dirname); 
+    const filenames = fs.readdirSync(path, function(err, files){
+      files = files.map(function (fileName) {
+      return {
+        name: fileName,
+        time: fs.statSync(path + '/' + fileName).mtime.getTime()
+      };
+      })
+      .sort(function (a, b) {
+        return a.time - b.time; })
+      .map(function (v) {
+        return v.name; });
+    });
     var posts = [];
-    files.forEach(file => { 
+    filenames.forEach(file => { 
       if (path.extname(file) == ".md") {
         posts.push(file.split('.')[0]);
       }
     });
     if (posts.indexOf(req.params.post) > -1){
-      res.render('default', { title: 'Post', content: req.params.post });
+      const markdown = fs.readfileSync(`./posts/${req.params.post}.md`);
+      const html = converter.makeHtml(markdown);
+      const title = markdown.match(/(\w.*)\n/)[0];
+      res.render('default', { title: title, content: html });
     } else {
       res.redirect('/');
     }
