@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 const path = "./posts";
 
+app.use(express.json());
 app.set("view engine", "pug");
 
 app.get("/read/:post", (req, res) => {
@@ -36,8 +37,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/write", (req, res) => {
-  console.log(req.data);
-  res.sendStatus(200);
+  if(req.body.key == process.env.key){
+    res.sendStatus(200);
+    console.log(req.body.title, req.body.content);
+    fs.writeFile('helloworld.txt', 'Hello World!', function (err) {
+      if (err) return console.log(err);
+      console.log('Hello World > helloworld.txt');
+    });
+  } else {
+    req.sendStatus(401);
+  }
 });
 
 app.listen(port, () => {
