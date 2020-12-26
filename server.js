@@ -33,7 +33,13 @@ app.get("/", (req, res) => {
   const text = fs.readFileSync(`./posts/index.md`, "utf8");
   const html = converter.makeHtml(text);
   const title = text.match(/(\w.*)\n/)[0];
-  res.render("default", { title: title, content: html });
+  var list = "";
+    fs.readdirSync(path).forEach(file => {
+      var filename = file.split('.')[0];
+      var title = filename.replace(/\-/," ");
+      list += `<li><a href='/read/${filename}'>${title}</a></li>`;
+    });
+  res.render("index", { title: title, content: html, list: list });
 });
 
 app.post("/write", (req, res) => {

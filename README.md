@@ -1,4 +1,4 @@
-# tyler's experiments in blogging
+# welcome to tyler's experiments in blogging
 
 ## The goal:
 
