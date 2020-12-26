@@ -8,8 +8,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "showdown": "^1.9.1",
-    "pug": "^3.0.0",
-    "bulma": "^0.9.1"
+    "pug": "^3.0.0"
   },
   "engines": {
     "node": "12.x"

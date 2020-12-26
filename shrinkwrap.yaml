@@ -1,5 +1,4 @@
 dependencies:
-  bulma: 0.9.1
   express: 4.17.1
   pug: 3.0.0
   showdown: 1.9.1
@@ -90,10 +89,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
-  /bulma/0.9.1:
-    dev: false
-    resolution:
-      integrity: sha512-LSF69OumXg2HSKl2+rN0/OEXJy7WFEb681wtBlNS/ulJYR27J3rORHibdXZ6GVb/vyUzzYK/Arjyh56wjbFedA==
   /bytes/3.1.0:
     dev: false
     engines:
@@ -843,7 +838,6 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  bulma: ^0.9.1
   express: ^4.17.1
   pug: ^3.0.0
   showdown: ^1.9.1

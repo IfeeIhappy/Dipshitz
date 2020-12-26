@@ -35,6 +35,11 @@ app.get("/", (req, res) => {
   res.render("default", { title: title, content: html });
 });
 
+app.post("/write", (req, res) => {
+  console.log(req.data);
+  res.sendStatus(200);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
