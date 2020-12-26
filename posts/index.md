@@ -1,13 +1,14 @@
 ---
-title: Tyler's First Post
-date: 2020-22-12
-draft: false
+title: Tyler's Adventures in Blogging
+category: index
 ---
+# Hi! 👋 I'm Tyler.
 
-# Here we go! 
+I'm a writer and maker, and this is my new page for writing!
+
 ## What is this?
 
-So I'm looking for a new way to write things online -- up until now, I've been using a comped Squarespace site (I worked there for a few years), and while it's been nice to have, the interface is more cumbserome than I would ever need or want. 
+I've been looking for a new way to write things online. Up until now, I've been using a comped Squarespace site (I worked there for a few years), and while it's been nice to have, the interface is more cumbserome than I would ever need or want. 
 
 The fact is that most of what I'm writing will only ever be just text. I won't need Summary Blocks or Gallery Images or any one of a million embed they offer, and I don't want to have to make six clicks before I can start writing. I just want to start. 
 
