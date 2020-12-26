@@ -1,25 +1,14 @@
-const
-  express = require('express'),
-  app = express(),
-  port = 3000,
-  Poet = require('poet');
+const fs = require('fs');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const poet = Poet(app, {
-  posts: './posts/',
-  postsPerPage: 5,
-  metaFormat: 'yaml'
-});
+app.set('view engine', 'pug');
 
-poet.init().then(function () {
-  // ready to go!
-});
-
-/*
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.render('index', { title: 'Hey', content: 'Hello there!' })
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
-})
-*/
+});
