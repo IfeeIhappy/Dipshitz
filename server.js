@@ -41,7 +41,8 @@ app.get("/", (req, res) => {
   var posts = getPosts();
   
   posts.forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a> <span class="meta">${post.modified == post.created ? "Posted on " + post.created : "Modified on " + post.modified}</span></li>`;
+    var meta = post.modified == post.created ? `Posted ${post.created.getFullyear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullyear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a> <span class="meta">${meta}</span></li>`;
   });
   res.render("index", { title: title, content: html, list: list });
 });
@@ -76,11 +77,11 @@ const getPosts = () => {
                 "markdown": markdown,
                 "title": markdown.match(/(\w.*)\n/)[0],
                 "html": converter.makeHtml(markdown),
-                "created": `${stats.ctime.getFullYear()}-${stats.ctime.getMonth()}-${stats.ctime}`,
-                "modified": `${stats.mtime}-${stats.ctime}-${stats.ctime}`
+                "created": stats.ctime,
+                "modified": stats.mtime
               };
             })
             .sort((a,b) => {
-              return b.modified - a.modified
+              return b.modified.getTime() - a.modified.getTime();
             });
 };
