@@ -1,2 +1,4 @@
 dist
 node_modules
+posts/*.md
+drafts/*.md

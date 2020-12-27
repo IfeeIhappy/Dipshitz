@@ -13,15 +13,11 @@ app.set("view engine", "pug");
 /* When a user follows a direct link to a published post */
 app.get("/read/:post", (req, res) => {
   if (typeof req.params.post !== "undefined") {
-    var posts = [];
-    fs.readdirSync(path).forEach(file => {
-      posts.push(file);
-    });
-    if (posts.indexOf(`${req.params.post}.md`) > -1) {
-      const text = fs.readFileSync(`./posts/${req.params.post}.md`, "utf8");
-      const html = converter.makeHtml(text);
-      const title = text.match(/(\w.*)\n/)[0];
-      res.render("post", { title: title, content: html });
+    var posts = getPosts();
+    var postID = posts.findIndex(p => p.slug == req.params.post);
+    if (postID > -1) {
+      var post = posts[postID];
+      res.render("post", { title: post.title, content: post.html });
     } else {
       res.redirect("/");
     }
@@ -68,6 +64,8 @@ app.listen(port, () => {
 });
 
 const getPosts = () => {
+  /* Get everything from posts/ and sort it by modified date */
+  /* Cant't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
   return fs.readdirSync(path)
             .map(file => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
