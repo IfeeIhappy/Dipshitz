@@ -41,8 +41,8 @@ app.get("/", (req, res) => {
   var posts = getPosts();
   
   posts.forEach(post => {
-    var meta = post.modified == post.created ? `Posted ${post.created.getFullyear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullyear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a> <span class="meta">${meta}</span></li>`;
+    var meta = post.modified == post.created ? `Posted ${post.created.getFullYear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullYear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${meta}</span></li>`;
   });
   res.render("index", { title: title, content: html, list: list });
 });

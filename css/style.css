@@ -58,12 +58,6 @@ a:active {
   border-color: var(--hover);
 }
 
-.meta {
-  font-size: 14px;
-  color: #636e72;
-  margin-left: 20px;
-}
-
 .quiet {
   opacity: 0.8;
 }
@@ -75,5 +69,9 @@ a:active {
 
 .post-list ul li {
   margin-bottom: 10px;
-  line-height: 2em;
+}
+
+.post-list .meta {
+  font-size: 12px;
+  color: #636e72;
 }
