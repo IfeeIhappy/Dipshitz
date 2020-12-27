@@ -30,7 +30,7 @@ app.get("/read/:post", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  const text = fs.readFileSync(`./posts/index.md`, "utf8");
+  const text = fs.readFileSync("./drafts/index.md", "utf8");
   const html = converter.makeHtml(text);
   const title = text.match(/(\w.*)\n/)[0];
   var list = "";
