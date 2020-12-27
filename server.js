@@ -38,12 +38,11 @@ app.get("/", (req, res) => {
   const title = text.match(/(\w.*)\n/)[0];
   
   var list = "";
-  fs.readdirSync(path)
-    .forEach(file => {
-      var filename = file.split(".")[0];
-      var title = filename.replace(/\-/gi, " ");
-      list += `<li><a href='/read/${filename}'>${title}</a></li>`;
-    });
+  var posts = getPosts();
+  
+  posts.forEach(post => {
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a> <span class="meta">${post.modified == post.created ? "Posted on " + post.created : "Modified on " + post.modified}</span></li>`;
+  });
   res.render("index", { title: title, content: html, list: list });
 });
 
@@ -68,19 +67,20 @@ app.listen(port, () => {
 });
 
 const getPosts = () => {
-  var list = fs.readdirSync(path)
-    .map(file => {
-      var markdown = fs.readFileSync(file, "utf8");
-      var stats = fs.statSync(file);
-      return {
-        "slug": file.split(".")[0],
-        "markdown": markdown,
-        "title": markdown.match(/(\w.*)\n/)[0],
-        "html": converter.makeHtml(markdown),
-        "created": 
-      };
-    })
-    .sort(post => {
-      
-    });
+  return fs.readdirSync(path)
+            .map(file => {
+              var markdown = fs.readFileSync(file, "utf8");
+              var stats = fs.statSync(file);
+              return {
+                "slug": file.split(".")[0],
+                "markdown": markdown,
+                "title": markdown.match(/(\w.*)\n/)[0],
+                "html": converter.makeHtml(markdown),
+                "created": stats.ctime,
+                "modified": stats.mtime
+              };
+            })
+            .sort((a,b) => {
+              return b.modified - a.modified
+            });
 };
