@@ -32,9 +32,11 @@ app.get("/read/:post", (req, res) => {
 
 /* List all published posts on the index page */
 app.get("/", (req, res) => {
+  /* Get the index page from drafts/ */
   const text = fs.readFileSync("./drafts/index.md", "utf8");
   const html = converter.makeHtml(text);
   const title = text.match(/(\w.*)\n/)[0];
+  
   var list = "";
   fs.readdirSync(path)
     .forEach(file => {
@@ -64,3 +66,13 @@ app.post("/write", (req, res) => {
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
+
+const getPosts = () => {
+  var list = fs.readdirSync(path)
+    .map(file => {
+      var slug = file.split(".")[0];
+      var markdown = fs.readFileSync(file, "utf8");
+      var title = markdown.match(/(\w.*)\n/)[0];
+      var html = converter.makeHtml(markdown);
+    });
+};
