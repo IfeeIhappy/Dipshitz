@@ -6,6 +6,7 @@ html
   body
     .container 
       | !{content}
-      ul
-        | !{list}
-    include footer
+      .post-list
+        ul
+          |  !{list}
+      include footer

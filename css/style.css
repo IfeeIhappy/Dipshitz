@@ -20,11 +20,13 @@ body {
 }
 
 .header {
-  margin-top: 60px;
+  margin: 50px 0px;
 }
 
 .footer {
+  border-top: 10px solid var(--accent);
   margin: 50px 0px;
+  padding-top: 50px;
 }
 
 h1, h2, h3 {
@@ -55,11 +57,9 @@ a:hover, a:active {
 }
 
 .quiet {
-  font-size: .75em;
-  color: var(--quiet);
+  opacity: 0.8;
 }
 
-.quiet a {
-  color: var(--quiet-link);
-  border-bottom: 2px solid var(--quiet-link);
+.post-list ul li {
+  list-style-type: none;
 }
