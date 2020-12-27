@@ -4,6 +4,8 @@
   --accent: #0652DD;
   --link: #0652DD;
   --hover: #1B1464;
+  --quiet: #5758BB;
+  --quiet-link: #9980FA;
 }
 
 
@@ -23,27 +25,41 @@ body {
 
 .footer {
   margin: 50px 0px;
-  font-size: 14px;
-  color: var(--accent);
 }
 
 h1, h2, h3 {
-  border-bottom: 10px solid var(--accent);
+  border-bottom: 10px solid !important;
+  border-color: var(--accent);
   color: var(--accent);
 }
 
+p {
+  line-height: 2em;
+}
+
 a {
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
   margin: 0px;
+  border-bottom: 3px solid var(--link);
 }
 
 a, a:visited {
   color: var(--link);
-  border-bottom: 3px solid var(--link);
+  border-color: var(--link);
 }
 
 a:hover, a:active {
   color: var(--hover);
-  border-bottom: 3px solid var(--hover);
+  border-color: var(--hover);
+}
+
+.quiet {
+  font-size: .75em;
+  color: var(--quiet);
+}
+
+.quiet a {
+  color: var(--quiet-link);
+  border-bottom: 2px solid var(--quiet-link);
 }
