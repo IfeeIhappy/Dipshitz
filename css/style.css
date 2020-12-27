@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap");
 
 :root {
   --accent: #0652DD;
@@ -8,9 +8,8 @@
   --quiet-link: #9980FA;
 }
 
-
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
 }
 
@@ -24,15 +23,16 @@ body {
 }
 
 .footer {
-  border-top: 10px solid var(--accent);
-  margin: 50px 0px;
-  padding-top: 50px;
+  margin: 100px 0px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   border-bottom: 10px solid !important;
   border-color: var(--accent);
   color: var(--accent);
+  font-weight: 400;
 }
 
 p {
@@ -46,12 +46,14 @@ a {
   border-bottom: 3px solid var(--link);
 }
 
-a, a:visited {
+a,
+a:visited {
   color: var(--link);
   border-color: var(--link);
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   color: var(--hover);
   border-color: var(--hover);
 }
