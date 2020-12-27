@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 666px;
+  max-width: 720px;
   margin: 25px auto;
 }
 
@@ -58,11 +58,22 @@ a:active {
   border-color: var(--hover);
 }
 
+.meta {
+  font-size: 14px;
+  color: #636e72;
+  margin-left: 20px;
+}
+
 .quiet {
   opacity: 0.8;
 }
 
-.post-list ul li {
+.post-list ul {
   list-style-type: none;
+  padding: 0;
+}
+
+.post-list ul li {
   margin-bottom: 10px;
+  line-height: 2em;
 }

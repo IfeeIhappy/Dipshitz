@@ -69,15 +69,15 @@ app.listen(port, () => {
 const getPosts = () => {
   return fs.readdirSync(path)
             .map(file => {
-              var markdown = fs.readFileSync(file, "utf8");
-              var stats = fs.statSync(file);
+              var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
+              var stats = fs.statSync(`${path}/${file}`);
               return {
                 "slug": file.split(".")[0],
                 "markdown": markdown,
                 "title": markdown.match(/(\w.*)\n/)[0],
                 "html": converter.makeHtml(markdown),
-                "created": stats.ctime,
-                "modified": stats.mtime
+                "created": `${stats.ctime.getFullYear()}-${stats.ctime.getMonth()}-${stats.ctime}`,
+                "modified": `${stats.mtime}-${stats.ctime}-${stats.ctime}`
               };
             })
             .sort((a,b) => {
