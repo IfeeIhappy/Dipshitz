@@ -32,7 +32,7 @@ h3 {
   border-bottom: 10px solid !important;
   border-color: var(--accent);
   color: var(--accent);
-  font-weight: 400;
+  font-weight: 600;
 }
 
 p {
@@ -64,4 +64,5 @@ a:active {
 
 .post-list ul li {
   list-style-type: none;
+  margin-bottom: 10px;
 }
