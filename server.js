@@ -20,7 +20,7 @@ app.get("/read/:post", (req, res) => {
       const text = fs.readFileSync(`./posts/${req.params.post}.md`, "utf8");
       const html = converter.makeHtml(text);
       const title = text.match(/(\w.*)\n/)[0];
-      res.render("default", { title: title, content: html });
+      res.render("post", { title: title, content: html });
     } else {
       res.redirect("/");
     }
