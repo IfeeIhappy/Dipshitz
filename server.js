@@ -70,9 +70,17 @@ app.listen(port, () => {
 const getPosts = () => {
   var list = fs.readdirSync(path)
     .map(file => {
-      var slug = file.split(".")[0];
       var markdown = fs.readFileSync(file, "utf8");
-      var title = markdown.match(/(\w.*)\n/)[0];
-      var html = converter.makeHtml(markdown);
+      var stats = fs.statSync(file);
+      return {
+        "slug": file.split(".")[0],
+        "markdown": markdown,
+        "title": markdown.match(/(\w.*)\n/)[0],
+        "html": converter.makeHtml(markdown),
+        "created": 
+      };
+    })
+    .sort(post => {
+      
     });
 };
