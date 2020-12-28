@@ -11,7 +11,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 18px;
+  font-size: 1.2em;
 }
 
 .container {
@@ -66,14 +66,24 @@ a:active {
 }
 
 .post-list ul li {
+  font-size: 1.5em;
+  line-height: 1em;
   margin-bottom: 10px;
 }
 
 .post-list ul li a {
   font-family: "Arvo", serif;
+  font-weight: 700;
 }
 
 .post-list .meta {
-  font-size: 12px;
+  font-size: 0.5em;
   color: #636e72;
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    margin: 10px;
+  }
 }
