@@ -31,6 +31,6 @@ Using Express, I can POST data to the "write/" endpoint on this site, and (provi
 I've added some basic CSS, but that'll be a work in progress, I'm sure. The next big things will be:
 
 - RSS feed support
-- Become a Glitch Member
+- Become a Glitch Member (Going to see how much I can get away with for free first)
 - Custom domain
 - Clean up the Glitch project for easier remixing
