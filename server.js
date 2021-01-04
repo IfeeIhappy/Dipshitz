@@ -60,12 +60,13 @@ app.post("/write", (req, res) => {
 /* RSS Feed - Honestly not sure yet if this will work */
 app.get("/rss", (req, res) => {
   var siteLink = 'https://tyler.robertson.click';
-  var rss = `<?xml version="1.0"?><rss version="2.0"><channel><title>Written by Tyler Robertson</title><link>${siteLink}</link><description>Missives and found documents from the desk of Tyler Robertson.</description>`;
+  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${siteLink}/rss" rel="self" type="application/rss+xml" /><title>Written by Tyler Robertson</title><link>${siteLink}</link><description>Missives and found documents from the desk of Tyler Robertson.</description>`;
   var posts = getPosts();
   posts.forEach(post => {
-    rss += `<item><title>$post.title</title><link>${siteLink}/read/${post.slug}</link><description>${post.html}</description></item>`;
+    rss += `<item><title>$post.title</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.modified.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += '</channel></rss>';
+  res.set('Content-Type', 'application/rss+xml');
   res.send(rss);
 });
 
