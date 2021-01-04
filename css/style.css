@@ -54,13 +54,11 @@ a:active {
 }
 
 .post-list ul {
-  list-style-type: none;
+  list-style-type: '📝';
   padding: 20px;
 }
 
 .post-list ul li {
-  font-size: 1.5em;
-  line-height: 1em;
   margin-bottom: 10px;
 }
 
@@ -78,6 +76,7 @@ a:active {
 
 .meta {
   font-size: .75em;
+  margin-left: 1em;
   color: var(--accent);
 }
 

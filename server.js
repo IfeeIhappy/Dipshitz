@@ -17,8 +17,7 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug == req.params.post);
     if (postID > -1) {
       var post = posts[postID];
-      var meta = post.modified == post.created ? `Posted ${post.created.getFullYear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullYear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
-      res.render("post", { title: post.title, content: post.html, meta: meta });
+      res.render("post", { title: post.title, content: post.html, meta: post.meta });
     } else {
       res.redirect("/");
     }
@@ -38,8 +37,7 @@ app.get("/", (req, res) => {
   var posts = getPosts();
   
   posts.forEach(post => {
-    var meta = post.modified == post.created ? `Posted ${post.created.getFullYear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullYear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${meta}</span></li>`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
   });
   res.render("index", { title: title, content: html, list: list });
 });
@@ -74,13 +72,16 @@ const getPosts = () => {
               var content = markdown.replace(title,"");
               var stats = fs.statSync(`${path}/${file}`);
               var meta = stats.mtime == stats.ctime ? `Posted ${stats.ctime.getFullYear()}/${stats.ctime.getMonth()+1}/${stats.ctime.getDate()}` : `Updated ${stats.mtime.getFullYear()}/${stats.mtime.getMonth()+1}/${stats.mtime.getDate()}`;
+              var words = markdown.trim().split(/\s+/).length;
+              var readingTime = words / 250;
               return {
                 "slug": file.split(".")[0],
                 "markdown": markdown,
                 "title": title,
                 "html": converter.makeHtml(content),
                 "created": stats.ctime,
-                "modified": stats.mtime
+                "modified": stats.mtime,
+                "meta": `~${readingTime.toFixed(1)} min. read | ${meta}`,
               };
             })
             .sort((a,b) => {
