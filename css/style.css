@@ -7,23 +7,23 @@
 }
 
 html {
-  font-size: medium;
+  font-size: 18px;
 }
 body {
   font-family: "Open Sans", sans-serif;
 }
 
 .container {
-  max-width: 720px;
-  margin: 25px auto;
+  max-width: 45rem;
+  margin: 2rem auto;
 }
 
 .header {
-  margin: 50px 0px;
+  margin: 2rem 0rem;
 }
 
 .footer {
-  margin: 100px 0px;
+  margin: 5rem 0rem;
 }
 
 h1,
@@ -33,10 +33,15 @@ h3 {
   font-weight: 700;
 }
 
+p {
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
 a {
   transition: all 0.2s ease;
   text-decoration: none;
-  margin: 0px;
+  margin: 0rem;
 }
 
 a,
@@ -56,33 +61,33 @@ a:active {
 }
 
 .post-list ul li {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .post-list ul li a {
   font-weight: 700;
-  font-size: x-large;
+  font-size: 1.25rem;
 }
 
 .post-title {
-  font-size: xx-large;
+  font-size: 3rem;
   color: var(--accent);
   font-weight: 700;
 }
 
 .meta {
-  font-size: medium;
+  font-size: 0.75rem;
   color: var(--accent);
 }
 
 
 @media (max-width: 100em) {  
   html {
-    font-size: x-large;
+    font-size: 35px;
   }
   .container {
     max-width: 100%;
-    margin: 1em;
+    margin: 2rem 1rem;
   }
 }
 
