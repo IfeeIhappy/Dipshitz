@@ -4,7 +4,9 @@ html
     style
       include ../css/style.css
   body
-    .container 
+    .container
+      .post-title
+        | !{title}
       | !{content}
       .post-list
         ul

@@ -36,7 +36,7 @@ app.get("/read/:post", (req, res) => {
 app.get("/", (req, res) => {
   /* Get the index page */
   
-  var markdown = fs.readFileSync("./posts/index.md", "utf8");
+  var markdown = fs.readFileSync("./index.md", "utf8");
   var title = markdown.match(/(\w.*)\n/)[0];
   var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
   const html = converter.makeHtml(content);

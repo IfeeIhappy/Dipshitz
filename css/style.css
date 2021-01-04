@@ -33,10 +33,6 @@ h3 {
   font-weight: 700;
 }
 
-p {
-  line-height: 2em;
-}
-
 a {
   transition: all 0.2s ease;
   text-decoration: none;
@@ -57,11 +53,10 @@ a:active {
 
 .post-list ul {
   list-style-type: '📝 ';
-  padding: 20px;
 }
 
 .post-list ul li {
-  margin: 1em;
+  margin-bottom: 1em;
 }
 
 .post-list ul li a {
@@ -79,15 +74,7 @@ a:active {
 .meta {
   font-size: medium;
   color: var(--accent);
-}
-
-@media (max-width: 1000px) {
-  html {
-    font-size: large;
-  }
-  .container {
-    margin: 1em;
-  }
+  margin-top: 1em;
 }
 
 
