@@ -100,16 +100,14 @@ const getPosts = () => {
               var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
               
               var stats = fs.statSync(`${path}/${file}`);
-              var pubdate = stats.birthtime;
-              var modified = stats.mtime;
+              var pubdate = stats.mtime;
     
               /* Pre-write the metadata (might change later) */
               var words = markdown.trim().split(/\s+/).length;
               var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
               var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-              var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} |`;
-              var displayModified = `${months[modified.getMonth()]} ${modified.getDate()} ${modified.getFullYear()} |`;
-              var meta = `${displayPub != displayModified ? 'Published ' : ''}${displayPub} ${displayPub != displayModified ? displayModified : ''} ~${readingTime.toFixed(1)}-minute read`;
+              var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} @ ${pubdate.getHours()}:${pubdate.getMinutes() < 10 ? '0' : ''}${pubdate.getMinutes()}`;
+              var meta = `${displayPub} | ${readingTime.toFixed(1)}m read`;
     
               return {
                 "slug": file.split(".")[0],
@@ -117,7 +115,6 @@ const getPosts = () => {
                 "title": title,
                 "html": converter.makeHtml(content),
                 "pubdate": pubdate,
-                "modified": modified,
                 "meta": meta
               };
             })

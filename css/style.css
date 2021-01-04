@@ -6,9 +6,11 @@
   --hover: #74b9ff;
 }
 
+html {
+  font-size: 18px
+}
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 18px;
 }
 
 .container {
@@ -81,9 +83,9 @@ a:active {
   color: var(--accent);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
+  
   .container {
-    max-width: 100%;
-    margin: 10px;
+    margin: 1em;
   }
 }
