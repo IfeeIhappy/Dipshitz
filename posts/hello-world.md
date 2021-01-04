@@ -1,4 +1,4 @@
-# How it works
+# Hello, world 👋🌎
 
 In trying to find a new way to publish my writing, I turned to [Glitch](https://glitch.com/) for a few reasons:
 
@@ -20,7 +20,7 @@ I started by "remixing" the [hello-express](https://glitch.com/~hello-express) p
 
 When a request comes in for the "/" directory, it looks for a markdown document at "drafts/index.md" and converts that file's contents to HTML with [Showdown](http://showdownjs.com/). Then, it uses [Pug](https://pugjs.org/) to apply that HTML to a template and display it to the reader. 
 
-Requests to "read/" are similar, but instead I have Express also looking for a post's slug in the URL. For example, this post is at [read/how-it-works](https://tyler-robertson-blog.glitch.me/read/how-it-works). When a post slug is provided, I look through the "posts/" and "drafts/" folders to find a match, convert it to HTML, and display it. If no matches are found, Express redirects back to the index. 
+Requests to "read/" are similar, but instead I have Express also looking for a post's slug in the URL. For example, this post is at [read/hello-world](/read/hello-world). When a post slug is provided, I look through the "posts/" and "drafts/" folders to find a match, convert it to HTML, and display it. If no matches are found, Express redirects back to the index. 
 
 The end result feels not unlike static site generators like [Jekyll](https://jekyllrb.com/) or [11ty](https://www.11ty.dev/), both great solutions if you're writing markdown directly into your console or browser. I'm opting not to use either of those solutions (yet), because of the other listener I have set up: "write/".
 
@@ -30,7 +30,8 @@ Using Express, I can POST data to the "write/" endpoint on this site, and (provi
 
 I've added some basic CSS, but that'll be a work in progress, I'm sure. The next big things will be:
 
-- RSS feed support
+- RSS feed support (edit: [it lives](/rss))
 - Become a Glitch Member (Going to see how much I can get away with for free first)
-- Custom domain
+- Custom domain (edit: [huzzah](https://tyler.robertson.click))
+- Rebuild and share my Drafts action for posting ([based on this one](https://actions.getdrafts.com/a/1Hf))
 - Clean up the Glitch project for easier remixing
