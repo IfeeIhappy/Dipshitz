@@ -75,7 +75,7 @@ app.get("/rss", (req, res) => {
       `;
   var posts = getPosts();
   posts.forEach(post => {
-    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.modified.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += '</channel></rss>';
   res.set('Content-Type', 'application/rss+xml');
@@ -98,21 +98,28 @@ const getPosts = () => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
               var title = markdown.match(/(\w.*)\n/)[0];
               var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
+              
               var stats = fs.statSync(`${path}/${file}`);
-              var meta = stats.mtime == stats.ctime ? `Posted ${stats.ctime.getFullYear()}/${stats.ctime.getMonth()+1}/${stats.ctime.getDate()}` : `Updated ${stats.mtime.getFullYear()}/${stats.mtime.getMonth()+1}/${stats.mtime.getDate()}`;
+              var pubdate = stats.birthtime;
+              var modified = stats.mtime;
+    
+              /* Pre-write the metadata (might change later) */
               var words = markdown.trim().split(/\s+/).length;
               var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
+              var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              var meta = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} | ~${readingTime.toFixed(1)}-minute read`;
+    
               return {
                 "slug": file.split(".")[0],
                 "markdown": markdown,
                 "title": title,
                 "html": converter.makeHtml(content),
-                "created": stats.ctime,
-                "modified": stats.mtime,
-                "meta": `${meta} | ~${readingTime.toFixed(1)}-minute read`,
+                "pubdate": pubdate,
+                "modified": modified,
+                "meta": meta
               };
             })
             .sort((a,b) => {
-              return b.modified.getTime() - a.modified.getTime();
+              return b.pubdate.getTime() - a.pubdate.getTime();
             });
 };
