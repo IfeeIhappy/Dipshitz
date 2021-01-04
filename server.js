@@ -4,7 +4,7 @@ const showdown = require("showdown");
 const converter = new showdown.Converter();
 
 const app = express();
-app.set('trust proxy', true); // <- required
+app.set('trust proxy', true); 
 app.use((req, res, next) => {
   if(!req.secure) return res.redirect('https://' + req.get('host') + req.url);
   next();

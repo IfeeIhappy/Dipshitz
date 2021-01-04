@@ -1,14 +1,9 @@
-html
-  head
-    title= title
-    style
-      include ../css/style.css
-  body
-    .container
-      .post-title
-        | !{title}
-      | !{content}
-      .post-list
-        ul
-          |  !{list}
-      include footer
+include header
+.container
+  .post-title
+    | !{title}
+  | !{content}
+  .post-list
+    ul
+      |  !{list}
+  include footer
