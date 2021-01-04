@@ -17,7 +17,8 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug == req.params.post);
     if (postID > -1) {
       var post = posts[postID];
-      res.render("post", { title: post.title, content: post.html });
+      var meta = post.modified == post.created ? `Posted ${post.created.getFullYear()}-${post.created.getMonth()+1}-${post.created.getDate()}` : `Modified ${post.modified.getFullYear()}-${post.modified.getMonth()+1}-${post.modified.getDate()}`;
+      res.render("post", { title: post.title, content: post.html, meta: meta });
     } else {
       res.redirect("/");
     }

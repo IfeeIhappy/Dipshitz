@@ -16,7 +16,7 @@ So, here we are.
 
 Like I said above, this all starts with [Glitch](https://glitch.com/), which I enjoy immensely. 
 
-I started by "remixing" the [hello-express](https://glitch.com/~hello-express) project, which got me started with a small Node.js app using [Express](http://expressjs.com/). Express is fun because it lets you quickly get your app to "listen" at various endpoints, creating hooks for various GET or POST requests. In my case, this "app" listens for GET requests at either the "/" or "read/" directories. 
+I started by "remixing" the [hello-express](https://glitch.com/~hello-express) project, which got me started with a small Node.js app using [Express](http://expressjs.com/). Express is fun because it lets you quickly get your app to "listen" at various endpoints, creating hooks for various GET or POST requests. In my case, the app created in `server.js` listens for GET requests at either the "/" or "read/" directories. 
 
 When a request comes in for the "/" directory, it looks for a markdown document at "drafts/index.md" and converts that file's contents to HTML with [Showdown](http://showdownjs.com/). Then, it uses [Pug](https://pugjs.org/) to apply that HTML to a template and display it to the reader. 
 
@@ -28,6 +28,9 @@ Using Express, I can POST data to the "write/" endpoint on this site, and (provi
 
 ## What's next
 
-At the time of writing, I still have to do simple things like CSS and a custom domain, so those are the next big things on the list now that the function of the site is working the way I wanted. 
+I've added some basic CSS, but that'll be a work in progress, I'm sure. The next big things will be:
 
-After that, watch this space! This is a work in progress, and I suspect I will be making many changes as time goes on. This draft was written on December 27th, 2020, and I'll return to it after writing and publishing more. 
+- RSS feed support
+- Become a Glitch Member
+- Custom domain
+- Clean up the Glitch project for easier remixing

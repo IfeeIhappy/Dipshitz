@@ -2,11 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap');
 
 :root {
-  --accent: #0652DD;
-  --link: #0652DD;
-  --hover: #1B1464;
-  --quiet: #5758BB;
-  --quiet-link: #9980FA;
+  --accent: #222;
+  --link: #0984e3;
+  --hover: #74b9ff;
 }
 
 body {
@@ -30,12 +28,15 @@ body {
 h1,
 h2,
 h3 {
-  border-bottom: 10px solid !important;
-  border-color: var(--accent);
   color: var(--accent);
   font-weight: 700;
   font-family: "Arvo", serif;
 }
+
+hr {
+  margin: 50px auto;
+}
+
 
 p {
   line-height: 2em;
