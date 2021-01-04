@@ -8,7 +8,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.2em;
+  font-size: 18px;
 }
 
 .container {
@@ -59,6 +59,7 @@ a:active {
 }
 
 .post-list ul li {
+  font-size: 1em;
   margin-bottom: 10px;
 }
 

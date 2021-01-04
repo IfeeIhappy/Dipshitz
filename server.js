@@ -73,7 +73,7 @@ const getPosts = () => {
               var stats = fs.statSync(`${path}/${file}`);
               var meta = stats.mtime == stats.ctime ? `Posted ${stats.ctime.getFullYear()}/${stats.ctime.getMonth()+1}/${stats.ctime.getDate()}` : `Updated ${stats.mtime.getFullYear()}/${stats.mtime.getMonth()+1}/${stats.mtime.getDate()}`;
               var words = markdown.trim().split(/\s+/).length;
-              var readingTime = words / 250;
+              var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
               return {
                 "slug": file.split(".")[0],
                 "markdown": markdown,
@@ -81,7 +81,7 @@ const getPosts = () => {
                 "html": converter.makeHtml(content),
                 "created": stats.ctime,
                 "modified": stats.mtime,
-                "meta": `~${readingTime.toFixed(1)} min. read | ${meta}`,
+                "meta": `${meta} | ~${readingTime.toFixed(1)}-minute read`,
               };
             })
             .sort((a,b) => {
