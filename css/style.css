@@ -70,7 +70,7 @@ a:active {
 .post-title {
   font-size: 3em;
   margin: 0;
-  line-height: 1em;
+  line-height: 1.5em;
   color: var(--accent);
   font-weight: 700;
 }

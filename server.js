@@ -91,6 +91,9 @@ const getPosts = () => {
   /* Get everything from posts/ and sort it by modified date */
   /* Cant't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
   return fs.readdirSync(path)
+            .filter(file => {
+              return file.toLowerCase().match(/\.md$/);
+            })
             .map(file => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
               var title = markdown.match(/(\w.*)\n/)[0];
