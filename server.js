@@ -34,10 +34,12 @@ app.get("/read/:post", (req, res) => {
 
 /* List all published posts on the index page */
 app.get("/", (req, res) => {
-  /* Get the index page from drafts/ */
-  const text = fs.readFileSync("./drafts/index.md", "utf8");
-  const html = converter.makeHtml(text);
-  const title = text.match(/(\w.*)\n/)[0];
+  /* Get the index page */
+  
+  var markdown = fs.readFileSync("./posts/index.md", "utf8");
+  var title = markdown.match(/(\w.*)\n/)[0];
+  var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
+  const html = converter.makeHtml(content);
   
   var list = "";
   var posts = getPosts();
@@ -107,7 +109,7 @@ const getPosts = () => {
               var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
               var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
               var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} @ ${pubdate.getHours()}:${pubdate.getMinutes() < 10 ? '0' : ''}${pubdate.getMinutes()}`;
-              var meta = `${displayPub} | ${readingTime.toFixed(1)}m read`;
+              var meta = `${displayPub} | ${readingTime.toFixed(1)}m to read`;
     
               return {
                 "slug": file.split(".")[0],
