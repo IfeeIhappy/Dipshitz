@@ -1,3 +1,0 @@
-# Everyone should watch Games Done Quick
-
-GDQ is a videogame speed-running marathon (trying to beat games as fast as possible) that raises money for charity 2+ times a year. [It's happening live as of this post](https://gamesdonequick.com), but the VODs are also worth the watch. If there's a game you loved as a kid, there's almost guaranteed to be a runner who will blow your mind (like [this Lion King run by eight](https://youtu.be/qnGHEFgP5zc)).
