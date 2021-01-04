@@ -57,6 +57,11 @@ app.post("/write", (req, res) => {
   }
 });
 
+/* RSS Feed - Honestly not sure yet if this will work */
+app.get("/rss", (req, res) => {
+  
+});
+
 /* Start listening */
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
