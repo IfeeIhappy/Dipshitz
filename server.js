@@ -77,7 +77,7 @@ app.get("/rss", (req, res) => {
   posts.forEach(post => {
     rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
-  rss += '</channel></rss>';
+  rss += `</channel></rss>`;
   res.set('Content-Type', 'application/rss+xml');
   res.send(rss);
 });
@@ -107,7 +107,9 @@ const getPosts = () => {
               var words = markdown.trim().split(/\s+/).length;
               var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
               var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-              var meta = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} | ~${readingTime.toFixed(1)}-minute read`;
+              var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()} |`;
+              var displayModified = `${months[modified.getMonth()]} ${modified.getDate()} ${modified.getFullYear()} |`;
+              var meta = `${displayPub != displayModified ? 'Published ' : ''}${displayPub} ${displayPub != displayModified ? displayModified : ''} ~${readingTime.toFixed(1)}-minute read`;
     
               return {
                 "slug": file.split(".")[0],
