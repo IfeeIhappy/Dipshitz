@@ -70,20 +70,19 @@ a:active {
 }
 
 .post-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--accent);
   font-weight: 700;
 }
 
 .meta {
-  font-size: 0.75rem;
   color: var(--accent);
 }
 
 
 @media (max-width: 100em) {  
   html {
-    font-size: 35px;
+    font-size: 40px;
   }
   .container {
     max-width: 100%;
