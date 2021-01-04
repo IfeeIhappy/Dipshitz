@@ -60,10 +60,16 @@ app.post("/write", (req, res) => {
 /* RSS Feed - Honestly not sure yet if this will work */
 app.get("/rss", (req, res) => {
   var siteLink = 'https://tyler.robertson.click';
-  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${siteLink}/rss" rel="self" type="application/rss+xml" /><title>Written by Tyler Robertson</title><link>${siteLink}</link><description>Missives and found documents from the desk of Tyler Robertson.</description>`;
+  var rss = `<?xml version="1.0"?>
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <atom:link href="${siteLink}/rss" rel="self" type="application/rss+xml" />
+      <title>Written by Tyler Robertson</title><link>${siteLink}</link>
+      <description>Missives and found documents from the desk of Tyler Robertson.</description>
+      `;
   var posts = getPosts();
   posts.forEach(post => {
-    rss += `<item><title>$post.title</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.modified.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><pubDate>${post.modified.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += '</channel></rss>';
   res.set('Content-Type', 'application/rss+xml');
@@ -82,7 +88,7 @@ const getPosts = () => {
             .map(file => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
               var title = markdown.match(/(\w.*)\n/)[0];
-              var content = markdown.replace(title,"");
+              var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
               var stats = fs.statSync(`${path}/${file}`);
               var meta = stats.mtime == stats.ctime ? `Posted ${stats.ctime.getFullYear()}/${stats.ctime.getMonth()+1}/${stats.ctime.getDate()}` : `Updated ${stats.mtime.getFullYear()}/${stats.mtime.getMonth()+1}/${stats.mtime.getDate()}`;
               var words = markdown.trim().split(/\s+/).length;
