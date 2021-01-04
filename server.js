@@ -70,12 +70,15 @@ const getPosts = () => {
   return fs.readdirSync(path)
             .map(file => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
+              var title = markdown.match(/(\w.*)\n/)[0];
+              var content = markdown.replace(title,"");
               var stats = fs.statSync(`${path}/${file}`);
+              var meta = stats.mtime == stats.ctime ? `Posted ${stats.ctime.getFullYear()}/${stats.ctime.getMonth()+1}/${stats.ctime.getDate()}` : `Updated ${stats.mtime.getFullYear()}/${stats.mtime.getMonth()+1}/${stats.mtime.getDate()}`;
               return {
                 "slug": file.split(".")[0],
                 "markdown": markdown,
-                "title": markdown.match(/(\w.*)\n/)[0],
-                "html": converter.makeHtml(markdown),
+                "title": title,
+                "html": converter.makeHtml(content),
                 "created": stats.ctime,
                 "modified": stats.mtime
               };
