@@ -7,6 +7,9 @@ const app = express();
 const port = 3000;
 const path = "./posts";
 
+app.enable('trust proxy');
+
+
 app.use(express.json());
 app.set("view engine", "pug");
 
@@ -14,7 +17,7 @@ app.set("view engine", "pug");
 app.get("/read/:post", (req, res) => {
   if (typeof req.params.post !== "undefined") {
     var posts = getPosts();
-    var postID = posts.findIndex(p => p.slug == req.params.post);
+    var postID = posts.findIndex(p => p.slug.toLowerCase() == req.params.post.toLowerCase());
     if (postID > -1) {
       var post = posts[postID];
       res.render("post", { title: post.title, content: post.html, meta: post.meta });
