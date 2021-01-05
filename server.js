@@ -7,9 +7,6 @@ const app = express();
 const port = 3000;
 const path = "./posts";
 
-app.enable('trust proxy');
-
-
 app.use(express.json());
 app.set("view engine", "pug");
 
