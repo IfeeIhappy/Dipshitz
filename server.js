@@ -76,7 +76,7 @@ app.get("/rss", (req, res) => {
       `;
   var posts = getPosts();
   posts.forEach(post => {
-    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><link>${siteLink}/read/${post.slug}</guid><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><link>${siteLink}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += `</channel></rss>`;
   res.set('Content-Type', 'application/rss+xml');
