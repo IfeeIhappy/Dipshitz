@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   
   var markdown = fs.readFileSync("./index.md", "utf8");
   var title = markdown.match(/(\w.*)\n/)[0];
-  var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
+  var content = markdown.replace(markdown.match(/.*\n/)[0],"");
   const html = converter.makeHtml(content);
   
   var list = "";
@@ -63,12 +63,16 @@ app.post("/write", (req, res) => {
 /* RSS Feed - Honestly not sure yet if this will work */
 app.get("/rss", (req, res) => {
   var siteLink = 'https://tyler.robertson.click';
+  var markdown = fs.readFileSync("./index.md", "utf8");
+  var title = markdown.match(/(\w.*)\n/)[0];
+  var content = markdown.replace(markdown.match(/.*\n/)[0],"");
+
   var rss = `<?xml version="1.0"?>
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <atom:link href="${siteLink}/rss" rel="self" type="application/rss+xml" />
-      <title>Written by Tyler Robertson</title><link>${siteLink}</link>
-      <description>Missives and found documents from the desk of Tyler Robertson.</description>
+      <title>${title}</title><link>${siteLink}</link>
+      <description>${content}</description>
       `;
   var posts = getPosts();
   posts.forEach(post => {
