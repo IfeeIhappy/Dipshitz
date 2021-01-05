@@ -48,6 +48,7 @@ app.get("/", (req, res) => {
 app.post("/write", (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
+    var title = req.body.title.replace(/\s/g,'-');
     fs.writeFile(`./posts/${req.body.title}.md`, req.body.content, function(
       err
     ) {
