@@ -25,9 +25,7 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug.toLowerCase() == req.params.post.toLowerCase());
     if (postID > -1) {
       var post = posts[postID];
-      var image = post.markdown.match(/\!\[.*\]\((.*)\)/)[1];
-      if (image == ""){ image = site.image; }
-      res.render("post", { title: post.title, content: post.html, image: image, meta: post.meta });
+      res.render("post", { title: post.title, content: post.html, image: posimage, meta: post.meta });
     } else {
       res.redirect("/");
     }
