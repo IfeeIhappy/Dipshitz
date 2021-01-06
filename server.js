@@ -25,7 +25,8 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug.toLowerCase() == req.params.post.toLowerCase());
     if (postID > -1) {
       var post = posts[postID];
-      var image = post.markup.match(/\!\[.*\]\((.*)\)/) ? post.markup.match(/\!\[.*\]\((.*)\)/) : site.image;
+      var image = post.markdown.match(/\!\[.*\]\((.*)\)/);
+      if (image == ""){ image = site.image; }
       res.render("post", { title: post.title, content: post.html, image: image, meta: post.meta });
     } else {
       res.redirect("/");
@@ -71,16 +72,12 @@ app.post("/write", (req, res) => {
 
 /* RSS Feed - Honestly not sure yet if this will work */
 app.get("/rss", (req, res) => {
-  var markdown = fs.readFileSync("./index.md", "utf8");
-  var title = markdown.match(/(\w.*)\n/)[0];
-  var content = markdown.replace(markdown.match(/.*\n/)[0],"");
-
   var rss = `<?xml version="1.0"?>
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" />
-      <title>${title}</title><link>${siteLink}</link>
-      <description>${content}</description>
+      <title>${site.title}</title><link>${site.url}</link>
+      <description>${site.description}</description>
       `;
   var posts = getPosts();
   posts.forEach(post => {
