@@ -62,12 +62,12 @@ a:active {
   border-color: var(--hover);
 }
 
-.post-list ul {
-  list-style-type: '📝 ';
+li {
+  margin-bottom: 1rem;
 }
 
-.post-list ul li {
-  margin-bottom: 1rem;
+.post-list ul {
+  list-style-type: "📝 ";
 }
 
 .post-list ul li a {
@@ -85,8 +85,7 @@ a:active {
   color: var(--accent);
 }
 
-
-@media (max-width: 100em) {  
+@media (max-width: 100em) {
   html {
     font-size: 40px;
   }
@@ -95,4 +94,3 @@ a:active {
     margin: 2rem 1rem;
   }
 }
-
