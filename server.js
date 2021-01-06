@@ -7,6 +7,14 @@ const app = express();
 const port = 3000;
 const path = "./posts";
 
+/* Site-specific settings */
+const site = {
+  "title": "Tyler Robertson",
+  "description": "Missives and found documents from the desk of the aforementioned person.",
+  "url": "https://tyler.robertson.click",
+  "image": "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332"
+};
+
 app.use(express.json());
 app.set("view engine", "pug");
 
@@ -17,7 +25,8 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug.toLowerCase() == req.params.post.toLowerCase());
     if (postID > -1) {
       var post = posts[postID];
-      res.render("post", { title: post.title, content: post.html, meta: post.meta });
+      var image = post.markup.match(/\!\[.*\]\((.*)\)/) ? post.markup.match(/\!\[.*\]\((.*)\)/) : site.image;
+      res.render("post", { title: post.title, content: post.html, image: image, meta: post.meta });
     } else {
       res.redirect("/");
     }
@@ -41,10 +50,10 @@ app.get("/", (req, res) => {
   posts.forEach(post => {
     list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
   });
-  res.render("index", { title: title, content: html, list: list });
+  res.render("index", { title: title, content: html, image: site.image, list: list });
 });
 
-/* Create new posts via API */
+/* Create new posts */
 app.post("/write", (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
@@ -62,7 +71,6 @@ app.post("/write", (req, res) => {
 
 /* RSS Feed - Honestly not sure yet if this will work */
 app.get("/rss", (req, res) => {
-  var siteLink = 'https://tyler.robertson.click';
   var markdown = fs.readFileSync("./index.md", "utf8");
   var title = markdown.match(/(\w.*)\n/)[0];
   var content = markdown.replace(markdown.match(/.*\n/)[0],"");
@@ -70,13 +78,13 @@ app.get("/rss", (req, res) => {
   var rss = `<?xml version="1.0"?>
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <atom:link href="${siteLink}/rss" rel="self" type="application/rss+xml" />
+      <atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" />
       <title>${title}</title><link>${siteLink}</link>
       <description>${content}</description>
       `;
   var posts = getPosts();
   posts.forEach(post => {
-    rss += `<item><title>${post.title}</title><guid>${siteLink}/read/${post.slug}</guid><link>${siteLink}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += `</channel></rss>`;
   res.set('Content-Type', 'application/rss+xml');
