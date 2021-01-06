@@ -25,7 +25,7 @@ app.get("/read/:post", (req, res) => {
     var postID = posts.findIndex(p => p.slug.toLowerCase() == req.params.post.toLowerCase());
     if (postID > -1) {
       var post = posts[postID];
-      res.render("post", { title: post.title, content: post.html, image: posimage, meta: post.meta });
+      res.render("post", { title: post.title, content: post.html, image: post.image, meta: post.meta });
     } else {
       res.redirect("/");
     }
@@ -102,6 +102,8 @@ const getPosts = () => {
               var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
               var title = markdown.match(/(\w.*)\n/)[0];
               var content = markdown.replace(markdown.match(/(.*)\n/)[0],"");
+    
+              var image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
               
               var stats = fs.statSync(`${path}/${file}`);
               var pubdate = stats.mtime;
@@ -118,6 +120,7 @@ const getPosts = () => {
                 "markdown": markdown,
                 "title": title,
                 "html": converter.makeHtml(content),
+                "image": image,
                 "pubdate": pubdate,
                 "meta": meta
               };
