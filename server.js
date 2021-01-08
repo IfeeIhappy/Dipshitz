@@ -82,10 +82,9 @@ app.post("/write", (req, res) => {
   }
 });
 
-/* RSS Feed - Honestly not sure yet if this will work */
+/* RSS Feed */
 app.get("/rss", (req, res) => {
-  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>
-      `;
+  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
   var posts = getPosts();
   posts.forEach(post => {
     rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
@@ -95,13 +94,8 @@ app.get("/rss", (req, res) => {
   res.send(rss);
 });
 
-/* Start listening */
-app.listen(port, () => {
-  console.log(`Listening at port ${port}`);
-});
-
 const getPosts = () => {
-  /* Get everything from posts/ and sort it by modified date */
+  /* Get everything from posts/ and sort it by publishing date */
   /* Cant't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
   return fs
     .readdirSync(path)
@@ -158,3 +152,8 @@ const getPosts = () => {
       return b.pubdate.getTime() - a.pubdate.getTime();
     });
 };
+
+/* Start listening */
+app.listen(port, () => {
+  console.log(`Listening at port ${port}`);
+});
