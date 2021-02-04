@@ -33,7 +33,7 @@ app.get("/read/:post", (req, res) => {
         title: post.title,
         content: post.html,
         image: post.image,
-        meta: post.meta
+        meta: `by <a href="/">${site.title}</a> | ${post.meta}`
       });
     } else {
       res.redirect("/");

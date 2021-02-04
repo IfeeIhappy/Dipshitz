@@ -2,6 +2,7 @@
 
 :root {
   --accent: #222;
+  --meta: #666;
   --link: #0984e3;
   --hover: #74b9ff;
 }
@@ -45,6 +46,12 @@ p {
   line-height: 2rem;
 }
 
+code {
+  background: #eee;
+  padding: 3px 10px; 
+  border-radius: 3px;
+}
+
 a {
   transition: all 0.2s ease;
   text-decoration: none;
@@ -84,7 +91,7 @@ li {
 }
 
 .meta {
-  color: var(--accent);
+  color: var(--meta);
   padding-top: 0.5rem;
 }
 
