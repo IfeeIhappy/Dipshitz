@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap");
 
 :root {
-  --accent: #222;
+  --accent: #555;
   --link: #0984e3;
   --hover: #74b9ff;
 }
@@ -68,7 +68,8 @@ li {
 }
 
 .post-list ul {
-  list-style-type: "📝 ";
+  list-style-type: none;
+  padding-inline-start: 0;
 }
 
 .post-list ul li a {
@@ -84,6 +85,7 @@ li {
 
 .meta {
   color: var(--accent);
+  padding-top: 0.5rem;
 }
 
 @media (max-width: 100em) {
