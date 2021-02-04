@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 20px;
 }
 body {
   font-family: "Open Sans", sans-serif;
@@ -95,10 +95,7 @@ li {
   padding-top: 0.5rem;
 }
 
-@media (max-width: 100em) {
-  html {
-    font-size: 40px;
-  }
+@media (max-width: 60em) {
   .container {
     max-width: 100%;
     margin: 2rem 1rem;
