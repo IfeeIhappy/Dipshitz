@@ -1,3 +1,3 @@
-# Tyler Robertson
+# Hi 👋 I'm Tyler.
 
-Missives and found documents from the desk of the aforementioned person.
+Here are some things I've written for you.
