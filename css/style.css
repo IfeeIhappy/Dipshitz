@@ -8,15 +8,16 @@
 }
 
 html {
-  font-size: 20px;
+  font-size: 130%;
 }
 body {
   font-family: "Open Sans", sans-serif;
 }
 
 .container {
-  max-width: 45rem;
+  max-width: 45em;
   margin: 2rem auto;
+  padding: 1rem;
 }
 
 .header {
@@ -93,11 +94,4 @@ li {
 .meta {
   color: var(--meta);
   padding-top: 0.5rem;
-}
-
-@media (max-width: 60em) {
-  .container {
-    max-width: 100%;
-    margin: 2rem 1rem;
-  }
 }
