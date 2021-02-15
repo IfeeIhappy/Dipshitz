@@ -10,8 +10,7 @@ const path = "./posts";
 /* Site-specific settings */
 const site = {
   title: "Tyler Robertson",
-  description:
-    "Missives and found documents from the desk of the aforementioned person.",
+  description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click",
   image:
     "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332"

@@ -1,6 +1,6 @@
 {
-  "name": "tylers-experimental-blogging-site",
-  "description": "tyler's trying to find a new way to write",
+  "name": "tylers-robertson-blog",
+  "description": "it's a blog for tinkerers",
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js"
