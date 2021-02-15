@@ -96,7 +96,7 @@ app.get("/rss", (req, res) => {
 
 const getPosts = () => {
   /* Get everything from posts/ and sort it by publishing date */
-  /* Cant't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
+  /* Can't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
   return fs
     .readdirSync(path)
     .filter(file => {
