@@ -1,3 +1,3 @@
-# Hi 👋 I'm Tyler Robertson.
+# Hi 👋 I'm Tyler.
 
-I write about how to use technology for work and play, with a focus on tools that are accessible to tinkerers of all experience levels. 
+Here are some things that I wrote for you.
