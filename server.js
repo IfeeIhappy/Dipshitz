@@ -46,9 +46,9 @@ app.get("/read/:post", (req, res) => {
 /* When a user follows a direct link to a page */
 app.get("/:page", (req, res) => {
   if (typeof req.params.page !== "undefined") {
-    var posts = getPages();
-    var id = posts.findIndex(
-      p => p.slug.toLowerCase() == req.params.post.toLowerCase()
+    var pages = getPages();
+    var id = pages.findIndex(
+      p => p.slug.toLowerCase() == req.params.page.toLowerCase()
     );
     if (id > -1) {
       var page = pages[id];
