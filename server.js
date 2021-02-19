@@ -42,6 +42,29 @@ app.get("/read/:post", (req, res) => {
   }
 });
 
+/* When a user follows a direct link to a page */
+app.get("/:page", (req, res) => {
+  if (typeof req.params.page !== "undefined") {
+    var posts = getPosts();
+    var postID = posts.findIndex(
+      p => p.slug.toLowerCase() == req.params.post.toLowerCase()
+    );
+    if (postID > -1) {
+      var post = posts[postID];
+      res.render("post", {
+        title: post.title,
+        content: post.html,
+        image: post.image,
+        meta: `by <a href="/">${site.title}</a> | ${post.meta}`
+      });
+    } else {
+      res.redirect("/");
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 /* List all published posts on the index page */
 app.get("/", (req, res) => {
   /* Get the index page */
@@ -96,6 +119,64 @@ app.get("/rss", (req, res) => {
 const getPosts = () => {
   /* Get everything from posts/ and sort it by publishing date */
   /* Can't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
+  return fs
+    .readdirSync(path)
+    .filter(file => {
+      return file.toLowerCase().match(/\.md$/);
+    })
+    .map(file => {
+      var markdown = fs.readFileSync(`${path}/${file}`, "utf8");
+      var title = markdown.match(/(\w.*)\n/)[0];
+      var content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
+
+      var image = markdown.match(/\!\[.*\]\((.*)\)/)
+        ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
+        : site.image;
+
+      var stats = fs.statSync(`${path}/${file}`);
+      var pubdate = stats.mtime;
+
+      /* Pre-write the metadata (might change later) */
+      var words = markdown.trim().split(/\s+/).length;
+      var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
+      var months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      var displayPub = `${
+        months[pubdate.getMonth()]
+      } ${pubdate.getDate()} ${pubdate.getFullYear()} @ ${pubdate.getHours()}:${
+        pubdate.getMinutes() < 10 ? "0" : ""
+      }${pubdate.getMinutes()}`;
+      var meta = `${displayPub} | ${readingTime.toFixed(1)}m to read`;
+
+      return {
+        slug: file.split(".")[0],
+        markdown: markdown,
+        title: title,
+        html: converter.makeHtml(content),
+        image: image,
+        pubdate: pubdate,
+        meta: meta
+      };
+    })
+    .sort((a, b) => {
+      return b.pubdate.getTime() - a.pubdate.getTime();
+    });
+};
+
+const getPages = () => {
+  /* Get everything from pages/ */
   return fs
     .readdirSync(path)
     .filter(file => {
