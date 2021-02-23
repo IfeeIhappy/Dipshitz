@@ -48,9 +48,13 @@ p {
 }
 
 code {
-  background: #eee;
-  padding: 3px 10px; 
-  border-radius: 3px;
+  font-family: monospace;
+  font-size: inherit;
+  background: #efefef;
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  padding: .1rem .3rem .2rem;
+  border-radius: .2rem;
 }
 
 a {
