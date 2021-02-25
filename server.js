@@ -92,12 +92,12 @@ app.get("/", (req, res) => {
 app.post("/write", (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
-    var title = req.body.title.replace(/\s/g, "-");
-    fs.writeFile(`${posts}/${req.body.title}.md`, req.body.content, function(
+    var title = req.body.title.replace(/\s/g, "-").toLowerCase();
+    fs.writeFile(`${posts}/${title}.md`, req.body.content, function(
       err
     ) {
       if (err) return console.log(err);
-      console.log("Wrote file", req.body.title);
+      console.log("Published:", req.body.title);
     });
   } else {
     req.send("Unauthorized");
