@@ -45,7 +45,17 @@ app.get("/read/:post", (req, res) => {
 
 /* When a user follows a direct link to a page */
 app.get("/:page", (req, res) => {
-  if (typeof req.params.page !== "undefined") {
+  /* RSS Feed */
+  if (req.params.page == 'rss') {
+    var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
+    var posts = getPosts();
+    posts.forEach(post => {
+      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    });
+    rss += `</channel></rss>`;
+    res.set("Content-Type", "application/rss+xml");
+    res.send(rss);
+  } else if (typeof req.params.page !== "undefined") {
     var pages = getPages();
     var id = pages.findIndex(
       p => p.slug.toLowerCase() == req.params.page.toLowerCase()
@@ -102,18 +112,6 @@ app.post("/write", (req, res) => {
   } else {
     req.send("Unauthorized");
   }
-});
-
-/* RSS Feed */
-app.get("/rss", (req, res) => {
-  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
-  var posts = getPosts();
-  posts.forEach(post => {
-    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
-  });
-  rss += `</channel></rss>`;
-  res.set("Content-Type", "application/rss+xml");
-  res.send(rss);
 });
 
 const getPosts = () => {
