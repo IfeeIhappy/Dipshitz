@@ -17,12 +17,37 @@ const site = {
     "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332"
 };
 
+/* Set express to accept JSON requests and use Pug for displaying pages */
 app.use(express.json());
 app.set("view engine", "pug");
 
-/* When a user follows a direct link to a published post */
-app.get("/read/:post", (req, res) => {
-  if (typeof req.params.post !== "undefined") {
+/* Get the index page */
+app.get("/", (req, res) => {
+  va
+  var markdown = fs.readFileSync("./pages/index.md", "utf8");
+  var title = markdown.match(/(\w.*)\n/)[0];
+  var content = markdown.replace(markdown.match(/.*\n/)[0], "");
+  const html = converter.makeHtml(content);
+
+  /* On this page, let's list all posts from /posts */
+  var list = "";
+  var posts = getPosts();
+
+  posts.forEach(post => {
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
+  });
+  res.render("index", {
+    title: title,
+    content: html,
+    image: site.image,
+    list: list
+  });
+});
+
+/* Find the specific page or post the user is looking for, and serve it */
+app.get("/:page/:post", (req, res) => {
+  /* If a user goes to /read/ and provides a post name, look for and serve that post */
+  if (req.params.page == "read" && typeof req.params.post !== "undefined") {
     var posts = getPosts();
     var postID = posts.findIndex(
       p => p.slug.toLowerCase() == req.params.post.toLowerCase()
@@ -36,26 +61,27 @@ app.get("/read/:post", (req, res) => {
         meta: `by <a href="/">${site.title}</a> | ${post.meta}`
       });
     } else {
+      /* If the post can't be found, redirect to index */
       res.redirect("/");
     }
-  } else {
-    res.redirect("/");
-  }
-});
-
-/* When a user follows a direct link to a page */
-app.get("/:page", (req, res) => {
-  /* RSS Feed */
-  if (req.params.page == 'rss') {
+  } else if (req.params.page == "rss") {
+    /* If a user requests /rss, write up some RSS for them */
     var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
     var posts = getPosts();
     posts.forEach(post => {
-      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${
+        post.slug
+      }</guid><link>${site.url}/read/${
+        post.slug
+      }</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${
+        post.html
+      }]]></description></item>`;
     });
     rss += `</channel></rss>`;
     res.set("Content-Type", "application/rss+xml");
     res.send(rss);
   } else if (typeof req.params.page !== "undefined") {
+    /* If neither of the above, let's give them the page they ask for from /pages */
     var pages = getPages();
     var id = pages.findIndex(
       p => p.slug.toLowerCase() == req.params.page.toLowerCase()
@@ -71,41 +97,17 @@ app.get("/:page", (req, res) => {
       res.redirect("/");
     }
   } else {
+    /* If none of the above, redirect to the index */
     res.redirect("/");
   }
 });
 
-/* List all published posts on the index page */
-app.get("/", (req, res) => {
-  /* Get the index page */
-
-  var markdown = fs.readFileSync("./index.md", "utf8");
-  var title = markdown.match(/(\w.*)\n/)[0];
-  var content = markdown.replace(markdown.match(/.*\n/)[0], "");
-  const html = converter.makeHtml(content);
-
-  var list = "";
-  var posts = getPosts();
-
-  posts.forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
-  });
-  res.render("index", {
-    title: title,
-    content: html,
-    image: site.image,
-    list: list
-  });
-});
-
-/* Create new posts */
+/* Publishing new posts */
 app.post("/write", (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
     var title = req.body.title.replace(/\s/g, "-").toLowerCase();
-    fs.writeFile(`${posts}/${title}.md`, req.body.content, function(
-      err
-    ) {
+    fs.writeFile(`${posts}/${title}.md`, req.body.content, function(err) {
       if (err) return console.log(err);
       console.log("Published:", req.body.title);
     });
@@ -115,8 +117,7 @@ app.post("/write", (req, res) => {
 });
 
 const getPosts = () => {
-  /* Get everything from posts/ and sort it by publishing date */
-  /* Can't see the posts/ folder in Glitch? It's hidden by the .gitignore file */
+  /* Get everything from /posts and sort it by publishing date */
   return fs
     .readdirSync(posts)
     .filter(file => {
@@ -174,7 +175,7 @@ const getPosts = () => {
 };
 
 const getPages = () => {
-  /* Get everything from pages/ */
+  /* Get everything from /pages */
   return fs
     .readdirSync(pages)
     .filter(file => {
@@ -194,7 +195,7 @@ const getPages = () => {
         markdown: markdown,
         title: title,
         html: converter.makeHtml(content),
-        image: image,
+        image: image
       };
     });
 };
