@@ -93,6 +93,8 @@ li {
   font-size: 2.5rem;
   color: var(--accent);
   font-weight: 700;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .meta {
