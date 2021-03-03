@@ -56,7 +56,7 @@ app.get("/:page/:post?", (req, res) => {
         title: post.title,
         content: post.html,
         image: post.image,
-        meta: `by <a href="/">${site.title}</a> / ${post.meta}`
+        meta: `by <a href="/">${site.title}</a> - ${post.meta}`
       });
     } else {
       /* If the post can't be found, redirect to index */
@@ -152,10 +152,7 @@ const getPosts = () => {
       ];
       var displayPub = `${
         months[pubdate.getMonth()]
-      } ${pubdate.getDate()} ${pubdate.getFullYear()} @ ${pubdate.getHours()}:${
-        pubdate.getMinutes() < 10 ? "0" : ""
-      }${pubdate.getMinutes()}`;
-      var meta = `${displayPub} / ${readingTime.toFixed(1)}m to read`;
+      } ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
         slug: file.split(".")[0],
@@ -164,7 +161,7 @@ const getPosts = () => {
         html: converter.makeHtml(content),
         image: image,
         pubdate: pubdate,
-        meta: meta
+        meta: displayPub
       };
     })
     .sort((a, b) => {
