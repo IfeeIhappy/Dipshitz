@@ -56,7 +56,7 @@ app.get("/:page/:post?", (req, res) => {
         title: post.title,
         content: post.html,
         image: post.image,
-        meta: `by <a href="/">${site.title}</a> - ${post.meta}`
+        meta: `by <a href="/">${site.title}</a><br/>${post.meta}`
       });
     } else {
       /* If the post can't be found, redirect to index */
