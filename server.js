@@ -17,17 +17,15 @@ const site = {
     "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332"
 };
 
-/* Set express to accept JSON requests and use Pug for displaying pages */
+/* Set express to accept JSON requests and use Pug for rendering pages */
 app.use(express.json());
 app.set("view engine", "pug");
 
 /* Get the index page */
 app.get("/", (req, res) => {
-  va
-  var markdown = fs.readFileSync("./pages/index.md", "utf8");
-  var title = markdown.match(/(\w.*)\n/)[0];
-  var content = markdown.replace(markdown.match(/.*\n/)[0], "");
-  const html = converter.makeHtml(content);
+  /* Build the index from /pages/index.md */
+  var pages = getPages();
+  var page = pages[pages.findIndex(p => p.slug.toLowerCase() == "index")];
 
   /* On this page, let's list all posts from /posts */
   var list = "";
@@ -37,15 +35,15 @@ app.get("/", (req, res) => {
     list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
   });
   res.render("index", {
-    title: title,
-    content: html,
+    title: page.title,
+    content: page.html,
     image: site.image,
     list: list
   });
 });
 
 /* Find the specific page or post the user is looking for, and serve it */
-app.get("/:page/:post", (req, res) => {
+app.get("/:page/:post?", (req, res) => {
   /* If a user goes to /read/ and provides a post name, look for and serve that post */
   if (req.params.page == "read" && typeof req.params.post !== "undefined") {
     var posts = getPosts();
@@ -58,7 +56,7 @@ app.get("/:page/:post", (req, res) => {
         title: post.title,
         content: post.html,
         image: post.image,
-        meta: `by <a href="/">${site.title}</a> | ${post.meta}`
+        meta: `by <a href="/">${site.title}</a> / ${post.meta}`
       });
     } else {
       /* If the post can't be found, redirect to index */
@@ -157,7 +155,7 @@ const getPosts = () => {
       } ${pubdate.getDate()} ${pubdate.getFullYear()} @ ${pubdate.getHours()}:${
         pubdate.getMinutes() < 10 ? "0" : ""
       }${pubdate.getMinutes()}`;
-      var meta = `${displayPub} | ${readingTime.toFixed(1)}m to read`;
+      var meta = `${displayPub} / ${readingTime.toFixed(1)}m to read`;
 
       return {
         slug: file.split(".")[0],
