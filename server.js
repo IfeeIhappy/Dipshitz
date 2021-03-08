@@ -14,7 +14,11 @@ const site = {
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click",
   image:
-    "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332"
+    "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
+  posts: "./posts",
+  pages: "./pages",
+  read: "/read",
+  write
 };
 
 /* Set express to accept JSON requests and use Pug for rendering pages */
@@ -125,17 +129,11 @@ const getPosts = () => {
       var markdown = fs.readFileSync(`${posts}/${file}`, "utf8");
       var title = markdown.match(/(\w.*)\n/)[0];
       var content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-
       var image = markdown.match(/\!\[.*\]\((.*)\)/)
         ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
         : site.image;
+      var pubdate = fs.statSync(`${posts}/${file}`).mtime;
 
-      var stats = fs.statSync(`${posts}/${file}`);
-      var pubdate = stats.mtime;
-
-      /* Pre-write the metadata (might change later) */
-      var words = markdown.trim().split(/\s+/).length;
-      var readingTime = words / 250; // Average reading speed is 250 words/minute, apparently?
       var months = [
         "January",
         "February",
@@ -150,9 +148,8 @@ const getPosts = () => {
         "November",
         "December"
       ];
-      var displayPub = `${
-        months[pubdate.getMonth()]
-      } ${pubdate.getDate()} ${pubdate.getFullYear()}`;
+    
+      var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
         slug: file.split(".")[0],
