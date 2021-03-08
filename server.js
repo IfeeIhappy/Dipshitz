@@ -24,8 +24,7 @@ const site = {
 /* Get the index page */
 app.get("/", (req, res) => {
   /* Build the index from /pages/index.md */
-  var pages = getPages();
-  var page = pages[pages.findIndex(p => p.slug.toLowerCase() == "index")];
+  var page = getItem("index");
 
   /* On this page, let's list all posts from /posts */
   var list = "";
@@ -116,11 +115,10 @@ const getPosts = () => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       const title = markdown.match(/(\w.*)\n/)[0];
       const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
-        : site.image;
-      var pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
-      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
+      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
+      const pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
+      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
         slug: file.split(".")[0],
@@ -145,13 +143,10 @@ const getPages = () => {
       return file.toLowerCase().match(/\.md$/);
     })
     .map(file => {
-      var markdown = fs.readFileSync(`./${site.pages}/${file}`, "utf8");
-      var title = markdown.match(/(\w.*)\n/)[0];
-      var content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-
-      var image = markdown.match(/\!\[.*\]\((.*)\)/)
-        ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
-        : site.image;
+      const markdown = fs.readFileSync(`./${site.pages}/${file}`, "utf8");
+      const title = markdown.match(/(\w.*)\n/)[0];
+      const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
+      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
 
       return {
         slug: file.split(".")[0],
@@ -162,6 +157,20 @@ const getPages = () => {
       };
     });
 };
+
+// I want to clean up this code by having one "create a list" function for the index page, and then one "get that thing and display it" function for everything else
+const getItem = (page, post) => {
+  const path = `.${`
+  const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8");
+  const title = markdown.match(/(\w.*)\n/)[0];
+  const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
+  const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
+  return {
+        title: title,
+        html: converter.makeHtml(content),
+        image: image
+      };
+}
 
 /* Start listening */
 app.listen(port, () => {
