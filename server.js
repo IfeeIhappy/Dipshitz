@@ -24,7 +24,7 @@ const site = {
 /* Get the index page */
 app.get("/", (req, res) => {
   /* Build the index from /pages/index.md */
-  var page = getItem("index");
+  var page = getItem(site.pages,"index");
 
   /* On this page, let's list all posts from /posts */
   var list = "";
@@ -158,18 +158,20 @@ const getPages = () => {
     });
 };
 
-// I want to clean up this code by having one "create a list" function for the index page, and then one "get that thing and display it" function for everything else
 const getItem = (page, post) => {
-  const path = `.${`
   const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8");
-  const title = markdown.match(/(\w.*)\n/)[0];
-  const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-  const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
-  return {
-        title: title,
-        html: converter.makeHtml(content),
-        image: image
-      };
+  if (markdown === null) {
+    return false;
+  } else {
+    const title = markdown.match(/(\w.*)\n/)[0];
+    const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
+    const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
+    return {
+          title: title,
+          html: converter.makeHtml(content),
+          image: image
+        };
+  }
 }
 
 /* Start listening */
