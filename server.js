@@ -5,25 +5,21 @@ const converter = new showdown.Converter();
 
 const app = express();
 const port = 3000;
-const posts = "./posts";
-const pages = "./pages";
+app.use(express.json());
+app.set("view engine", "pug");
 
 /* Site-specific settings */
+
 const site = {
   title: "Tyler Robertson",
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click",
-  image:
-    "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
-  posts: "./posts",
-  pages: "./pages",
-  read: "/read",
-  write
+  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
+  posts: "posts",
+  pages: "pages",
+  read: "read",
+  write: "write"
 };
-
-/* Set express to accept JSON requests and use Pug for rendering pages */
-app.use(express.json());
-app.set("view engine", "pug");
 
 /* Get the index page */
 app.get("/", (req, res) => {
@@ -48,8 +44,7 @@ app.get("/", (req, res) => {
 
 /* Find the specific page or post the user is looking for, and serve it */
 app.get("/:page/:post?", (req, res) => {
-  /* If a user goes to /read/ and provides a post name, look for and serve that post */
-  if (req.params.page == "read" && typeof req.params.post !== "undefined") {
+  if (req.params.page == site.read && typeof req.params.post !== "undefined") {
     var posts = getPosts();
     var postID = posts.findIndex(
       p => p.slug.toLowerCase() == req.params.post.toLowerCase()
@@ -63,21 +58,13 @@ app.get("/:page/:post?", (req, res) => {
         meta: `by <a href="/">${site.title}</a><br/>${post.meta}`
       });
     } else {
-      /* If the post can't be found, redirect to index */
       res.redirect("/");
     }
   } else if (req.params.page == "rss") {
-    /* If a user requests /rss, write up some RSS for them */
     var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
     var posts = getPosts();
     posts.forEach(post => {
-      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${
-        post.slug
-      }</guid><link>${site.url}/read/${
-        post.slug
-      }</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${
-        post.html
-      }]]></description></item>`;
+      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
     });
     rss += `</channel></rss>`;
     res.set("Content-Type", "application/rss+xml");
@@ -99,17 +86,17 @@ app.get("/:page/:post?", (req, res) => {
       res.redirect("/");
     }
   } else {
-    /* If none of the above, redirect to the index */
+    /* If a page wasn't requested, go to the index */
     res.redirect("/");
   }
 });
 
 /* Publishing new posts */
-app.post("/write", (req, res) => {
+app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
     var title = req.body.title.replace(/\s/g, "-").toLowerCase();
-    fs.writeFile(`${posts}/${title}.md`, req.body.content, function(err) {
+    fs.writeFile(`./${site.posts}/${title}.md`, req.body.content, function(err) {
       if (err) return console.log(err);
       console.log("Published:", req.body.title);
     });
@@ -121,34 +108,18 @@ app.post("/write", (req, res) => {
 const getPosts = () => {
   /* Get everything from /posts and sort it by publishing date */
   return fs
-    .readdirSync(posts)
+    .readdirSync(`./${site.posts}`)
     .filter(file => {
       return file.toLowerCase().match(/\.md$/);
     })
     .map(file => {
-      var markdown = fs.readFileSync(`${posts}/${file}`, "utf8");
-      var title = markdown.match(/(\w.*)\n/)[0];
-      var content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-      var image = markdown.match(/\!\[.*\]\((.*)\)/)
-        ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
+      const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
+      const title = markdown.match(/(\w.*)\n/)[0];
+      const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
+      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
         : site.image;
-      var pubdate = fs.statSync(`${posts}/${file}`).mtime;
-
-      var months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ];
-    
+      var pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       var displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
@@ -169,12 +140,12 @@ const getPosts = () => {
 const getPages = () => {
   /* Get everything from /pages */
   return fs
-    .readdirSync(pages)
+    .readdirSync(`./${site.pages}`)
     .filter(file => {
       return file.toLowerCase().match(/\.md$/);
     })
     .map(file => {
-      var markdown = fs.readFileSync(`${pages}/${file}`, "utf8");
+      var markdown = fs.readFileSync(`./${site.pages}/${file}`, "utf8");
       var title = markdown.match(/(\w.*)\n/)[0];
       var content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
 
