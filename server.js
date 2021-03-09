@@ -14,7 +14,7 @@ const site = {
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click", // the link back to your site
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
-  favicon: "",
+  favicon: "", // your site's icon, shown in the browser tab or your bookmarks page
   posts: "posts", // the folder that your blog posts are kept in
   pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
   rss: "rss", // where your rss is served
