@@ -1,21 +1,20 @@
-const fs = require("fs");
-const express = require("express");
-const showdown = require("showdown");
-const converter = new showdown.Converter();
+const fs = require("fs"),
+      express = require("express"),
+      showdown = require("showdown"),
+      converter = new showdown.Converter(),
+      app = express(),
+      port = 3000;
 
-const app = express();
-const port = 3000;
 app.use(express.json());
 app.set("view engine", "pug");
 
-/* Site-specific settings */
-
+/// Site-specific settings. These are what you'll edit to make the site your own!
 const site = {
   title: "Tyler Robertson",
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click",
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
-  favicon: "https://cdn.zappy.app/8d91e9849e203476bd0ffc649470a0f3.png",
+  favicon: "",
   posts: "posts",
   pages: "pages",
   rss: "rss",
@@ -26,19 +25,18 @@ const site = {
 /* Get the index page */
 app.get("/", (req, res) => {
   /* Build the index from /pages/index.md */
-  var page = getItem(site.pages,"index");
+  var content = getItem(site.pages,"index");
 
   /* On this page, let's list all posts from /posts */
   var list = "";
-  var posts = getPosts();
-
-  posts.forEach(post => {
+  getPosts().forEach(post => {
     list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
   });
   res.render("content", {
-    title: page.title,
-    content: page.html+`<div class="post-list"><ul>${list}</ul></div>`,
-    image: site.image
+    title: content.title,
+    content: content.html+`<div class="post-list"><ul>${list}</ul></div>`,
+    image: site.image,
+    site: site
   });
 });
 
