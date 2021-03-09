@@ -8,26 +8,25 @@ const fs = require("fs"),
 app.use(express.json());
 app.set("view engine", "pug");
 
-/// Site-specific settings. These are what you'll edit to make the site your own!
+// Site-specific settings. These are what you'll edit to make the site your own!
 const site = {
   title: "Tyler Robertson",
   description: "Three spreadsheets in a trenchcoat.",
-  url: "https://tyler.robertson.click",
-  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
+  url: "https://tyler.robertson.click", // the link back to your site
+  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
   favicon: "",
-  posts: "posts",
-  pages: "pages",
-  rss: "rss",
-  read: "read",
-  write: "write"
+  posts: "posts", // the folder that your blog posts are kept in
+  pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
+  rss: "rss", // where your rss is served
+  read: "read", // where users request blog posts from (note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
+  write: "write" // where you send new posts
 };
 
-/* Get the index page */
+// The index page is always assumed to be in your pages folder, titled "index.md"
 app.get("/", (req, res) => {
-  /* Build the index from /pages/index.md */
   var content = getItem(site.pages,"index");
 
-  /* On this page, let's list all posts from /posts */
+  // On this page, let's list all posts from /posts
   var list = "";
   getPosts().forEach(post => {
     list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
@@ -40,7 +39,7 @@ app.get("/", (req, res) => {
   });
 });
 
-/* Find the specific page or post the user is looking for, and serve it */
+// Find the specific page or post the user is looking for and display it
 app.get("/:page/:post?", (req, res) => {
   var content, meta;
   if (req.params.page == site.rss) {
@@ -66,7 +65,7 @@ app.get("/:page/:post?", (req, res) => {
 
 });
 
-/* Publishing new posts */
+// Writing new posts
 app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
@@ -80,8 +79,8 @@ app.post(`/${site.write}`, (req, res) => {
   }
 });
 
+// Get a list of all blog posts, sorted by modification date
 const getPosts = () => {
-  /* Get everything from your posts folder and sort it by creation date */
   return fs
     .readdirSync(`./${site.posts}`)
     .filter(file => {
@@ -89,14 +88,11 @@ const getPosts = () => {
     })
     .map(file => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
-      const title = markdown.match(/(\w.*)\n/)[0];
-      const mtime = fs.statSync(`./${site.posts}/${file}`).mtime;
-
       return {
         slug: file.split(".")[0],
-        title: title,
-        mtime: mtime,
-        pubdate: mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+        title: markdown.match(/(\w.*)\n/)[0],
+        mtime: fs.statSync(`./${site.posts}/${file}`).mtime,
+        pubdate: fs.statSync(`./${site.posts}/${file}`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       };
     })
     .sort((a, b) => {
@@ -110,20 +106,17 @@ const getItem = (page, post) => {
   if (markdown === null) {
     return false;
   } else {
-    const title = markdown.match(/(\w.*)\n/)[0];
-    const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-    const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
-    const pubdate = fs.statSync(`./${page}/${post}.md`).mtime;
     return {
           slug: post,
-          title: title,
-          html: converter.makeHtml(content),
-          image: image,
-          pubdate: pubdate.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+          title: markdown.match(/(\w.*)\n/)[0],
+          html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
+          image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image,
+          pubdate: fs.statSync(`./${page}/${post}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
         };
   }
 }
 
+// 
 const getRSS = () => {
   var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
   const posts = getPosts();
