@@ -79,12 +79,12 @@ li {
   margin-bottom: 1rem;
 }
 
-.post-list ul {
+ul.post-list {
   list-style-type: none;
   padding-inline-start: 0;
 }
 
-.post-list ul li a {
+ul.post-list li a {
   font-weight: 700;
   font-size: 1.25rem;
 }

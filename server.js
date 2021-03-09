@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   });
   res.render("content", {
     title: content.title,
-    content: content.html+`<div class="post-list"><ul>${list}</ul></div>`,
+    content: content.html+`<ul class="post-list">${list}</ul>`,
     image: site.image,
     site: site
   });
