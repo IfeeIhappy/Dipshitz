@@ -15,11 +15,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.header {
-  font-weight: 700;
-  font-size: 3rem;
-}
-
 .container {
   max-width: 45em;
   margin: 1rem auto;
@@ -27,7 +22,8 @@ body {
 }
 
 .header {
-  margin: 2rem 0rem;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
 .footer {
