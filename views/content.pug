@@ -5,7 +5,8 @@ html
       include ../css/style.css
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="twitter:card" content="summary")
-    meta(name="og:title" content=site.title+'title)
+    - var pageTitle = site.title + ' - ' + title;
+    meta(name="og:title" content=pageTitle)
     meta(name="og:description" content=content)
     meta(name="og:image" content=image)
     link(rel='icon', href=site.favicon, type='image/png')
