@@ -17,6 +17,7 @@ const site = {
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
   posts: "posts",
   pages: "pages",
+  rss: "rss",
   read: "read",
   write: "write"
 };
@@ -43,7 +44,7 @@ app.get("/", (req, res) => {
 
 /* Find the specific page or post the user is looking for, and serve it */
 app.get("/:page/:post?", (req, res) => {
-  if (req.params.page == site.read && typeof req.params.post !== "undefined") {
+  if (req.params.page == site.read) {
     const post = getItem(site.posts, req.params.post);
     if (post) {
       res.render("post", {
@@ -55,23 +56,14 @@ app.get("/:page/:post?", (req, res) => {
     } else {
       res.redirect("/");
     }
-  } else if (req.params.page == "rss") {
-    var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
-    var posts = getPosts();
-    posts.forEach(post => {
-      rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
-    });
-    rss += `</channel></rss>`;
+  } else if (req.params.page == site.rss) {
+    const rss = getRSS();
     res.set("Content-Type", "application/rss+xml");
     res.send(rss);
   } else if (typeof req.params.page !== "undefined") {
     /* If neither of the above, let's give them the page they ask for from /pages */
-    var pages = getPages();
-    var id = pages.findIndex(
-      p => p.slug.toLowerCase() == req.params.page.toLowerCase()
-    );
-    if (id > -1) {
-      var page = pages[id];
+    const page = getItem(site.pages, req.params.page);
+    if (page) {
       res.render("page", {
         title: page.title,
         content: page.html,
@@ -101,7 +93,7 @@ app.post(`/${site.write}`, (req, res) => {
 });
 
 const getPosts = () => {
-  /* Get everything from /posts and sort it by publishing date */
+  /* Get everything from your posts folder and sort it by publishing date */
   return fs
     .readdirSync(`./${site.posts}`)
     .filter(file => {
@@ -110,18 +102,13 @@ const getPosts = () => {
     .map(file => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       const title = markdown.match(/(\w.*)\n/)[0];
-      const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
       const pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
       const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       const displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
         slug: file.split(".")[0],
-        markdown: markdown,
         title: title,
-        html: converter.makeHtml(content),
-        image: image,
         pubdate: pubdate,
         meta: displayPub
       };
@@ -131,29 +118,7 @@ const getPosts = () => {
     });
 };
 
-const getPages = () => {
-  /* Get everything from /pages */
-  return fs
-    .readdirSync(`./${site.pages}`)
-    .filter(file => {
-      return file.toLowerCase().match(/\.md$/);
-    })
-    .map(file => {
-      const markdown = fs.readFileSync(`./${site.pages}/${file}`, "utf8");
-      const title = markdown.match(/(\w.*)\n/)[0];
-      const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
-      const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
-
-      return {
-        slug: file.split(".")[0],
-        markdown: markdown,
-        title: title,
-        html: converter.makeHtml(content),
-        image: image
-      };
-    });
-};
-
+// Find and return a specific page or post for display
 const getItem = (page, post) => {
   const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8");
   if (markdown === null) {
@@ -169,9 +134,20 @@ const getItem = (page, post) => {
           title: title,
           html: converter.makeHtml(content),
           image: image,
-          meta: 
+          meta: displayPub
         };
   }
+}
+
+const getRSS = () => {
+  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
+  const posts = getPosts();
+  posts.forEach(post => {
+    const post = getItem(site.posts, )
+    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+  });
+  rss += `</channel></rss>`;
+  return rss;
 }
 
 /* Start listening */
