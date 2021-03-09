@@ -1,12 +1,12 @@
-const fs = require("fs"),
-      express = require("express"),
-      showdown = require("showdown"),
+const fs = require("fs"), // fs is used to manipulate our files, such as reading a page or creating a new blog post on request
+      express = require("express"), // express is used to accept requests and route content where it needs to go (http://expressjs.com/)
+      showdown = require("showdown"), // showdown is used to turn markdown into HTML (http://showdownjs.com/)
       converter = new showdown.Converter(),
       app = express(),
       port = 3000;
 
-app.use(express.json());
-app.set("view engine", "pug");
+app.use(express.json()); // Set up our express app to accept JSON requests
+app.set("view engine", "pug"); // Using Pug as our view engine lets us dynamically build HTML pages with the files in the "views" folder (https://pugjs.org/)
 
 // Site-specific settings. These are what you'll edit to make the site your own!
 const site = {
@@ -116,19 +116,19 @@ const getItem = (page, post) => {
   }
 }
 
-// 
+// Generate some RSS and fill in each blog post
 const getRSS = () => {
-  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
+  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/${site.rss}" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
   const posts = getPosts();
   posts.forEach(item => {
     const post = getItem(site.posts, item.slug);
-    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+    rss += `<item><title>${post.title}</title><guid>${site.url}/${site.posts}/${post.slug}</guid><link>${site.url}/${site.posts}/${post.slug}</link><pubDate>${post.pubdate}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += `</channel></rss>`;
   return rss;
 }
 
-/* Start listening */
+// Start listening for requests
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
