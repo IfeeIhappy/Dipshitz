@@ -15,6 +15,7 @@ const site = {
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click",
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332",
+  favicon: "https://cdn.zappy.app/8d91e9849e203476bd0ffc649470a0f3.png",
   posts: "posts",
   pages: "pages",
   rss: "rss",
@@ -32,7 +33,7 @@ app.get("/", (req, res) => {
   var posts = getPosts();
 
   posts.forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
+    list += `<ul class="post-list"><li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li></`;
   });
   res.render("index", {
     title: page.title,
