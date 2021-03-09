@@ -15,12 +15,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.container {
-  max-width: 45em;
-  margin: 1rem auto;
-  padding: 1rem;
-}
-
 .header {
   font-weight: 700;
   font-size: 2rem;
@@ -28,6 +22,12 @@ body {
 
 .footer {
   margin: 5rem 0rem;
+}
+
+.container {
+  max-width: 45em;
+  margin: 1rem auto;
+  padding: 1rem;
 }
 
 h1,

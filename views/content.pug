@@ -13,9 +13,10 @@ html
     .container
       .header
         a(href=site.url) !{site.title}
-      .post-title= title
-      .meta= meta
-      | !{content}
+      .content
+        .post-title= title
+        .meta= meta
+        | !{content}
       .footer
         ul(class="nav")
           li(class="first")
