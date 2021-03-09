@@ -44,9 +44,8 @@ app.get("/", (req, res) => {
 app.get("/:page/:post?", (req, res) => {
   var content, meta;
   if (req.params.page == site.rss) {
-    const rss = getRSS();
     res.set("Content-Type", "application/rss+xml");
-    res.send(rss);
+    res.send(getRSS());
   } else if (req.params.page == site.read) {
     content = getItem(site.posts, req.params.post);
   } else if (typeof req.params.page !== "undefined") {
@@ -60,7 +59,8 @@ app.get("/:page/:post?", (req, res) => {
       title: content.title,
       content: content.html,
       meta: content.pubdate,
-      image: content.image
+      image: content.image,
+      site: site
     });
   }
 
@@ -128,7 +128,7 @@ const getRSS = () => {
   var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
   const posts = getPosts();
   posts.forEach(item => {
-    const post = getItem(site.posts, post.slug);
+    const post = getItem(site.posts, item.slug);
     rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += `</channel></rss>`;
