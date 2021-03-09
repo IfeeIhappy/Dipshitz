@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   var posts = getPosts();
 
   posts.forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.meta}</span></li>`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
   });
   res.render("index", {
     title: page.title,
@@ -51,7 +51,7 @@ app.get("/:page/:post?", (req, res) => {
         title: post.title,
         content: post.html,
         image: post.image,
-        meta: `by <a href="/">${site.title}</a><br/>${post.meta}`
+        meta: `by <a href="/">${site.title}</a><br/>${post.pubdate}`
       });
     } else {
       res.redirect("/");
@@ -103,14 +103,11 @@ const getPosts = () => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       const title = markdown.match(/(\w.*)\n/)[0];
       const pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      const displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
 
       return {
         slug: file.split(".")[0],
         title: title,
-        pubdate: pubdate,
-        meta: displayPub
+        pubdate: pubdate.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       };
     })
     .sort((a, b) => {
@@ -128,13 +125,12 @@ const getItem = (page, post) => {
     const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
     const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
     const pubdate = fs.statSync(`./${page}/${post}.md`).mtime;
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
     return {
+          slug: post,
           title: title,
           html: converter.makeHtml(content),
           image: image,
-          meta: displayPub
+          pubdate: pubdate.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
         };
   }
 }
@@ -142,9 +138,9 @@ const getItem = (page, post) => {
 const getRSS = () => {
   var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/rss" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
   const posts = getPosts();
-  posts.forEach(post => {
-    const post = getItem(site.posts, )
-    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate.toUTCString()}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
+  posts.forEach(item => {
+    const post = getItem(site.posts, post.slug);
+    rss += `<item><title>${post.title}</title><guid>${site.url}/read/${post.slug}</guid><link>${site.url}/read/${post.slug}</link><pubDate>${post.pubdate}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
   });
   rss += `</channel></rss>`;
   return rss;
