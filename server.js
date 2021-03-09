@@ -93,7 +93,7 @@ app.post(`/${site.write}`, (req, res) => {
 });
 
 const getPosts = () => {
-  /* Get everything from your posts folder and sort it by publishing date */
+  /* Get everything from your posts folder and sort it by creation date */
   return fs
     .readdirSync(`./${site.posts}`)
     .filter(file => {
@@ -102,16 +102,17 @@ const getPosts = () => {
     .map(file => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       const title = markdown.match(/(\w.*)\n/)[0];
-      const pubdate = fs.statSync(`./${site.posts}/${file}`).mtime;
+      const mtime = fs.statSync(`./${site.posts}/${file}`).mtime;
 
       return {
         slug: file.split(".")[0],
         title: title,
-        pubdate: pubdate.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+        mtime: mtime,
+        pubdate: mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       };
     })
     .sort((a, b) => {
-      return b.pubdate.getTime() - a.pubdate.getTime();
+      return b.mtime - a.mtime;
     });
 };
 
