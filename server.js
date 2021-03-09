@@ -33,49 +33,39 @@ app.get("/", (req, res) => {
   var posts = getPosts();
 
   posts.forEach(post => {
-    list += `<ul class="post-list"><li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li></`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
   });
-  res.render("index", {
+  res.render("content", {
     title: page.title,
-    content: page.html,
-    image: site.image,
-    list: list
+    content: page.html+`<div class="post-list"><ul>${list}</ul></div>`,
+    image: site.image
   });
 });
 
 /* Find the specific page or post the user is looking for, and serve it */
 app.get("/:page/:post?", (req, res) => {
-  if (req.params.page == site.read) {
-    const post = getItem(site.posts, req.params.post);
-    if (post) {
-      res.render("post", {
-        title: post.title,
-        content: post.html,
-        image: post.image,
-        meta: `by <a href="/">${site.title}</a><br/>${post.pubdate}`
-      });
-    } else {
-      res.redirect("/");
-    }
-  } else if (req.params.page == site.rss) {
+  if (req.params.page == site.rss) {
     const rss = getRSS();
     res.set("Content-Type", "application/rss+xml");
     res.send(rss);
+  } else if (req.params.page == site.read) {
+    const content = getItem(site.posts, req.params.post);
   } else if (typeof req.params.page !== "undefined") {
-    /* If neither of the above, let's give them the page they ask for from /pages */
-    const page = getItem(site.pages, req.params.page);
-    if (page) {
-      res.render("page", {
-        title: page.title,
-        content: page.html,
-        image: page.image
-      });
-    } else {
-      res.redirect("/");
-    }
-  } else {
-    /* If a page wasn't requested, go to the index */
+    const content = getItem(site.pages, req.params.page);
+  }
+  
+  // If the item requested doesn't exist, redirect to index
+  if (!content) {
     res.redirect("/");
+  }
+  
+  res.render("content", {
+    title: content.title,
+    content: content.html,
+    meta: content.meta,
+    image: content.image
+  });
+  
   }
 });
 
