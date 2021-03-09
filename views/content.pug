@@ -13,10 +13,14 @@ html
     .container
       .header
         a(href=site.url) !{site.title}
-      .post-title
-        | !{title}
-      .meta
-        | !{meta}
+      .post-title= title
+      .meta= meta
       | !{content}
       .footer
-        p #[a(href='/') Read more from Tyler], #[a(href='/rss') get some RSS], or #[a(href='https://twitter.com/aTylerRobertson') follow him on Twitter].
+        ul(class="nav")
+          li
+            a(href='/') Home
+          li 
+            a(href='/rss') RSS
+          li
+            a(href='https://twitter.com/aTylerRobertson') Twitter

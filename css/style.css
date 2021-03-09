@@ -104,3 +104,17 @@ li {
   color: var(--meta);
   padding-top: 0.5rem;
 }
+
+.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav li {
+  float: left;
+  margin-right: 1rem;
+}
+
+
