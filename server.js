@@ -44,12 +44,8 @@ app.get("/", (req, res) => {
 /* Find the specific page or post the user is looking for, and serve it */
 app.get("/:page/:post?", (req, res) => {
   if (req.params.page == site.read && typeof req.params.post !== "undefined") {
-    var posts = getPosts();
-    var postID = posts.findIndex(
-      p => p.slug.toLowerCase() == req.params.post.toLowerCase()
-    );
-    if (postID > -1) {
-      var post = posts[postID];
+    const post = getItem(site.posts, req.params.post);
+    if (post) {
       res.render("post", {
         title: post.title,
         content: post.html,
@@ -166,10 +162,14 @@ const getItem = (page, post) => {
     const title = markdown.match(/(\w.*)\n/)[0];
     const content = markdown.replace(markdown.match(/(.*)\n/)[0], "");
     const image = markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image;
+    const pubdate = fs.statSync(`./${page}/${post}.md`).mtime;
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const displayPub = `${months[pubdate.getMonth()]} ${pubdate.getDate()} ${pubdate.getFullYear()}`;
     return {
           title: title,
           html: converter.makeHtml(content),
-          image: image
+          image: image,
+          meta: 
         };
   }
 }
