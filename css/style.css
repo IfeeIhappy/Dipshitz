@@ -106,20 +106,17 @@ li {
 }
 
 ul.nav {
-  list-style-type: none;
   margin: 0;
-  padding: 0;
-  padding-inline-start: 0;
-  margin-inline-start: 0;
+  padding-left: 0;
 }
 
 ul.nav li {
   float: left;
   padding: 0 1rem;
-  list-style-type: disc;
+  list-style-type: '-';
 }
 
 ul.nav li.first {
   list-style-type: none;
-  padding-left: none;
+  padding-left: 0;
 }
