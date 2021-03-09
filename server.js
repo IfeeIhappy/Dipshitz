@@ -44,29 +44,28 @@ app.get("/", (req, res) => {
 
 /* Find the specific page or post the user is looking for, and serve it */
 app.get("/:page/:post?", (req, res) => {
+  var content, meta;
   if (req.params.page == site.rss) {
     const rss = getRSS();
     res.set("Content-Type", "application/rss+xml");
     res.send(rss);
   } else if (req.params.page == site.read) {
-    const content = getItem(site.posts, req.params.post);
+    content = getItem(site.posts, req.params.post);
   } else if (typeof req.params.page !== "undefined") {
-    const content = getItem(site.pages, req.params.page);
+    content = getItem(site.pages, req.params.page);
   }
-  
   // If the item requested doesn't exist, redirect to index
-  if (!content) {
+  if (typeof content == undefined) {
     res.redirect("/");
+  } else {
+    res.render("content", {
+      title: content.title,
+      content: content.html,
+      meta: content.pubdate,
+      image: content.image
+    });
   }
-  
-  res.render("content", {
-    title: content.title,
-    content: content.html,
-    meta: content.meta,
-    image: content.image
-  });
-  
-  }
+
 });
 
 /* Publishing new posts */
