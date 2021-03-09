@@ -105,16 +105,21 @@ li {
   padding-top: 0.5rem;
 }
 
-.nav {
+ul.nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  padding-inline-start: 0;
+  margin-inline-start: 0;
 }
 
-.nav li {
+ul.nav li {
   float: left;
-  margin-right: 1rem;
+  padding: 0 1rem;
+  list-style-type: disc;
 }
 
-
+ul.nav li.first {
+  list-style-type: none;
+  padding-left: none;
+}
