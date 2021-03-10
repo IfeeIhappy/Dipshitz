@@ -70,7 +70,7 @@ app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
     const markdown = req.body.markdown;
-    var slug = markdown.match(/(.+)\n/)[0].replace(/[^\w\s]/g,"").replace(/\s/g, "-").toLowerCase();
+    var slug = markdown.match(/(\w.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase();
     fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) {
       if (err) return console.log(err);
       console.log("Created file:", `./${site.posts}/${slug}.md`);
