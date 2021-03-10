@@ -70,14 +70,12 @@ a {
 
 a,
 a:visited {
-  color: var(--link);
-  border-color: var(--link);
+  color: var(--link) !important;
 }
 
 a:hover,
 a:active {
-  color: var(--link-hover);
-  border-color: var(--link-hover);
+  color: var(--link-hover) !important;
 }
 
 li {
