@@ -71,7 +71,7 @@ app.post(`/${site.write}`, (req, res) => {
     res.sendStatus(200);
     const markdown = req.body.markdown;
     var slug = markdown.match(/(.+)\n/)[0].replace(/[^\w\s]/g,"").replace(/\s/g, "-").toLowerCase();
-    fs.writeFile(`./${site.posts}/${slug}.md`, req.body.content, function(err) {
+    fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) {
       if (err) return console.log(err);
       console.log("Created file:", `./${site.posts}/${slug}.md`);
     });
@@ -91,7 +91,7 @@ const getPosts = () => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       return {
         slug: file.split(".")[0],
-        title: converter.makeHtml(markdown.match(/(.+)\n/)[0]),
+        title: converter.makeHtml(markdown.match(/(.+)\n/)[0]).replace(/[Hh]\d/g,"span"),
         mtime: fs.statSync(`./${site.posts}/${file}`).mtime,
         pubdate: fs.statSync(`./${site.posts}/${file}`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       };
@@ -109,7 +109,7 @@ const getItem = (page, post) => {
   } else {
     return {
           slug: post,
-          title: markdown.match(/(\w.*)\n/)[0].,
+          title: converter.makeHtml(markdown.match(/(.*)\n/)[0]).replace(/[Hh]\d/g,"span"),
           html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
           image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image,
           pubdate: fs.statSync(`./${page}/${post}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
