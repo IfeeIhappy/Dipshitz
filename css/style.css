@@ -4,7 +4,10 @@
   --accent: #222;
   --meta: #666;
   --link: #0984e3;
-  --hover: #74b9ff;
+  --link-hover: #74b9ff;
+  --background-color: #fff;
+  --font-color: #000;
+  --font-family: "Open Sans", sans-serif;
 }
 
 html {
@@ -12,7 +15,9 @@ html {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var()
 }
 
 .footer {
