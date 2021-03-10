@@ -70,7 +70,7 @@ app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
     const markdown = req.body.markdown;
-    var slug = markdown.exec(/([\w\s]+)/).replace(/\s/g, "-").toLowerCase();
+    var slug = markdown.match(/([[^\W]\s]+)/)[0].replace(/\s/g, "-").toLowerCase();
     fs.writeFile(`./${site.posts}/${slug}.md`, req.body.content, function(err) {
       if (err) return console.log(err);
       console.log("Created file:", `./${site.posts}/${slug}.md`);
@@ -91,7 +91,7 @@ const getPosts = () => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
       return {
         slug: file.split(".")[0],
-        title: markdown.exec(/(.*)\n/),
+        title: markdown.match(/(\w+)\n/)[0],
         mtime: fs.statSync(`./${site.posts}/${file}`).mtime,
         pubdate: fs.statSync(`./${site.posts}/${file}`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
       };
