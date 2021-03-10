@@ -17,7 +17,7 @@ html {
 body {
   font-family: var(--font-family);
   background-color: var(--background-color);
-  color: var()
+  color: var(--font-color);
 }
 
 .footer {
@@ -76,8 +76,8 @@ a:visited {
 
 a:hover,
 a:active {
-  color: var(--hover);
-  border-color: var(--hover);
+  color: var(--link-hover);
+  border-color: var(--link-hover);
 }
 
 li {
@@ -89,13 +89,17 @@ ul.post-list {
   padding-inline-start: 0;
 }
 
-ul.post-list li a {
+ul.post-list li {
   font-weight: 700;
   font-size: 1.25rem;
+  line-height: 1.25rem;
+  content-visibility: auto;
 }
 
 .meta {
   color: var(--meta);
+  font-weight: 400;
+  font-size: 0.75rem;
   padding-top: 0.5rem;
 }
 

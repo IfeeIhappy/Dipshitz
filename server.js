@@ -69,10 +69,12 @@ app.get("/:page/:post?", (req, res) => {
 app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) {
     res.sendStatus(200);
-    var title = req.body.title.replace(/\s/g, "-").toLowerCase();
-    fs.writeFile(`./${site.posts}/${title}.md`, req.body.content, function(err) {
+    const markdown = req.body.markdown;
+    var title = converter.makeHtml(markdown.match(/(.*)\n/)[0]);
+    var slug = title.match(/([\w\s]+)/)[0].replace(/\s/g, "-").toLowerCase();
+    fs.writeFile(`./${site.posts}/${slug}.md`, req.body.content, function(err) {
       if (err) return console.log(err);
-      console.log("Published:", req.body.title);
+      console.log("Created file:", `./${site.posts}/${slug}.md`);
     });
   } else {
     req.send("Unauthorized");
