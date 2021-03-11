@@ -32,7 +32,8 @@ app.get("/", (req, res) => {
     list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
   });
   res.render("content", {
-    title: content.title,
+    title: content.title.replace(/(<([^>]+)>)/gi,''),
+    displayTitle: content.title,
     content: content.html+`<ul class="post-list">${list}</ul>`,
     image: site.image,
     site: site
@@ -55,7 +56,8 @@ app.get("/:page/:post?", (req, res) => {
     res.redirect("/");
   } else {
     res.render("content", {
-      title: content.title,
+      title: content.title.replace(/(<([^>]+)>)/gi,''),
+      displayTitle: content.title,
       content: content.html,
       meta: content.pubdate,
       image: content.image,
