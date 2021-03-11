@@ -1,3 +1,3 @@
 # Hi 👋 I'm Tyler.
 
-Here are some things that I wrote for you.
+Here are some things that I've written for you.
