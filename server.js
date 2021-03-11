@@ -121,8 +121,8 @@ app.post(`/${site.write}`, (req, res) => {
   if (req.body.key == process.env.key) { // Check to make sure the right key was provided -- remember to set a key in .env!
     res.sendStatus(200);
     const markdown = req.body.markdown;
-    var slug = markdown.match(/(\w.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase();
-    if(!slug.match(/\w/)) { slug =  }
+    var slug = markdown.match(/(\.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase();
+    if (!slug.match(/\w/)) slug = Date.now();
     fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) {
       if (err) return console.log(err);
       console.log("Created file:", `./${site.posts}/${slug}.md`);
