@@ -94,6 +94,8 @@ ul.post-list li {
 }
 
 .meta {
+  display: block;
+  clear: both;
   color: var(--meta);
   font-weight: 400;
   font-size: 0.75rem;

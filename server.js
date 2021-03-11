@@ -14,13 +14,21 @@ const site = {
   description: "Three spreadsheets in a trenchcoat.",
   url: "https://tyler.robertson.click", // the link back to your site
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
-  favicon: "", // your site's icon, shown in the browser tab or your bookmarks page
+  favicon: "",
   posts: "posts", // the folder that your blog posts are kept in
   pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
   rss: "rss", // where your rss is served
   read: "read", // where users request blog posts from (note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
   write: "write" // where you send new posts
 };
+
+app.get('/favicon.ico', (req, res) => {
+  if (site.favicon == "") {
+    res.status(204);
+  } else {
+    res.send(site.favicon);
+  }
+});
 
 // The index page is always assumed to be in your pages folder, titled "index.md"
 app.get("/", (req, res) => {
@@ -29,7 +37,7 @@ app.get("/", (req, res) => {
   // On this page, let's list all posts from /posts
   var list = "";
   getPosts().forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><br/><span class="meta">${post.pubdate}</span></li>`;
+    list += `<li><a href='/read/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
   });
   res.render("content", {
     title: content.title.replace(/(<([^>]+)>)/gi,''),
