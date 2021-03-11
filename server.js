@@ -67,21 +67,6 @@ app.get("/:page/:post?", (req, res) => {
 
 });
 
-// Writing new posts
-app.post(`/${site.write}`, (req, res) => {
-  if (req.body.key == process.env.key) {
-    res.sendStatus(200);
-    const markdown = req.body.markdown;
-    var slug = markdown.match(/(\w.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase();
-    fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) {
-      if (err) return console.log(err);
-      console.log("Created file:", `./${site.posts}/${slug}.md`);
-    });
-  } else {
-    req.send("Unauthorized");
-  }
-});
-
 // Get a list of all blog posts, sorted by modification date
 const getPosts = () => {
   return fs
@@ -130,6 +115,22 @@ const getRSS = () => {
   rss += `</channel></rss>`;
   return rss;
 }
+
+// Writing new posts
+app.post(`/${site.write}`, (req, res) => {
+  if (req.body.key == process.env.key) { // Check to make sure the right key was provided -- remember to set a key in .env!
+    res.sendStatus(200);
+    const markdown = req.body.markdown;
+    var slug = markdown.match(/(\w.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase();
+    if(!slug.match(/\w/)) { slug =  }
+    fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) {
+      if (err) return console.log(err);
+      console.log("Created file:", `./${site.posts}/${slug}.md`);
+    });
+  } else {
+    req.send("Unauthorized");
+  }
+});
 
 // Start listening for requests
 app.listen(port, () => {
