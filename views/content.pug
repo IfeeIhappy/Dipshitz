@@ -21,9 +21,6 @@ html
         | !{content}
       .footer
         ul(class="nav")
-          li(class="first")
-            a(href='/') Home
-          li 
-            a(href='/rss') RSS
-          li
-            a(href='https://twitter.com/aTylerRobertson') Twitter
+          each val, key in site.footer
+            li
+             a(href= val) !{key}

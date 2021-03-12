@@ -88,9 +88,12 @@ ul.post-list {
 }
 
 ul.post-list li {
-  font-weight: 700;
-  font-size: 1.25rem;
   content-visibility: auto;
+}
+
+ul.post-list li a {
+  font-weight: 700;
+  font-size: 1.25rem !important;
 }
 
 .meta {
@@ -113,7 +116,7 @@ ul.nav li {
   list-style-type: '-';
 }
 
-ul.nav li.first {
+ul.nav:first-child {
   list-style-type: none;
   padding-left: 0;
 }
