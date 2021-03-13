@@ -6,7 +6,7 @@ The online escape room I went to was hosted partly in Zoom, and partly in a cust
 
 And, naturally, it got me thinking: **What if you did everything in Google Sheets?** 
 
-If the entire experience was kept within Google Sheets, you could cut out the host and the custom website requirements, and build a variety of escape rooms relatively quickly. They'd be easier to distribute, too, thanks to the ubiquity of Google Docs. Is it a sustainable business? I'm not sure! (Again, if you make escape rooms, [I'd love to chat](https://twitter.com/aTylerRobertson)!)
+If the entire experience was kept within Google Sheets, you could cut out the Zoom call, the host, the custom website requirements, and build a variety of escape rooms relatively quickly. They'd be easier to distribute, too, thanks to the ubiquity of Google Docs. Is it a sustainable business? I'm not sure! (Again, if you make escape rooms, [I'd love to chat](https://twitter.com/aTylerRobertson)!)
 
 Here's what I came up with:
 
@@ -18,4 +18,12 @@ The "room" has three puzzles, each broken out into a separate worksheet. You can
 
 _"But Tyler,"_ I hear you cry, _"What's stopping someone from just looking at that sheet and getting all the answers?"_ 
 
-I'm glad you asked! I
+I'm glad you asked! I prevent the user from opening that sheet using a single function:
+
+`SUBTOTAL()`
+
+_"But Tyler,"_ what, you again? _"Isn't SUBTOTAL just for financial stuff?"_
+
+Well, sure, yeah, [SUBTOTAL](https://support.google.com/docs/answer/3093649) is great for things like invoices, if that's your jam. But it can also **skip hidden rows**, which means if you put your answers _inside_ hidden rows, you can detect when the player un-hides them. 
+
+[Click here to copy another spreadsheet that helps demonstrate this!]()
