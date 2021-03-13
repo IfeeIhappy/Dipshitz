@@ -1,3 +1,20 @@
+const site = { // Site-specific settings. These are what you'll edit to make the site your own!
+  title: "Tyler Robertson",
+  description: "Three spreadsheets in a trenchcoat.",
+  url: "https://tyler.robertson.click", // the link back to your site
+  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
+  favicon: "",
+  header: {}, // Links to display in your site's header, beneath the title. "Name":"URL"
+  footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer, "Name":"URL"
+  posts: "posts", // the folder that your blog posts are kept in
+  pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
+  rss: "rss", // where your rss is served
+  read: "read", // where users request blog posts from (note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
+  write: "write" // where you send new posts
+};
+
+// Everything below here affects how the site works. It's not required to edit anything there, but I encourage you to poke around!
+
 const fs = require("fs"), // fs is used to manipulate our files, such as reading a page or creating a new blog post on request
       express = require("express"), // express is used to accept requests and route content where it needs to go (http://expressjs.com/)
       showdown = require("showdown"), // showdown is used to turn markdown into HTML (http://showdownjs.com/)
@@ -7,21 +24,6 @@ const fs = require("fs"), // fs is used to manipulate our files, such as reading
 
 app.use(express.json()); // Set up our express app to accept JSON requests
 app.set("view engine", "pug"); // Using Pug as our view engine lets us dynamically build HTML pages with the files in the "views" folder (https://pugjs.org/)
-
-// Site-specific settings. These are what you'll edit to make the site your own!
-const site = {
-  title: "Tyler Robertson",
-  description: "Three spreadsheets in a trenchcoat.",
-  url: "https://tyler.robertson.click", // the link back to your site
-  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
-  favicon: "",
-  footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"},
-  posts: "posts", // the folder that your blog posts are kept in
-  pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
-  rss: "rss", // where your rss is served
-  read: "read", // where users request blog posts from (note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
-  write: "write" // where you send new posts
-};
 
 app.get('/favicon.ico', (req, res) => {
   if (site.favicon == "") {
