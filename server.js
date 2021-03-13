@@ -4,7 +4,7 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   url: "https://tyler.robertson.click", // the link back to your site
   image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // the default image for your site, primarily used on social media
   favicon: "",
-  header: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's header, beneath the title. "Name":"URL"
+  header: {}, // Links to display in your site's header, beneath the title. "Name":"URL"
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer, "Name":"URL"
   posts: "posts", // the folder that your blog posts are kept in
   pages: "pages", // the folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
@@ -110,7 +110,7 @@ const getItem = (page, post) => {
           title: converter.makeHtml(markdown.match(/(.*)\n/)[0]).replace(/[Hh]\d/g,"span"),
           html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
           image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image,
-          pubdate: fs.statSync(`./${page}/${post}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+          pubdate: page == site.posts ? fs.statSync(`./${page}/${post}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : ""
         };
   }
 }
