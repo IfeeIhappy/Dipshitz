@@ -1,4 +1,4 @@
-# Links from my phone, part 1 /📱🔗 1️⃣
+# Links from my phone, part 1 / 📱🔗1️⃣
 
 It's important to know that, on desktop computers, I am fastidious about browser tabs: If a tab isn't actively in use, it gets closed. Immediately.
 

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap");
 
+/* Variables */
 :root {
   --accent: #222;
   --meta: #666;
@@ -32,6 +33,8 @@ body {
 
 .content {
   display: block;
+  clear: both;
+  margin: 1rem 0;
 }
 
 .container {
@@ -116,14 +119,12 @@ ul.post-list li a {
 }
 
 ul.nav {
-  clear: both;
-  display: block;
+  overflow: auto;
   margin: 0;
-  padding: 0 1rem 1rem 0;
+  padding: 0;
 }
 
 ul.nav li {
-  display: inline-block;
   float: left;
   margin: 0;
   padding-right: 1rem;
