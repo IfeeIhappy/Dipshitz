@@ -38,7 +38,7 @@ The one thing we can't really prevent here is players who want to enter their ow
 
 ## Taking it further
 
-In addition to just adding more puzzles, there are a few really cool opportunities this presents, which I haven't explored yet:
+In addition to just adding more puzzles, there are a few other really cool opportunities presented by using Google Sheets for your escape room:
 
 1. [Google Apps Script](https://developers.google.com/apps-script)! Google lets you add your own custom code to your sheets, superpowering them and allowing for even more complex solutions than what I've shown here. You could even couple your sheet with something like [riddle.com's API](https://www.riddle.com/docs/api/v2/) to generate custom puzzles on the fly.
 2. Speaking of generating custom puzzles, Google Sheets has lots of options for [random number generation](https://support.google.com/docs/answer/3093438), which would let you ensure that each playthrough is unique.
