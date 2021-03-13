@@ -18,7 +18,7 @@ The "room" has three puzzles, each broken out into a separate worksheet. You can
 
 _"But Tyler,"_ I hear you cry, _"What's stopping someone from just looking at that sheet and getting all the answers?"_ 
 
-I'm glad you asked! I prevent the user from opening that sheet using a single function:
+I'm glad you asked! In addition to [hiding the sheet and rows](https://support.google.com/docs/answer/1218656), I prevent the user from opening that sheet using a single function:
 
 `SUBTOTAL()`
 
@@ -26,4 +26,10 @@ _"But Tyler,"_ what, you again? _"Isn't SUBTOTAL just for financial stuff?"_
 
 Well, sure, yeah, [SUBTOTAL](https://support.google.com/docs/answer/3093649) is great for things like invoices, if that's your jam. But it can also **skip hidden rows**, which means if you put your answers _inside_ hidden rows, you can detect when the player un-hides them. 
 
-[Click here to copy another spreadsheet that helps demonstrate this!]()
+[Click here to copy another spreadsheet that helps demonstrate this!](https://docs.google.com/spreadsheets/d/1YGhwYb_RLmGEgQQzVh5vL9r9JBoVJfo8r1L-nbkRg3M/copy)
+
+## How this affects our design
+
+By hiding a sheet from the players, we can use that as the "brains" of the whole operation, so that all player-facing cells only reference what we want the player to see. 
+
+For example, in the 
