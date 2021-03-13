@@ -1,4 +1,4 @@
-# How to make an escape room in Google Sheets
+# Can you make an escape room in Google Sheets?
 
 Alright, I have to start with a confession: I've never been to an escape room. It's on my post-pandemic to-do list, but as of now I've only attended one digital escape room experience, and it was enough to make me make this spreadsheet. I say that to say, _please don't confuse this spreadsheet for a professional escape room_. It's a proof of concept, nothing more. (That said, if you're an escape room designer who's interested in spreadsheets, [let's talk!](https://twitter.com/aTylerRobertson))
 
@@ -28,8 +28,13 @@ Well, sure, yeah, [SUBTOTAL](https://support.google.com/docs/answer/3093649) is 
 
 [Click here to copy another spreadsheet that helps demonstrate this!](https://docs.google.com/spreadsheets/d/1YGhwYb_RLmGEgQQzVh5vL9r9JBoVJfo8r1L-nbkRg3M/copy)
 
-## How this affects our design
+## How this affects the design
 
 By hiding a sheet from the players, we can use that as the "brains" of the whole operation, so that all player-facing cells only reference what we want the player to see. 
 
-For example, in the 
+For example, in the "ADVENTURE" sheet, the main screen references a cell in the hidden sheet, and that cell uses a VLOOKUP to determine what to show to the player. That keeps the player one step removed from how the game works, helping guarantee that they don't accidentally stumble on information they shouldn't have yet. There are also some puzzles, like the WATER room, that rely solely on navigating the spreadsheet, and don't reference the hidden cells at all.
+
+The one thing we can't really prevent here is players who want to enter their own formulas, and reference the hidden cells on their own. We can "protect" cells to some degree, but that will always be a possibility. All we can do here is make that process really, really annoying. In my example above, I do this by placing each puzzle in a different spot, and ensuring that the cell where you enter the answers doesn't reference those answers. That way, even though you can technically use formulas to poke around and find the answers, by that point you've done nothing but spoil the fun. 
+
+## Taking it further
+
