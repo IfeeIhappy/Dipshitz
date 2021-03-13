@@ -8,4 +8,14 @@ And, naturally, it got me thinking: **What if you did everything in Google Sheet
 
 If the entire experience was kept within Google Sheets, you could cut out the host and the custom website requirements, and build a variety of escape rooms relatively quickly. They'd be easier to distribute, too, thanks to the ubiquity of Google Docs. Is it a sustainable business? I'm not sure! (Again, if you make escape rooms, [I'd love to chat](https://twitter.com/aTylerRobertson)!)
 
-Here
+Here's what I came up with:
+
+## [Click here to make a copy!](https://docs.google.com/spreadsheets/d/1xJM10k71-X-4Z68mqjWTsKhZuQny0OxTWUMPKhOQtSk/copy)
+
+## How it works
+
+The "room" has three puzzles, each broken out into a separate worksheet. You can put multiple puzzles into a single sheet, of course, but having separate tabs really contributes to the feeling of having separate spaces within a larger area. I won't get too deep into how each puzzle works (I'll write up separate pieces for that later on), but the important thing is that they all refer to a separate, hidden, "FORBIDDEN" worksheet. 
+
+_"But Tyler,"_ I hear you cry, _"What's stopping someone from just looking at that sheet and getting all the answers?"_ 
+
+I'm glad you asked! I
