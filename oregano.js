@@ -39,9 +39,13 @@ app.get("/", (req, res) => {
 
   // On this page, let's list all posts from /posts
   var list = "";
-  getPosts().forEach(post => {
-    list += `<li><a href='/read/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
-  });
+  if(getPosts().length > 0){
+    getPosts().forEach(post => {
+      list += `<li><a href='/read/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
+    });
+  } else {
+    list = `<li><i>Nothing here yet!</i></li>`;
+  }
   res.render("content", {
     title: content.title.replace(/(<([^>]+)>)/gi,''),
     displayTitle: content.title,

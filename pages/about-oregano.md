@@ -10,7 +10,7 @@ Let me clarify: blogging platforms, like WordPress or Squarespace, had too many 
 
 After a year of searching, nothing quite fit the bill, so I decided to make my own. I'm not a developer, but I'm pretty good at googling, and a few months later here we are: the smallest, simplest, feature-less blogging that I wanted this whole time. It's worked out pretty well for me so far, so I'm sharing it here for you to use, as well! 
 
-Oregano is powered by [Glitch](https://glitch.com), a simple tool for creating web apps. It uses [Express](https://expressjs.com) to receive and handle requests (like when someone wants to read a post), and [Showdown](https://showdownjs.com) and [Pug](https://pugjs.org) to make sure your content gets displayed correctly. All of the code powering Oregano fits into fewer than 150 over-commented lines of Javascript, so there's plenty of room to play around and make it grow with you.
+Oregano is a "flat-file" blogging tool, meaning all of your pages and post exists as markdown files in easy-to-access folders on your site. No more futzing around with an interface that you're only using 2% of. It's powered by [Glitch](https://glitch.com), a simple tool for creating web apps. It uses [Express](https://expressjs.com) to receive and handle requests (like when someone wants to read a post), and [Showdown](https://showdownjs.com) and [Pug](https://pugjs.org) to make sure your content gets displayed correctly. All of the code powering Oregano fits into fewer than 150 over-commented lines of Javascript, so there's plenty of room to play around and make it grow with you.
 
 [Check out the Getting Started guide to try it out!](/getting-started)
 
