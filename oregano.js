@@ -4,12 +4,12 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   url: "https://oregano-blog.glitch.me", // Your site's primary URL
   image: "", // The default image for your site, primarily used on social media
   favicon: "", // The icon that appears in the browser tab
-  header: {"Home":"/","About":"/about-oregano"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
+  header: {"Home":"/","About":"/about-oregano","Getting Started":"/getting-started"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   posts: "posts", // The folder that your blog posts are kept in
   pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
   rss: "rss", // Where people can go to get an RSS feed for your site
-  read: "read", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
+  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
   write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write
 };
 
@@ -57,7 +57,7 @@ app.get("/:page/:post?", (req, res) => {
   if (req.params.page == site.rss) {
     res.set("Content-Type", "application/rss+xml");
     res.send(getRSS());
-  } else if (req.params.page == site.read) {
+  } else if (req.params.page == site.blog) {
     content = getItem(site.posts, req.params.post);
   } else if (typeof req.params.page !== "undefined") {
     content = getItem(site.pages, req.params.page);
