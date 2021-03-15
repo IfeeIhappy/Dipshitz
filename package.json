@@ -1,9 +1,9 @@
 {
-  "name": "flat-file-blog",
+  "name": "oregano",
   "description": "really simple flat-file blogging",
   "version": "1.0.0",
   "scripts": {
-    "start": "node flat-file-blog.js"
+    "start": "node oregano.js"
   },
   "dependencies": {
     "express": "^4.17.1",

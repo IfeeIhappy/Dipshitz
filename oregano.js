@@ -1,8 +1,8 @@
 const site = { // Site-specific settings. These are what you'll edit to make the site your own!
-  title: "Tyler Robertson", // The primary title of your site -- Appears on every page, and in the browser tab
-  description: "A writer focused on the web, automation, and spreadsheets.", // A brief description of your site, used for search results and some social sharing
-  url: "https://tyler.robertson.click", // Your site's primary URL
-  image: "https://cdn.glitch.com/1fd701c7-e73d-40ab-8afe-2d1ae4ec1f55%2Fwumbo%202.JPG?v=1609924141332", // The default image for your site, primarily used on social media
+  title: "Oregano", // The primary title of your site -- Appears on every page, and in the browser tab
+  description: "Simple, markdown-focused blogging.", // A brief description of your site, used for search results and some social sharing
+  url: "https://oregano-blog.glitch.me", // Your site's primary URL
+  image: "", // The default image for your site, primarily used on social media
   favicon: "", // The icon that appears in the browser tab
   header: {"Home":"/","About":"/about"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
