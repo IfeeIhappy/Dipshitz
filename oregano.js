@@ -4,7 +4,7 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   url: "https://oregano-blog.glitch.me", // Your site's primary URL
   image: "", // The default image for your site, primarily used on social media
   favicon: "", // The icon that appears in the browser tab
-  header: {"Home":"/","About":"/about"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
+  header: {"Home":"/","About":"/about-oregano"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   posts: "posts", // The folder that your blog posts are kept in
   pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
