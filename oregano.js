@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
   var list = "";
   if(getPosts().length > 0){
     getPosts().forEach(post => {
-      list += `<li><a href='/read/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
+      list += `<li><a href='/${site.blog}/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
     });
   } else {
     list = `<li><i>Nothing here yet!</i></li>`;
