@@ -43,12 +43,12 @@ When you create a new post in Oregano, it automatically assumes that the first l
 
 You can create markdown files and write new posts directly within Glitch's interface (which is so good that I wrote half of the code from my phone), but using Express also gives Oregano a really cool ability: you can use the `/write` endpoint to publish new content from anywhere. All you have to do is make a "POST" request to your site's `/write` endpoint, and include:
 
-1. The markdown content that you want to publish
-2. Your site's super secret key, which you set in `.env`
+1. The **markdown** content that you want to publish
+2. Your site's super secret **key**, which you set in `.env`
 
 For example, if I want to make a post that just says "Hello, world!", I can pop this into any web browser:
 
-`https://example-oregano-blog.glitch.me/write?key=SuperSecretKey1234&content=Hello, world!`
+`https://example-oregano-blog.glitch.me/write?key=SuperSecretKey1234&markdown=Hello, world!`
 
 Oregano's code receives that request with Express, figures out what to call the file based on the first line (or inserts the current time if it's hard to tell), and adds it as a markdown file to your `posts/` folder.
 
