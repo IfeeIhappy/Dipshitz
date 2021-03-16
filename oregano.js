@@ -1,3 +1,4 @@
+// Welcome to Oregano, a tiny flat-file blogging system by @aTylerRobertson
 const site = { // Site-specific settings. These are what you'll edit to make the site your own!
   title: "Oregano", // The primary title of your site -- Appears on every page, and in the browser tab
   description: "Simple, markdown-focused blogging.", // A brief description of your site, used for search results and some social sharing
@@ -12,7 +13,6 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
   write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write
 };
-
 // ✨ Everything below here affects how the site works. ✨ 
 // It's not required to edit anything there, but I encourage you to poke around!
 const fs = require("fs"), // fs is used to manipulate our files, such as reading a page or creating a new blog post on request
