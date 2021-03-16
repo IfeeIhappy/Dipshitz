@@ -68,6 +68,14 @@ p {
   line-height: 2rem;
 }
 
+pre code {
+  display: block;
+  max-width: 90%;
+  margin: 2rem auto;
+  word-wrap: break-word;
+  overflow-x: scroll;
+}
+
 code {
   font-family: monospace;
   font-size: 1.25rem;

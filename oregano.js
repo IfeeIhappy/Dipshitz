@@ -25,69 +25,69 @@ const fs = require("fs"), // fs is used to manipulate our files, such as reading
 app.use(express.json()); // Set up our express app to accept JSON requests
 app.set("view engine", "pug"); // Using Pug as our view engine lets us dynamically build HTML pages with the files in the "views" folder (https://pugjs.org/)
 
-app.get('/favicon.ico', (req, res) => {
-  if (site.favicon == "") {
-    res.status(204);
-  } else {
-    res.send(site.favicon);
+app.get('/favicon.ico', (req, res) => { // This isn't strictly necessary, but
+  if (site.favicon == "") { // most browsers will check for a favicon in your root folder.
+    res.status(204); // So you can either let it fail,
+  } else { // or,
+    res.send(site.favicon); // tell it where it is, using the site settings above.
   }
 });
 
 // The index page is always assumed to be in your pages folder, titled "index.md"
-app.get("/", (req, res) => {
-  var content = getItem(site.pages,"index");
+app.get("/", (req, res) => { // the forward slash here just means "anyone someone requests *just* your site's URL"
+  var content = getItem(site.pages,"index"); // grab the index from pages/index.md
 
-  // On this page, let's list all posts from /posts
+  // In addition to the content of the page, let's list all posts from the posts/ folder
   var list = "";
   if(getPosts().length > 0){
     getPosts().forEach(post => {
-      list += `<li><a href='/${site.blog}/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`;
+      list += `<li><a href='/${site.blog}/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`; // There's probably a nicer way to do this using Pug, but using Javascript to build HTML has a sort of an ugly, pure quality to it.
     });
   } else {
-    list = `<li><i>Nothing here yet!</i></li>`;
+    list = `<li><i>Nothing here yet!</i></li>`; // Just in case there aren't any posts, give the people *something*
   }
-  res.render("content", {
-    title: content.title.replace(/(<([^>]+)>)/gi,''),
+  res.render("content", { // Now we use Pug to take all of the content from the page and render it
+    title: content.title.replace(/(<([^>]+)>)/gi,''), // This regex removes all HTML tags from the title, so that it can be displayed properly in the browser tab (yes I had to google this)
     displayTitle: content.title,
     content: content.html+`<ul class="post-list">${list}</ul>`,
     image: site.image,
-    site: site
+    site: site // You'll see this pop up a few times, but we also pass all of the site variables to pug, so we can display site-constant stuff, like the header and footer links
   });
 });
 
 // Find the specific page or post the user is looking for and display it
-app.get("/:page/:post?", (req, res) => {
+app.get("/:page/:post?", (req, res) => { // This uses some special Express-powers, and first checks if someone went to a page, like /blog. If they did, we also check if the requested a post, like /blog/hello-world
   var content, meta;
-  if (req.params.page == site.rss) {
+  if (req.params.page == site.rss) { // If the page they requested is your RSS feed, let's give them that.
     res.set("Content-Type", "application/rss+xml");
     res.send(getRSS());
-  } else if (req.params.page == site.blog) {
-    content = getItem(site.posts, req.params.post);
-  } else if (typeof req.params.page !== "undefined") {
-    content = getItem(site.pages, req.params.page);
+  } else if (req.params.page == site.blog) { // If the page is your blog page,
+    content = getItem(site.posts, req.params.post); // Let's try and get the post they want
+  } else if (typeof req.params.page !== "undefined") { // If there's NO post, and they definitely requested a page,
+    content = getItem(site.pages, req.params.page); // let's grab that page
   }
-  // If the item requested doesn't exist, redirect to index
+  // If for whatever reason the item they requested doesn't exist, redirect to index
   if (typeof content == undefined) {
     res.redirect("/");
   } else {
-    res.render("content", {
-      title: content.title.replace(/(<([^>]+)>)/gi,''),
+    res.render("content", { // But if we do have a page or post to show, let's render it with Pug
+      title: content.title.replace(/(<([^>]+)>)/gi,''), // again this is some great regex to help remove HTML tags, to put your title in the browser window
       displayTitle: content.title,
       content: content.html,
       meta: content.pubdate,
       image: content.image,
-      site: site
+      site: site // we send all of the site settings to Pug as well, to display constants like your site title, and nav menus
     });
   }
 
 });
 
-// Get a list of all blog posts, sorted by modification date
+// For the index and RSS feed, we need a list of all blog posts, sorted by modification date
 const getPosts = () => {
-  return fs
+  return fs // fs lets us look at the File System, and grab your actual markdown files
     .readdirSync(`./${site.posts}`)
     .filter(file => {
-      return file.toLowerCase().match(/\.md$/);
+      return file.toLowerCase().match(/\.md$/); //this looks at the 
     })
     .map(file => {
       const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
