@@ -41,18 +41,20 @@ You can also poke around in `css/` where a single CSS file changes how the site 
 
 When you create a new post in Oregano, it automatically assumes that the first line in the file is your post's title (yes, that means that you can title a post with an image, you maniac). There's no tagging, categorizing, or front-matter to worry about: everything you write will appear on the page. When you need to update a post, there's no re-publish button: just edit the markdown file! 
 
-You can create markdown files and write new posts directly within Glitch's interface (which is so good that I wrote half of the code from my phone), but using Express also gives Oregano a really cool ability: you can use the `/write` endpoint to publish new content from anywhere. All you have to do is make a "POST" request to your site's `/write` endpoint, and include:
+You can create markdown files and write new posts directly within Glitch's interface (which is so good that I wrote half of the code from my phone), but using Express also gives Oregano a really cool ability: you can use the `/write` endpoint to publish new content from anywhere. All you have to do is make a "POST" request to your site's `/write` endpoint, and include two parameters:
 
-1. The **markdown** content that you want to publish
-2. Your site's super secret **key**, which you set in `.env`
+1. **markdown**: The raw markdown content that you want to publish
+2. **key**: The super secret key or password that you set in `.env`
 
 For example, if I want to make a post that just says "Hello, world!", I can pop this into any web browser:
 
-`https://example-oregano-blog.glitch.me/write?key=SuperSecretKey1234&markdown=Hello, world!`
+```
+https://example-oregano-blog.glitch.me/write?key=SuperSecretKey1234&markdown=Hello, world!
+```
 
 Oregano's code receives that request with Express, figures out what to call the file based on the first line (or inserts the current time if it's hard to tell), and adds it as a markdown file to your `posts/` folder.
 
-You can use that same process to post from your favorite writing app, like [Drafts](https://getdrafts.com/) or an automation tool like [Zapier](https://zapier.com) (disclosure: I work at Zapier, but I'd still mention it here). 
+You can use that same process to post from your favorite writing app, like [Drafts](https://getdrafts.com/) ([here's the action I used to post from my phone!](https://actions.getdrafts.com/a/1il)) or a webhook-friendly automation tool like [Zapier](https://zapier.com) (disclosure: I work at Zapier, but I'd still mention it here). 
 
 ## What if I find a bug, or have a question?
 
