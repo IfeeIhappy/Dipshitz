@@ -70,13 +70,12 @@ p {
 
 code {
   font-family: monospace;
-  font-size: inherit;
+  font-size: 1.25rem;
   background: #efefef;
   word-wrap: break-word;
   box-decoration-break: clone;
   padding: 0.1rem 0.3rem 0.2rem;
   border-radius: 0.2rem;
-  font-size: 1.5rem;
 }
 
 a {
