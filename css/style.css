@@ -5,17 +5,19 @@
 :root {
   --accent: #222;
   --meta: #666;
-  --link: #0984e3;
-  --link-hover: #74b9ff;
+  --link: #27ae60;
+  --link-hover: #2ecc71;
   --background-color: #fff;
   --font-color: #000;
   --font-family: "Open Sans", sans-serif;
+  --container-width: 45rem;
+  --font-size: 130%;
 }
 
 /* Changing anything below this point isn't required, but I encourage you to poke around! */
 
 html {
-  font-size: 130%;
+  font-size: var(--font-size);
 }
 
 body {
@@ -41,7 +43,7 @@ body {
 }
 
 .container {
-  max-width: 45em;
+  max-width: var(--container-width);
   margin: 0 auto;
   padding: 1rem;
 }

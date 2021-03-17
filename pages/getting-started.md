@@ -2,7 +2,7 @@
 
 To start blogging with Oregano, you'll first need a [Glitch](https://glitch.com) account. That will let you **remix** this app:
 
-## [Click here to remix!](https://glitch.com/edit/#!/remix/oregano-blog)
+## [🌱 Click here to remix! 🌱](https://glitch.com/edit/#!/remix/oregano-blog)
 
 That will create a brand new copy of this app on your own account. 
 
