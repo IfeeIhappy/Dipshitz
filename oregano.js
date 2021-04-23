@@ -4,7 +4,7 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   description: "Simple, markdown-focused blogging.", // A brief description of your site, used for search results and some social sharing
   url: "https://oregano-blog.glitch.me", // Your site's primary URL
   image: "", // The default image for your site, primarily used on social media
-  favicon: "", // The icon that appears in the browser tab
+  favicon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>", // The icon that appears in the browser tab
   header: {"Home":"/","About":"/about-oregano","Getting Started":"/getting-started"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   posts: "posts", // The folder that your blog posts are kept in
