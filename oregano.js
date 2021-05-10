@@ -96,7 +96,13 @@ const getPosts = () => {
 };
 // If the user requested a specific page or post, let's grab it and return it for display
 const getItem = (page, post) => {
-  const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8");
+  const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8", (err, data) =>{
+    if (err) {
+      return null;
+    } else {
+      return data;
+    }
+  });
   if (markdown === null) {
     return false;
   } else {
@@ -125,8 +131,8 @@ app.post(`/${site.write}`, (req, res) => { // You can publish new posts remotely
   if (req.body.key == process.env.key) { // Check to make sure the right key was provided -- remember to set a key in .env!
     res.sendStatus(200); // If the key is correct, send a success status!
     const markdown = req.body.markdown; // The only other required value is "markdown", which is the raw markdown content of your post. 
-    var slug = markdown.match(/(\.*)\n/)[0].replace(/[^\w\s\d]/g,"").trim().replace(/\s/g, "-").toLowerCase(); // We grab the first line, and try to parse out any text we can from it, replacing spces with dashes, to use as the filename.
-    if (!slug.match(/\w/)) slug = Date.now(); // If the slug doesn't have any letters in it, using the current date/time as the filename instead.
+    var slug = markdown.match(/([^\#\!\?\[\]\&].*)\n/)[0].trim().replace(/\s/g, "-").toLowerCase(); // We grab the first line, and try to parse out any text we can from it, replacing spces with dashes, to use as the filename.
+    if (!slug.match(/[^\!\?\s]/)) slug = Date.now(); // If the slug doesn't have any usable characters in it, using the current date/time as the filename instead.
     fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) { // Write the file to your posts/ folder
       if (err) return console.log(err);
       console.log("Created file:", `./${site.posts}/${slug}.md`);
