@@ -61,7 +61,7 @@ app.get("/:page/:post?", (req, res) => { // This uses some special Express-power
     content = getItem(site.pages, req.params.page); // let's grab that page
   }
   // If for whatever reason the item they requested doesn't exist, redirect to index
-  if (typeof content == undefined) {
+  if (typeof content == undefined || content === false) {
     res.redirect("/");
   } else {
     res.render("content", { // But if we do have a page or post to show, let's render it with Pug
@@ -94,26 +94,17 @@ const getPosts = () => {
       return b.mtime - a.mtime;
     });
 };
-// If the user requested a specific page or post, let's grab it and return it for display
-const getItem = (page, post) => {
-  const markdown = fs.readFileSync(`./${page}/${post}.md`, "utf8", (err, data) =>{
-    if (err) {
-      return null;
-    } else {
-      return data;
-    }
-  });
-  if (markdown === null) {
-    return false;
-  } else {
-    return {
-          slug: post,
-          title: converter.makeHtml(markdown.match(/(.*)\n/)[0]).replace(/[Hh]\d/g,"span"), // because we apply our own styling to the title, we convert it into HTML and remove any headers before display
-          html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
-          image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image, // for the social sharing image, we look for the first image in the post. If there are no images, use the default site image instead.
-          pubdate: page == site.posts ? fs.statSync(`./${page}/${post}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : "" // If the item is a page (as opposed to a post), don't display the publishing date (you can change this if you want, but I like the evergreen nature of pages)
-        };
-  }
+// Find and return a specific page or post for display
+const getItem = (folder, file) => {
+  var markdown = "";
+  try { markdown = fs.readFileSync(`./${folder}/${file}.md`, "utf8"); } catch (err) { return false; }
+  return {
+      slug: file,
+      title: converter.makeHtml(markdown.match(/(.*)\n/)[0]).replace(/[Hh]\d/g,"span"),
+      html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
+      image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image,
+      pubdate: folder == site.posts ? fs.statSync(`./${folder}/${file}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : ""
+  };
 }
 // Generate some RSS and fill in each blog post
 const getRSS = () => { // This is maybe the ugliest function here, becuase we're building the RSS from scratch. If you have a better way to do this, let me know @aTylerRobertson! 
