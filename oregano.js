@@ -10,7 +10,7 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   posts: "posts", // The folder that your blog posts are kept in.
   pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
   rss: "rss", // Where people can go to get an RSS feed for your site.
-  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
+  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/blog (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
   write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write
 };
 // ✨ Everything below here affects how the site works. ✨ 
