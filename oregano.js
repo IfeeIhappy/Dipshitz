@@ -7,11 +7,11 @@ const site = { // Site-specific settings. These are what you'll edit to make the
   favicon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>", // The icon that appears in the browser tab
   header: {"Home":"/","About":"/about-oregano","Getting Started":"/getting-started"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
-  posts: "posts", // The folder that your blog posts are kept in. Cannot be "oregano".
-  pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept. Cannot be "oregano".
-  rss: "rss", // Where people can go to get an RSS feed for your site. Cannot be "oregano".
-  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!) Cannot be "oregano".
-  write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write - Cannot be "oregano"
+  posts: "posts", // The folder that your blog posts are kept in.
+  pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
+  rss: "rss", // Where people can go to get an RSS feed for your site.
+  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/read (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
+  write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write
 };
 // ✨ Everything below here affects how the site works. ✨ 
 // It's not required to edit anything there, but I encourage you to poke around!
@@ -131,16 +131,6 @@ app.post(`/${site.write}`, (req, res) => { // You can publish new posts remotely
   } else {
     req.send("Unauthorized"); // If the key doesn't match, you're outta here!
   }
-});
-app.get(`/oregano/test`, (req, res) => { // Test the connection for third-party tools like Zapier
-  if (req.body.key == process.env.key) { // Check to make sure the key is correct...
-    res.sendStatus(200); // And return a 200 if it is!
-  } else {
-    res.sendStatus(401); // Otherwise, they're unauthorized.
-  }
-});
-app.get(`/oregano/all-posts`, (req, res) => { // Return all posts as JSON, if someone's reading via API
-  res.send(getPosts());
 });
 app.listen(port, () => { // Tell Express to start listening for requests when your site wakes up
   console.log(`Listening at port ${port}`);
