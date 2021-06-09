@@ -1,12 +1,12 @@
 // Welcome to Oregano, a tiny flat-file blogging system by @aTylerRobertson
 const site = { // Site-specific settings. These are what you'll edit to make the site your own!
   title: "Oregano", // The primary title of your site -- Appears on every page, and in the browser tab
-  description: "Simple, markdown-focused blogging.", // A brief description of your site, used for search results and some social sharing
+  description: "Super simple blogging for writers who don't have the thyme. 🌱", // A brief description of your site, used for search results and some social sharing
   url: "https://oregano-blog.glitch.me", // Your site's primary URL
-  image: "", // The default image for your site, primarily used on social media
-  favicon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>", // The icon that appears in the browser tab
+  image: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The default image for your site, primarily used on social media
+  favicon: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The icon that appears in the browser tab
   header: {"Home":"/","About":"/about-oregano","Getting Started":"/getting-started"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
-  footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/aTylerRobertson"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
+  footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/oregano_blog"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
   posts: "posts", // The folder that your blog posts are kept in.
   pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
   rss: "rss", // Where people can go to get an RSS feed for your site.
