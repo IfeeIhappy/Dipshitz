@@ -1,137 +1,458 @@
-// Welcome to Oregano, a tiny flat-file blogging system by @aTylerRobertson
-const site = { // Site-specific settings. These are what you'll edit to make the site your own!
-  title: "Oregano", // The primary title of your site -- Appears on every page, and in the browser tab
-  description: "Super simple blogging for writers who don't have the thyme. 🌱", // A brief description of your site, used for search results and some social sharing
-  url: "https://oregano-blog.glitch.me", // Your site's primary URL
-  image: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The default image for your site, primarily used on social media
-  favicon: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The icon that appears in the browser tab
-  header: {"Home":"/","About":"/about-oregano","Getting Started":"/getting-started"}, // Links to display in your site's header, beneath the title. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
-  footer: {"Home":"/","RSS":"/rss","Twitter":"https://twitter.com/oregano_blog"}, // Links to display in your site's footer. Always use this format: {"Link 1":"URL 1","Link 2":"URL 2"}
-  posts: "posts", // The folder that your blog posts are kept in.
-  pages: "pages", // The folder that pages - files that you can link to directly, but aren't listed on the index page - are kept.
-  rss: "rss", // Where people can go to get an RSS feed for your site.
-  blog: "blog", // Where users request blog posts from, ex.: https://YourSite.com/blog (Note: I recommend updating this *before* sharing your posts with people, because changing it will break old links!)
-  write: "write" // Where you send new posts to be published, ex.: https://YourSite.com/write
+/*
+  🌱 WELCOME TO OREGANO 🌱
+  A tiny blogging system, designed to help you post from wherever you are. 
+
+  Made by Tyler Robertson: https://tyler.robertson.click
+  Using Glitch: https://glitch.com
+  & Express: https://expressjs.com 
+  & Pug: https://pugjs.org
+  & Showdown: http://showdownjs.com
+
+  💡 HOW IT WORKS 💡
+  To get started, remix or clone this site, and adjust the SITE SETTINGS (below) to
+  make it your own. You can also edit /pages/index.md to customize your home page,
+  /css/style.css to change how the site looks, and the files in /views adjust how 
+  content is rendered.
+
+  To publish content in Oregano, write a markdown (.md) file, and place it in either 
+  the "pages" or "posts" folder. 
+
+  "Pages" are considered evergreen content, and can be linked to directly. 
+  For example, if you write "about.md" and add it to the "pages" folder,
+  you can link to it at https://yourSiteURL.com/about. 
+
+  "Posts" are part of your blog, are listed on the index page, and can be linked to at 
+  https://yourSiteURL.com/read/your-post. The first line of your post's content
+  is considered its title, and is used to create that link. For example, if
+  you write a post that starts, "hello, world 👋", it will be available at
+  https://yourSiteURL.com/read/hello-world-👋
+  
+  ❓ HAVE QUESTIONS? ❓
+  Reach out to @oregano_blog on Twitter!
+*/
+
+/* 
+  ⚙️ SITE SETTINGS ⚙️
+
+  Change the values below to make the site your own!
+  
+  Not shown here is the KEY value, which you'll need in order to integrate your blog 
+  with third-party apps. Set that in your ENVIRONMENT VARIABLES. 
+  In Glitch, you can get to ENVIRONMENT VARIABLES by selecting "🔑.env" in the sidebar!
+  
+  You'll also want to edit /pages/index.md, to personalize your home page.
+*/ 
+
+const site = {
+  title: "Oregano", // Your site's title appears at the top of every page
+  description: "Super simple blogging for writers who don't have the thyme. 🌱", // A brief description of your site, appears in search results
+  url: "https://oregano-blog.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
+  image: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The default image to show in search results or on social media
+  favicon: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", //The tiny icon to show in your browser tab
+  header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started", API: "/api" }, // Links to show on your site's header, using the format {"Text": "URL"}
+  footer: { "All posts": "/all", RSS: "/all?format=rss", Twitter: "https://twitter.com/oregano_blog", "🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
+  pagination: 10 // How many posts should we show on the index page at one time?
 };
-// ✨ Everything below here affects how the site works. ✨ 
-// It's not required to edit anything there, but I encourage you to poke around!
-const fs = require("fs"), // fs is used to manipulate our files, such as reading a page or creating a new blog post on request
-      express = require("express"), // express is used to accept requests and route content where it needs to go (http://expressjs.com/)
-      showdown = require("showdown"), // showdown is used to turn markdown into HTML (http://showdownjs.com/)
-      converter = new showdown.Converter(), // showdown uses a "converter" object to help convert markdown to html, and we'll call it any time we want that to happen
-      app = express(), // telling our app (this app right here!) to use express
-      port = 3000; // this is the port our app "listens" for new requests at
-app.use(express.json()); // Set up our express app to accept JSON requests
-app.set("view engine", "pug"); // Using Pug as our view engine lets us dynamically build HTML pages with the files in the "views" folder (https://pugjs.org/)
-app.get('/favicon.ico', (req, res) => { // This isn't strictly necessary, but
-  if (site.favicon == "") { // most browsers will check for a favicon in your root folder.
-    res.status(204); // So you can either let it fail,
-  } else { // or,
-    res.send(site.favicon); // tell it where it is, using the site settings above.
-  }
-});
-// The index page is always assumed to be in your pages folder, titled "index.md"
-app.get("/", (req, res) => { // the forward slash here just means "anyone someone requests *just* your site's URL"
-  var content = getItem(site.pages,"index"); // grab the index from pages/index.md
-  var list = ""; // In addition to the content of the page, let's list all posts from the posts/ folder
-  if(getPosts().length > 0){
-    getPosts().forEach(post => {
-      list += `<li><a href='/${site.blog}/${post.slug}'>${post.title}</a><span class="meta">${post.pubdate}</span></li>`; // There's probably a nicer way to do this using Pug, but using Javascript to build HTML has a sort of an ugly, pure quality to it.
+
+/*  
+  ⚠️ REQUIRED STUFF ⚠️
+
+  This is where we include the stuff that helps Oregano run:
+    * FS lets us access the File System, so we can read and write posts
+    * Express lets us listen for requests at the endpoints we define below
+    * Showdown turns markdown into HTML
+    * Pug helps us render HTML dynamically
+    
+  You probably won't want to change anything here, unless you know what you're doing.
+*/
+
+const fs = require("fs"),
+  express = require("express"),
+  showdown = require("showdown"),
+  converter = new showdown.Converter(),
+  app = express(),
+  port = 3000;
+app.use(express.json());
+app.set("view engine", "pug");
+
+/* 
+  🔑 AUTHORIZATION 🔑
+
+  Any time you want to connect your Oregano site to a third-party app, you can
+  make a GET request to https://yourSiteURL.com/auth, and include a "key" value
+  in the query. If that key matches the key that you set in ENVIRONMENT VARIABLES,
+  then you're good to go! That means that your key is correct, and you can use the
+  other functions listed below successfully. 
+*/
+
+app.get("/auth", (req, res) => {
+  if (req.query.key == process.env.key) {
+    console.log("✅ Connected successfully!");
+    res.send({
+      message: "✅ Connected successfully!",
+      url: site.url
     });
   } else {
-    list = `<li><i>Nothing here yet!</i></li>`; // Just in case there aren't any posts, give the people *something*
+    console.log("🛑 Unauthorized connection attempt!");
+    res.status(401);
   }
-  res.render("content", { // Now we use Pug to take all of the content from the page and render it
-    title: content.title.replace(/(<([^>]+)>)/gi,''), // This regex removes all HTML tags from the title, so that it can be displayed properly in the browser tab (yes I had to google this)
-    displayTitle: content.title,
-    content: content.html+`<ul class="post-list">${list}</ul>`,
-    image: site.image,
-    site: site // You'll see this pop up a few times, but we also pass all of the site variables to pug, so we can display site-constant stuff, like the header and footer links
+});
+
+/*
+  📚 ALL POSTS 📚
+  
+  Whether you want to scroll through all of your posts, get an RSS feed, or send
+  posts to a third-party app, going to https://yourSiteURL.com/all is the place to start. 
+  
+  By default, it will render an HTML list of all of your posts. But, you can add a "format"
+  value to the query, to change how the posts are displayed. 
+  
+  For RSS: https://yourSiteURL.com/all?format=rss
+  For JSON: https://yourSiteURL.com/all?format=json
+*/
+
+app.get("/all", (req, res) => {
+  const format = req.query.format;
+  const posts = getAllPosts(); 
+  if (format == "rss") {
+    res.render("rss", {
+      posts: posts,
+      site: site
+    });
+  } else if (format == "json") {
+    res.type("application/json");
+    res.send(posts);
+  } else {
+    res.render("list", {
+      title: "All posts",
+      htmlTitle: "All posts",
+      image: site.image,
+      posts: posts,
+      site: site
+    });
+  }
+});
+
+/*
+  🔍 SEARCH 🔍
+  
+  Want to find a specific post? Head to https://yourSiteURL.com/search
+  
+  By default, that will render an HTML page with a search bar and list of results. 
+  If you want to return the results as JSON instead (such as for a third-party app), 
+  you can specify "q" and "format" in the query. 
+  
+  For example, to return posts that contain "test" as JSON, use: 
+  
+  https://yourSiteURL.com/search?q=test&format=json
+  
+  To limit the number of results, you can add a "limit" value to the query.
+  So to get only the top result for "test", use:
+  
+  https://yourSiteURL.com/search?q=test&format=json&limit=1
+*/
+
+app.get("/search", (req, res) => {
+  const q = req.query.q,
+    format = req.query.format,
+    limit = req.query.limit;
+  const pattern = new RegExp(q, "gi");
+  var results = getAllPosts()
+    .filter(post => {
+      return post.markdown.search(pattern) > -1;
+    })
+    .sort((a, b) => {
+      return (
+        b.markdown.match(pattern).length - a.markdown.match(pattern).length
+      );
+    });
+  if (typeof limit !== undefined) {
+    results = results.slice(0, limit);
+  }
+  if (format == "json") {
+    res.send(results);
+  } else {
+    res.render("search", {
+      title: "Search",
+      query: q,
+      image: site.image,
+      posts: results,
+      site: site
+    });
+  }
+});
+
+/* 
+  📖 READ 📖
+  
+  This is where your blog posts come from! 
+  
+  When you go to https://yourSiteURL.com/read/post-title, this code looks for a
+  file in the "posts" folder called "post-title.md". If it exists, we render it
+  in HTML. If it doesn't, you get redirected back to the index page. 
+*/
+
+app.get("/read/:post?", (req, res) => {
+  const post = getFile("posts", req.params.post);
+  if (!post) {
+    res.redirect("/");
+  }
+  res.render("post", {
+    title: post.plainTitle,
+    htmlTitle: post.htmlTitle,
+    html: post.html,
+    meta: post.prettyDate,
+    image: post.image,
+    site: site
   });
 });
-// Find the specific page or post the user is looking for and display it
-app.get("/:page/:post?", (req, res) => { // This uses some special Express-powers, and first checks if someone went to a page, like /blog. If they did, we also check if the requested a post, like /blog/hello-world
-  var content, meta;
-  if (req.params.page == site.rss) { // If the page they requested is your RSS feed, let's give them that.
-    res.set("Content-Type", "application/rss+xml");
-    res.send(getRSS());
-  } else if (req.params.page == site.blog) { // If the page is your blog page,
-    content = getItem(site.posts, req.params.post); // Let's try and get the post they want
-  } else if (typeof req.params.page !== "undefined") { // If there's NO post, and they definitely requested a page,
-    content = getItem(site.pages, req.params.page); // let's grab that page
-  }
-  // If for whatever reason the item they requested doesn't exist, redirect to index
-  if (typeof content == undefined || content === false) {
+
+/*
+  📄 PAGES 📄
+  
+  Pages are considered "evergreen" content, and exist outside the regular blog. 
+  For example, an "About Me" page would be a good thing to put in the "pages" folder. 
+  
+  When someone goes to https://yourSiteURL.com/page-title, this code looks for a 
+  file in the "pages" folder called "page-title.md". If it exists, we render it 
+  in HTML. Otherwise, you get redirected back to the index page.
+*/
+
+app.get("/:page", (req, res) => {
+  const page = getFile("pages", req.params.page);
+  if (!page) {
     res.redirect("/");
-  } else {
-    res.render("content", { // But if we do have a page or post to show, let's render it with Pug
-      title: content.title.replace(/(<([^>]+)>)/gi,''), // again this is some great regex to help remove HTML tags, to put your title in the browser window
-      displayTitle: content.title,
-      content: content.html,
-      meta: content.pubdate,
-      image: content.image,
-      site: site // we send all of the site settings to Pug as well, to display constants like your site title, and nav menus
+  }
+  res.render("page", {
+    title: page.plainTitle,
+    htmlTitle: page.htmlTitle,
+    html: page.html,
+    image: page.image,
+    site: site
+  });
+});
+
+/*
+  🏠 INDEX 🏠
+  
+  When you visit https://yourSiteURL.com, we render the "index.md" file in your "pages" folder.
+*/
+
+app.get("/", (req, res) => {
+  var p = req.query.p ? parseInt(req.query.p) : 1;
+  var index = getFile("pages", "index");
+  const allPosts = getAllPosts();
+  const posts = allPosts.slice(site.pagination*(p-1),(site.pagination*(p-1))+site.pagination);
+  res.render("list", {
+    title: index.plainTitle,
+    htmlTitle: index.htmlTitle,
+    html: index.html,
+    image: index.image,
+    posts: posts,
+    current: p,
+    all: allPosts.length,
+    next: allPosts.length > (site.pagination*(p-1))+site.pagination ? p+1 : null,
+    prev: p > 1 ? p-1 : null,
+    site: site
+  });
+});
+
+/*
+  ✏️ WRITE ✏️
+  
+  While you can always publish posts by adding markdown files directly to the "posts" folder,
+  you can also use third-party apps to send a POST request to https://yourSiteURL.com/write to 
+  publish remotely!
+  
+  When you do that, you'll need to include your "key" and "markdown" in the request body. For example:
+
+  {
+    key: "super-secret-key",
+    markdown: "# Hello, world 👋 \n This is a brand new post on my site!"
+  }
+  
+  The "key" helps make sure you're authorized to publish here, and is set in your ENVIRONMENT VARIABLES.
+  
+  The "markdown" is the raw markdown content you want to post. The first line of that content is then
+  used as the post's title and filename. If the first line doesn't include any discernable text 
+  (for example, if it's an image), we'll use the current timestamp as the filename instead.
+*/
+
+app.post("/write", (req, res) => {
+  const key = req.body.key,
+        markdown = req.body.markdown;
+  if (key == process.env.key) {
+    var id = markdown.match(/(.*)\n?/)[0].replace(/[\#\!\?\[\]\&]/g, "").trim().replace(/\s/g, "-").toLowerCase();
+    if (!id.match(/[^\!\?\s]/)) id = Date.now();
+    fs.writeFile(`./posts/${id}.md`, markdown, (err) => {
+      if (err) return console.log(err);
+      res.send(getFile("posts", id));
     });
+  } else {
+    res.status(401);
   }
 });
-// For the index and RSS feed, we need a list of all blog posts, sorted by modification date
-const getPosts = () => {
-  return fs // fs lets us look at the File System, and grab your actual markdown files
-    .readdirSync(`./${site.posts}`)
+
+/*
+  📝 UPDATE 📝
+  
+  If you've already written a post, and want to update its content without changing its filename,
+  you can send PUT a request to https://yourSiteURL.com/update
+  
+  In the request, you'll need to include your "key", "markdown", and the "id" of the post you want to
+  update. For example, if you want to update "hello-world.md", you would send:
+
+  {
+    key: "super-secret-key",
+    id: "hello-world",
+    markdown: "# Oops! \n I forgot to edit this post!"
+  }
+*/
+
+app.put("/update", (req, res) => {
+  const key = req.body.key,
+        id = req.body.id,
+        markdown = req.body.markdown;
+  if (key == process.env.key) {
+    try {
+      var currentMarkdown = fs.readFileSync(`./posts/${id}.md`, "utf8");
+    } catch (err) {
+      res.status(404);
+    }
+    fs.writeFile(`./posts/${id}.md`, markdown, (err) => {
+      if (err) return console.log(err);
+      res.send(getFile("posts", id));
+    });
+  } else {
+    res.status(401);
+  }
+});
+
+/*
+  🗑 DELETE 🗑
+  
+  If you need to remove a post remotely, send a DELETE request to https://yourSiteURL.com/delete
+  In the request body, you'll need to include your "key", and the "id" of the post you want to delete.
+  For example, to delete the post "hello-world.md", you'd send:
+
+  {
+    key: "super-secret-key",
+    id: "hello-world"
+  }
+*/
+
+app.delete("/delete", (req, res) => {
+  const key = req.body.key,
+        id = req.body.id;
+  if(key == process.env.key){
+    try {
+      var file = fs.readFileSync(`./posts/${id}.md`, "utf8");
+    } catch (err) {
+      res.status(404);
+    }
+    fs.unlinkSync(`./posts/${id}.md`);
+    res.send({
+      message: `${id} was deleted`
+    });
+  } else {
+    req.status(401);
+  }
+});
+
+/*
+  🤗 HELPER FUNCTIONS 🤗
+  
+  The functions below help the endpoints above run, and are referenced quite a bit 
+  in the code you just scrolled past. If you want to make changes to things like 
+  how markdown is coverted into HTML, this is where to look!
+*/
+
+/*
+  ♾ GET ALL POSTS ♾
+  
+  This function looks at *all* of the files in the "posts" folder, and returns 
+  them as an array of objects, sorted by their modified date.
+  
+  The objects include values like the filename ("id"), the original markdown, 
+  the post's title, and the converted HTML.
+*/
+
+const getAllPosts = () => {
+  const posts = fs
+    .readdirSync(`./posts`)
     .filter(file => {
-      return file.toLowerCase().match(/\.md$/); // this looks at the posts/ folder, and returns all .md files
+      return file.toLowerCase().match(/\.md$/);
     })
-    .map(file => { // Now, using the content of those files, let's create some posts
-      const markdown = fs.readFileSync(`./${site.posts}/${file}`, "utf8");
+    .map(file => {
+      const markdown = fs.readFileSync(`./posts/${file}`, "utf8");
+      const title = markdown.match(/(.*)\n?/)[0];
       return {
-        slug: file.split(".")[0], // the "slug" is the part you put in the address bar
-        title: converter.makeHtml(markdown.match(/(.+)\n/)[0]).replace(/[Hh]\d/g,"span"), // The title is the first line of your markdown, converted to HTML, then stripped of any Header tags (so our own styles can kick in instead)
-        mtime: fs.statSync(`./${site.posts}/${file}`).mtime, // this is the raw "modified time" of the file
-        pubdate: fs.statSync(`./${site.posts}/${file}`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) // the prettier version of mtime, displayed on the page
+        id: file.split(".")[0],
+        markdown: markdown,
+        html: converter.makeHtml(markdown.replace(title, "")),
+        image: markdown.match(/\!\[.*\]\((.*)\)/)
+          ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
+          : site.image,
+        htmlTitle: converter.makeHtml(title).replace(/[Hh]\d/g, "span"),
+        plainTitle: converter.makeHtml(title).replace(/(<([^>]+)>)/gi, ""),
+        modifiedDate: fs.statSync(`./posts/${file}`).mtime,
+        prettyDate: fs.statSync(`./posts/${file}`).mtime.toLocaleDateString("en-GB",{weekday:"long",year:"numeric",month:"long",day:"numeric"})
       };
     })
-    .sort((a, b) => { // sort the posts so that the most recent ones are on top
-      return b.mtime - a.mtime;
+    .sort((a, b) => {
+      return b.modifiedDate - a.modifiedDate;
     });
+  return posts;
 };
-// Find and return a specific page or post for display
-const getItem = (folder, file) => {
+
+/*
+  1️⃣ GET ONE FILE 1️⃣
+  
+  This function is used when we need just one page or post to display. It returns a JSON 
+  object containing all of the stuff we might need to render that file for the reader.
+  
+  If the file can't be found, it returns FALSE, which tells us to kick the user back 
+  to the index page.
+*/
+
+const getFile = (folder, id) => {
   var markdown = "";
-  try { markdown = fs.readFileSync(`./${folder}/${file}.md`, "utf8"); } catch (err) { return false; }
-  return {
-      slug: file,
-      title: converter.makeHtml(markdown.match(/(.*)\n/)[0]).replace(/[Hh]\d/g,"span"),
-      html: converter.makeHtml(markdown.replace(markdown.match(/(.*)\n/)[0], "")),
-      image: markdown.match(/\!\[.*\]\((.*)\)/) ? markdown.match(/\!\[.*\]\((.*)\)/)[1] : site.image,
-      pubdate: folder == site.posts ? fs.statSync(`./${folder}/${file}.md`).mtime.toLocaleDateString("en-GB",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : ""
-  };
-}
-// Generate some RSS and fill in each blog post
-const getRSS = () => { // This is maybe the ugliest function here, becuase we're building the RSS from scratch. If you have a better way to do this, let me know @aTylerRobertson! 
-  var rss = `<?xml version="1.0"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="${site.url}/${site.rss}" rel="self" type="application/rss+xml" /><title>${site.title}</title><link>${site.url}</link><description>${site.description}</description>`;
-  const posts = getPosts(); // After pasting in the default RSS requirements, let's return all posts and plug them into some XML
-  posts.forEach(item => {
-    const post = getItem(site.posts, item.slug);
-    rss += `<item><title>${post.title}</title><guid>${site.url}/${site.posts}/${post.slug}</guid><link>${site.url}/${site.posts}/${post.slug}</link><pubDate>${post.pubdate}</pubDate><description><![CDATA[${post.html}]]></description></item>`;
-  });
-  rss += `</channel></rss>`;
-  return rss;
-}
-// Writing new posts
-app.post(`/${site.write}`, (req, res) => { // You can publish new posts remotely by making a POST request to your site's /write endpoint
-  if (req.body.key == process.env.key) { // Check to make sure the right key was provided -- remember to set a key in .env!
-    res.sendStatus(200); // If the key is correct, send a success status!
-    const markdown = req.body.markdown; // The only other required value is "markdown", which is the raw markdown content of your post. 
-    var slug = markdown.match(/([^\#\!\?\[\]\&].*)\n/)[0].trim().replace(/\s/g, "-").toLowerCase(); // We grab the first line, and try to parse out any text we can from it, replacing spces with dashes, to use as the filename.
-    if (!slug.match(/[^\!\?\s]/)) slug = Date.now(); // If the slug doesn't have any usable characters in it, using the current date/time as the filename instead.
-    fs.writeFile(`./${site.posts}/${slug}.md`, markdown, function(err) { // Write the file to your posts/ folder
-      if (err) return console.log(err);
-      console.log("Created file:", `./${site.posts}/${slug}.md`);
-    });
-  } else {
-    req.send("Unauthorized"); // If the key doesn't match, you're outta here!
+  try {
+    markdown = fs.readFileSync(`./${folder}/${id}.md`, "utf8");
+  } catch (err) {
+    return false;
   }
-});
-app.listen(port, () => { // Tell Express to start listening for requests when your site wakes up
+  const title = markdown.match(/(.*)\n?/)[0];
+  return {
+    id: id,
+    htmlTitle: converter.makeHtml(title).replace(/[Hh]\d/g, "span"), 
+    plainTitle: converter.makeHtml(title).replace(/(<([^>]+)>)/gi, ""),
+    markdown: markdown,
+    html: converter.makeHtml(markdown.replace(title, "")),
+    image: markdown.match(/\!\[.*\]\((.*)\)/)
+      ? markdown.match(/\!\[.*\]\((.*)\)/)[1]
+      : site.image,
+    modifiedDate: fs.statSync(`./${folder}/${id}.md`).mtime,
+    prettyDate: fs.statSync(`./${folder}/${id}.md`).mtime.toLocaleDateString("en-GB", {weekday:"long",year:"numeric",month:"long",day:"numeric"})
+  };
+};
+
+/*
+ 🧚‍ HEY, LISTEN 🧚‍♂️
+ 
+ This starts the listening process, so that your site can receive the requests we defined above!
+*/
+
+app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
+
+/*
+  ❤️ THANK YOU ❤️
+  
+  Thanks for trying out Oregano, and reading down this far! If you have questions,
+  comments, gripes, or complaints about Oregano, please feel free to reach out on
+  Twitter any time at @aTylerRobertson
+  
+  Have a great day! 👋
+*/

@@ -1,7 +1,7 @@
 {
-  "name": "oregano",
-  "description": "really simple flat-file blogging",
-  "version": "1.0.0",
+  "name": "Oregano",
+  "description": "Super simple blogging for writers who don't have the thyme. 🌱",
+  "version": "1.5.0",
   "scripts": {
     "start": "node oregano.js"
   },
