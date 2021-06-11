@@ -282,7 +282,7 @@ app.post("/write", (req, res) => {
   const key = req.body.key,
         markdown = req.body.markdown;
   if (key == process.env.key) {
-    var id = markdown.match(/(.*)\n?/)[0].replace(/[\#\!\?\[\]\&]/g, "").trim().replace(/\s/g, "-").toLowerCase();
+    var id = markdown.match(/(.*)\n?/)[0].replace(/[\#\!\?\[\]\&\.\,]/g, "").trim().replace(/\s/g, "-").toLowerCase();
     if (!id.match(/[^\!\?\s]/)) id = Date.now();
     fs.writeFile(`./posts/${id}.md`, markdown, (err) => {
       if (err) return console.log(err);
