@@ -145,19 +145,19 @@ a:active {
 }
 
 li {
-  margin-bottom: 1rem;
   line-height: 2rem;
 }
 
 ul.post-list {
   list-style-type: none;
   padding-inline-start: 0;
+  margin: 2rem 0;
 }
 
 ul.post-list li {
-  content-visibility: auto;
-  line-height: 1rem;
   margin-bottom: 1.5rem;
+  content-visibility: auto;
+  line-height: 1.5rem;
 }
 
 ul.post-list li a {
