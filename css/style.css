@@ -67,6 +67,12 @@ h5 {
   margin-bottom: 0;
 }
 
+blockquote {
+  border-left: 3px solid var(--link);
+  padding-left: 1rem;
+  color: var(--meta);
+}
+
 img,
 iframe {
   display: block;
