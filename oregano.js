@@ -44,13 +44,13 @@
 */ 
 
 const site = {
-  title: "Oregano", // Your site's title appears at the top of every page
-  description: "Super simple blogging for writers who don't have the thyme. 🌱", // A brief description of your site, appears in search results
-  url: "https://oregano-blog.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
-  image: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", // The default image to show in search results or on social media
-  favicon: "https://cdn.glitch.com/e610c8b0-504c-4186-884d-4efe9a6e8b51%2Foregano_logo.png?v=1623236080041", //The tiny icon to show in your browser tab
-  header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started", API: "/api" }, // Links to show on your site's header, using the format {"Text": "URL"}
-  footer: { "All posts": "/all", RSS: "/all?format=rss", Twitter: "https://twitter.com/oregano_blog", "🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
+  title: "Grow Darken", // Your site's title appears at the top of every page
+  description: "Growtopia Private Server", // A brief description of your site, appears in search results
+  url: "https://grow-darken.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
+  image: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", // The default image to show in search results or on social media
+  favicon: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", //The tiny icon to show in your browser tab
+  header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started"}, // Links to show on your site's header, using the format {"Text": "URL"}
+  footer: { "All posts": "/all", "🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
   pagination: 10 // How many posts should we show on the index page at one time?
 };
 

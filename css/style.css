@@ -3,12 +3,12 @@
 
 /* Editing the variables here will impact most of the design on your site! */
 :root {
-  --accent: #222;
+  --accent: #7f7f7f;
   --meta: #666;
   --link: #27ae60;
   --link-hover: #2ecc71;
-  --background-color: #fff;
-  --font-color: #000;
+  --background-color: #121212;
+  --font-color: #fff;
   --font-family: "Open Sans", sans-serif;
   --container-width: 45rem;
   --font-size: 130%;
