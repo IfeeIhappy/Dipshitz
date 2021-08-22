@@ -50,7 +50,7 @@ const site = {
   image: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", // The default image to show in search results or on social media
   favicon: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", //The tiny icon to show in your browser tab
   header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started"}, // Links to show on your site's header, using the format {"Text": "URL"}
-  footer: { "All posts": "/all", "🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
+  footer: { "All posts": "/all", "Search 🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
   pagination: 10 // How many posts should we show on the index page at one time?
 };
 

@@ -1,3 +1,3 @@
-# Super simple blogging for writers who don't have the thyme. 🌱
+# Grow Darken,Growtopia Private Server
 
-Update your blog from anywhere, at any time, just by writing some markdown.
+Official Website
