@@ -44,12 +44,12 @@
 */ 
 
 const site = {
-  title: "Infinity", // Your site's title appears at the top of every page
+  title: "<img src=\"https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514\" alt=\"GrowDarken\" style=\"float: left; margin-right: 10px; width: 50px; border-radius: 50;\" />InfinityDN", // Your site's title appears at the top of every page
   description: "", // A brief description of your site, appears in search results
-  url: "https://grow-darken.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
-  image: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", // The default image to show in search results or on social media
-  favicon: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", //The tiny icon to show in your browser tab
-  header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started", "Join Now": "https://discord.gg/SRfcYvUnvu"}, // Links to show on your site's header, using the format {"Text": "URL"}
+  url: "https://infinitydn.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
+  image: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", // The default image to show in search results or on social media
+  favicon: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", //The tiny icon to show in your browser tab
+  header: { Home: "/", About: "/about-oregano", "Getting Started": "/getting-started",}, // Links to show on your site's header, using the format {"Text": "URL"}
   footer: { "All posts": "/all", "Search 🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
   pagination: 10 // How many posts should we show on the index page at one time?
 };
