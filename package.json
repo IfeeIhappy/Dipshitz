@@ -12,5 +12,6 @@
   },
   "engines": {
     "node": "12.x"
-  }
+  },
+  "license": "MIT"
 }
