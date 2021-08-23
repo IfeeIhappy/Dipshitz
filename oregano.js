@@ -44,12 +44,14 @@
 */ 
 
 const site = {
-  title: "<img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"GrowDarken\" style=\"float: center; width: 75px; border-radius: 100px;\" />InfinityDN", // Your site's title appears at the top of every page
+  title: "<img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"Logo\" style=\"float: center; width: 75px; border-radius: 100px;\" />InfinityDN",
+  // Your site's title appears at the top of every page
+  title2:"InfinityDN",
   description: "", // A brief description of your site, appears in search results
   url: "https://infinitydn.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
   image: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", // The default image to show in search results or on social media
   favicon: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", //The tiny icon to show in your browser tab
-  header: { Home: "/", About: "/about",}, // Links to show on your site's header, using the format {"Text": "URL"}
+  header: { Home: "/", About: "/about", "Search 🔍": "/search"}, // Links to show on your site's header, using the format {"Text": "URL"}
   footer: { "All posts": "/all", "Search 🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
   pagination: 10 // How many posts should we show on the index page at one time?
 };
@@ -125,10 +127,11 @@ app.get("/all", (req, res) => {
   } else {
     res.render("list", {
       title: "All posts",
-      htmlTitle: "All posts",
+      htmlTitle: "Posts",
       image: site.image,
       posts: posts,
-      site: site
+      site: site,
+      htmlTitle: site.title2
     });
   }
 });
