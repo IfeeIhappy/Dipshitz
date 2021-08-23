@@ -52,7 +52,7 @@ const site = {
   favicon: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", //The tiny icon to show in your browser tab
   header: { Home: "/", About: "/about", "Search 🔍": "/search"}, // Links to show on your site's header, using the format {"Text": "URL"}
   footer: { "All posts": "/all", "Search 🔍": "/search" }, // Links to show on your site's footer, using the format {"Text": "URL"}
-  pagination: 10 // How many posts should we show on the index page at one time?
+  pagination: 5 // How many posts should we show on the index page at one time?
 };
 
 /*  
