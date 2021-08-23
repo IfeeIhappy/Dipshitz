@@ -44,8 +44,8 @@
 */ 
 
 const site = {
-  title: "Grow Darken", // Your site's title appears at the top of every page
-  description: "Growtopia Private Server", // A brief description of your site, appears in search results
+  title: "Infinity", // Your site's title appears at the top of every page
+  description: "", // A brief description of your site, appears in search results
   url: "https://grow-darken.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
   image: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", // The default image to show in search results or on social media
   favicon: "https://cdn.glitch.com/26e999b9-4f28-4341-8a98-80460a3cab4c%2F42ff1a92e55e1c9e5d1492be5ad19219.png?v=1629674795514", //The tiny icon to show in your browser tab
