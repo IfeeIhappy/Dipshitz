@@ -46,8 +46,7 @@
 const site = {
   title: "<img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"Logo\" style=\"float: center; width: 75px; border-radius: 100px;\" />InfinityDN",
   // Your site's title appears at the top of every page
-  title2:"InfinityDN",
-  description: "", // A brief description of your site, appears in search results
+  description: "Digital-Pointed Blog", // A brief description of your site, appears in search results
   url: "https://infinitydn.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
   image: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", // The default image to show in search results or on social media
   favicon: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", //The tiny icon to show in your browser tab
@@ -131,7 +130,6 @@ app.get("/all", (req, res) => {
       image: site.image,
       posts: posts,
       site: site,
-      htmlTitle: site.title2
     });
   }
 });
