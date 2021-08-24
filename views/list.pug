@@ -20,7 +20,7 @@ html
             - var last = first + site.pagination - 1
             if last > all 
               - var last = all
-            span Posts #{first}-#{last} of #{all}
+            span Page #{current}/#{all}
           if next != null
             a(href='?p='+next)  👉
       include footer.pug
