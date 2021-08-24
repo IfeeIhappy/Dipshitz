@@ -1,4 +1,4 @@
-# Top 5 Freeroam Driving Simulators For Android<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE9uOCesx6aEWLYQCv5ydz-Ua6gdwpblfw_A&usqp=CAU" alt="Android" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px;" />
+# Top 5 Flight Simulators For Android<br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE9uOCesx6aEWLYQCv5ydz-Ua6gdwpblfw_A&usqp=CAU" alt="plane" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px;" />
 
 I prepared 5 flight simulators on android for you!
 
@@ -266,4 +266,38 @@ infiniteflight.com/legal/terms
 
 [Go to Download Page](https://play.google.com/store/apps/details?id=com.fds.infiniteflight&gl=TR)
 
-# 5. Flight Simulator 2018 FlyWings Free
+# 5. Flight Simulator 2018 FlyWings Free (⭐ 3.7)
+
+FLIGHT SIMULATOR as you have never seen before! FlyWings 2018 - Flight Simulator is the masterpiece of flight simulation for mobile!
+
+Fasten your seatbelts and be ready for the most realistic and beautiful flight of your life!
+
++ CHOOSE between airplanes, helicopters, fighter jets and the amazing ANTONOV 225!
++ MISSION and FREE FLIGHT game modes, log your FLIGHT HOURS and to UNLOCK airplanes!
++ AMAZING 3D graphics of cities, landscapes and aircraft.
++ DANGEROUS and BUSIEST AIRPORTS around the world! Like Lukla Airport in Nepal and J.F.K. Airport in New York!
++ RECORD AND SHARE the best moments of your flight with our NEW replay tool.
++ Fly with other pilots around the world in the MULTIPLAYER gamemode!
++ CONFIGURE your flight! CHOOSE between Day or NIGHT, WEATHER CONDITIONS, WIND speed and the NEW feature: WEIGHT and PAYLOAD!
++ REAL audios, REAL airlines and liveries, REALISTIC physics for best simulation.
+
+MISSION game mode is a real challenge! And it is really amazing in this simulator. ATC talks, COOL and ADDICTING gameplay! You are gonna love it!
+FREE FLIGHT gives you the oportunity to create your own routes in the most realistic cities and airports around the world!
+
+Try to land a small aircraft in the most DANGEROUS airport of all: Lukla Airport in Nepal!
+Visit the Hoover Dam and all the Casinos in Las Vegas. Fly over Manhattan in New York city and be admired with all the details!
+You will be able to see the Empire State building, Yankee Stadium and many more cool sightseeing!
+
+FlyWings is the first and only flight simulator that let you choose to fly during DAY or NIGHT, choose the WEATHER CONDITIONS between clear skies and storms,
+wind speed and now we introduced a NEW awesome feature: choose the WEIGHT and PAYLOAD of your aircraft!
+Try to fly a fully armed F-15 or a very heavy cargo plane from one AIRPORT to another and feel what it is to be a skilled flight PILOT!
+
+Thinking about become a digital influencer or youtuber? We added a feature to share a video with the best moments of your flight!
+
+Real audios recorded from real aircraft. Turn on and off the engines, change the lights, APU configurations and more!
+
+Bored about other simulations that don't bring anything new? Flywings 2018 will definitively impress you!
+
+Send us your feedback! We are always working to create the best flight simulator experience for you! And will be constantly updating and adding features for you!
+
+[Go to Download Page](https://play.google.com/store/apps/details?id=com.thetisgames.googleplay.flywings2018flightsimulator&gl=TR)
