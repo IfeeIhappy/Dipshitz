@@ -1,6 +1,6 @@
 # InfinityDN
 
-You can find digital blogs in this website!
+You can find useful blogs and news in this website!
 
 
 
