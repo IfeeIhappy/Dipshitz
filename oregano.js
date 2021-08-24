@@ -42,7 +42,6 @@
   
   You'll also want to edit /pages/index.md, to personalize your home page.
 */ 
-
 const site = {
   title: "<div align=\"center\"><img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"Logo\" style=\"width: 75px; border-radius: 100px;\" /></div>InfinityDN",
   // Your site's title appears at the top of every page
@@ -443,7 +442,6 @@ const getFile = (folder, id) => {
  
  This starts the listening process, so that your site can receive the requests we defined above!
 */
-
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
