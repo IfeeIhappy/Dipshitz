@@ -1,7 +1,7 @@
 # Humanoid robot from Tesla<br><img src="https://cdn1.ntv.com.tr/gorsel/kmCt-TgUc0ij8uMVbPdTaw.jpg?width=767&height=575&mode=both&scale=both&v=1629460901167" alt="robot" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
 
 Tesla is developing a humanoid robot. It is aimed that the prototype of the robot, which was developed with the technology used in electric cars, will be ready next year. The robot will perform basic tasks that people have difficulty in doing in daily life.
-<img src="https://cdn1.ntv.com.tr/gorsel/_8pA9SAK_02PkGXjXvdeSg.jpg?width=767&height=575&mode=both&scale=both&v=1629460901167" alt="robot" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" /><br>
+<img src="https://cdn1.ntv.com.tr/gorsel/_8pA9SAK_02PkGXjXvdeSg.jpg?width=767&height=575&mode=both&scale=both&v=1629460901167" alt="robot" style="float: center; margin-right: 0px; width: 1000px; border-radius: 25px" /><br>
 <br>
 
 The American company Tesla, which produces electric vehicles, has taken up the production of robots. The company is preparing to produce a humanoid robot.
