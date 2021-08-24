@@ -44,7 +44,7 @@
 */ 
 
 const site = {
-  title: "<div align=\"center\"><img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"Logo\" style=\"width: 75px; border-radius: 100px; margin-right: 50px;\" />InfinityDN</div>",
+  title: "<div align=\"center\"><img src=\"https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999\" alt=\"Logo\" style=\"width: 75px; border-radius: 100px;\" /></div>InfinityDN",
   // Your site's title appears at the top of every page
   description: "Digital-Pointed Blog", // A brief description of your site, appears in search results
   url: "https://infinitydn.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
