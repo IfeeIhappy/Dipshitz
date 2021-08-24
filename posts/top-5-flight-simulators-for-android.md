@@ -266,38 +266,41 @@ infiniteflight.com/legal/terms
 
 [Go to Download Page](https://play.google.com/store/apps/details?id=com.fds.infiniteflight&gl=TR)
 
-# 5. Flight Simulator 2018 FlyWings Free (⭐ 3.7)
+# 5. Aerofly 2 Flight Simulator (⭐ 3.8)
 
-FLIGHT SIMULATOR as you have never seen before! FlyWings 2018 - Flight Simulator is the masterpiece of flight simulation for mobile!
+Aerofly 2 Flight Simulator lets you explore the world of flying in a quality never seen before. Fly a large selection of highly detailed aircrafts with fully animated 3D cockpits in the fantastic region of the San Francisco Bay Area and its surroundings.
 
-Fasten your seatbelts and be ready for the most realistic and beautiful flight of your life!
+Aerofly 2 Flight Simulator sets a high value on realistic flight physics, highly detailed aircraft and a stunning, photo realistic, scenery.
+Take your seat in the cockpit and enjoy flying over the famous Golden Gate Bridge or visit Alcatraz Island. Learn the basics of flying with our Flight School or practice landings in various atmospheric conditions using the ILS navigation system.
 
-+ CHOOSE between airplanes, helicopters, fighter jets and the amazing ANTONOV 225!
-+ MISSION and FREE FLIGHT game modes, log your FLIGHT HOURS and to UNLOCK airplanes!
-+ AMAZING 3D graphics of cities, landscapes and aircraft.
-+ DANGEROUS and BUSIEST AIRPORTS around the world! Like Lukla Airport in Nepal and J.F.K. Airport in New York!
-+ RECORD AND SHARE the best moments of your flight with our NEW replay tool.
-+ Fly with other pilots around the world in the MULTIPLAYER gamemode!
-+ CONFIGURE your flight! CHOOSE between Day or NIGHT, WEATHER CONDITIONS, WIND speed and the NEW feature: WEIGHT and PAYLOAD!
-+ REAL audios, REAL airlines and liveries, REALISTIC physics for best simulation.
+At the same time, Aerofly 2 Flight Simulator features an intuitive user interface and requires virtually no training time.
 
-MISSION game mode is a real challenge! And it is really amazing in this simulator. ATC talks, COOL and ADDICTING gameplay! You are gonna love it!
-FREE FLIGHT gives you the oportunity to create your own routes in the most realistic cities and airports around the world!
 
-Try to land a small aircraft in the most DANGEROUS airport of all: Lukla Airport in Nepal!
-Visit the Hoover Dam and all the Casinos in Las Vegas. Fly over Manhattan in New York city and be admired with all the details!
-You will be able to see the Empire State building, Yankee Stadium and many more cool sightseeing!
+FEATURES
 
-FlyWings is the first and only flight simulator that let you choose to fly during DAY or NIGHT, choose the WEATHER CONDITIONS between clear skies and storms,
-wind speed and now we introduced a NEW awesome feature: choose the WEIGHT and PAYLOAD of your aircraft!
-Try to fly a fully armed F-15 or a very heavy cargo plane from one AIRPORT to another and feel what it is to be a skilled flight PILOT!
+• over 70 airports to choose from
+• 6 aircraft included ( F-18, Learjet 45, C172, Baron 58, ASG 29 glider, Pitts S-2B biplane )
+• 11 aircraft available for purchase ( Airbus A320, Airbus A380, B737-500, B747-400, King Air C90 GTx, Aermacchi MB-339, Corsair F4U, Extra 330, Swift S1 glider, P-38 Lightning and Sopwith Camel )
+• Highly detailed and animated 3D cockpits in all aircraft
+• Lighted cockpit at night time
+• Automatic navigation tuning ( ILS, NDB and VOR )
+• Realistic flight physics
+• Sophisticated autopilot
+• Interactive Flight school for learning the basics of flying
+• High resolution aerial images of the San Francisco Bay Area
+• Lighted buildings at night
+• PAPI runway lights
+• Altitude Callouts
+• Over 40000 square miles flyable area
+• Display terrain features like mountains, lakes and cities for easy navigation
+• Adjustable time of day
+• Adjustable wind, thermals and turbulence
+• Replay system
+• Different view modes: Follow, Cockpit, Fly by, Tower, HUD view and many more
 
-Thinking about become a digital influencer or youtuber? We added a feature to share a video with the best moments of your flight!
+This Flight Simulator will really show you the fascinating world of flying in a quality never seen before.
 
-Real audios recorded from real aircraft. Turn on and off the engines, change the lights, APU configurations and more!
+*** PLEASE NOTE: Due to the highly detailed 3D graphics and cockpits, Aerofly 2 Flight Simulator will run smoothly only on tablets and phones with a powerful graphics processor. ***
+*** PLEASE NOTE: The size of Aerofly 2 Flight Simulator is almost 2,0 GByte. Please ensure you have enough free space on your phone or tablet. ***
 
-Bored about other simulations that don't bring anything new? Flywings 2018 will definitively impress you!
-
-Send us your feedback! We are always working to create the best flight simulator experience for you! And will be constantly updating and adding features for you!
-
-[Go to Download Page](https://play.google.com/store/apps/details?id=com.thetisgames.googleplay.flywings2018flightsimulator&gl=TR)
+[Go to Download Page](https://play.google.com/store/apps/details?id=com.aerofly.aerofly2android&gl=TR)
