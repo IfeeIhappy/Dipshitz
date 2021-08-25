@@ -72,7 +72,9 @@ blockquote {
   padding-left: 1rem;
   color: var(--meta);
 }
-
+a {
+  font-size: 150%;
+  }
 img,
 iframe {
   display: block;
