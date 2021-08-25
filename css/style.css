@@ -8,10 +8,10 @@
   --link: #27ae60;
   --link-hover: #2ecc71;
   --background-color: #121212;
-  --font-color: #7f7f7f;
+  --font-color: #A9A9A9;
   --font-family: "Open Sans", sans-serif;
   --container-width: 45rem;
-  --font-size: 130%;
+  --font-size: 100%;
 }
 
 /* Changing anything below this point isn't required, but I encourage you to poke around! */
