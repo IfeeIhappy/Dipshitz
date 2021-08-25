@@ -10,7 +10,8 @@ html
         ul(class="post-list")
           each post in posts
             li
-             a(href='/read/' + post.id) !{post.htmlTitle}
+             a(hres.render("list", {
+      href='/read/' + post.id) !{post.htmlTitle}
              span(class="meta") !{post.prettyDate}
         #pagination
           if prev != null
