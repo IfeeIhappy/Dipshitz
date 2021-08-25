@@ -1,4 +1,4 @@
-# New Ransomware: “Nitro<br>Ransomware” <br><img src="https://elona.xyz/uploads/images/image_750x_60bf3d75e1ffe.jpg" alt="ransomware" style="float: center; margin-right: 10px; width: 1000px; border-radius: 25px" />
+# New Ransomware: “Nitro<br>Ransomware” <br><br><img src="https://elona.xyz/uploads/images/image_750x_60bf3d75e1ffe.jpg" alt="ransomware" style="float: center; margin-right: 10px; width: 1000px; border-radius: 25px" />
 
 The new ransomware called “NitroRansomware” requests a Discord Nitro gift code to decrypt it after it encrypts the files of victims it infects. While ransomware often demands thousands of dollars, it is considered unusual for ransomware to accept only $9 worth of Discord Nitro gift codes. BleepingComputer researchers believe that this malware was distributed through a tool that claims to distribute "Free Discord Nitro Code". When the malware is first run, it first converts the files into encrypted files with the ".givemenitro" extension. 
 
@@ -6,6 +6,10 @@ The new ransomware called “NitroRansomware” requests a Discord Nitro gift co
 
 The victim is then shown a screen telling them that if you don't pay within 3 hours, they will delete your files.
 
-<img src="https://elona.xyz/uploads/images/image_750x415_60bf3d2eb5fe4.jpg" alt="img" style="float: center; margin-right: 10px; width: 1000px; border-radius: 25px" />It will turn your desktop background into an angry Discord logo when the time expires. 
+<img src="https://elona.xyz/uploads/images/image_750x415_60bf3d2eb5fe4.jpg" alt="img" style="float: center; margin-right: 10px; width: 1000px; border-radius: 25px" />
+
+It will turn your desktop background into an angry Discord logo when the time expires.
+
 <img src="https://elona.xyz/uploads/images/image_750x415_60bf4048f12c5.jpg" alt="img" style="float: center; margin-right: 10px; width: 1000px; border-radius: 25px" />
+
 Researchers have observed that time does not delete its files when reset. The good news is that the decryption key has been found to be statically embedded in the NitroRansomware software. In this way, victims can recover their files without paying. But the worst thing is that the ransomware executes different commands over the infected system, apart from encrypting the files. Users who are exposed to this type of malware are advised to run the anti-virus program they use after changing their Discord passwords and scan the system. It is also recommended to check Windows user accounts and delete accounts that they did not create. 

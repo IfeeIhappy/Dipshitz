@@ -1,4 +1,4 @@
-# Google has killed Discord's best music bot<br><img src="https://cdn.mos.cms.futurecdn.net/RuBp9G36pJPcFZTtoAZQTA-650-80.jpg.webp" alt="Discord" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
+# Google has killed Discord's best music bot<br><br><img src="https://cdn.mos.cms.futurecdn.net/RuBp9G36pJPcFZTtoAZQTA-650-80.jpg.webp" alt="Discord" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
 
 YouTube has issued a cease-and-desist order against the creator of Groovy, who has agreed to shut down the widely-popular music bot on August 30th.
 
