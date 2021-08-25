@@ -66,7 +66,7 @@ const site = {
   You probably won't want to change anything here, unless you know what you're doing.
 */
 
-var io = require("socket.io");
+
 const fs = require("fs"),
   express = require("express"),
   showdown = require("showdown"),
@@ -76,9 +76,7 @@ const fs = require("fs"),
 app.use(express.json());
 app.set("view engine", "pug");
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
+
 
 /* 
   🔑 AUTHORIZATION 🔑
