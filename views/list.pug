@@ -14,14 +14,14 @@ html
              span(class="meta") !{post.prettyDate}
         #pagination
           if prev != null
-            a(href='?p='+prev) 👈 
+            a(href='?p='+prev) ⏪ 
           if next != null || prev != null
             - var first = (current * site.pagination) - site.pagination + 1
             - var last = first + site.pagination - 1
             if last > all 
               - var last = all
-            span Page #{current}/#{all}
+            span Page #{current}
           if next != null
-            a(href='?p='+next)  👉
+            a(href='?p='+next)  ⏩
       include footer.pug
        
