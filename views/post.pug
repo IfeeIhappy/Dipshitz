@@ -8,9 +8,4 @@ html
         h1.title !{htmlTitle}
         span.meta !{meta}
         | !{html}
-        each post in posts
-            li
-             a(hres.render("list"), {
-      href='/read/' + post.id !{post.htmlTitle})
-             span(class="meta") !{post.prettyDate}
         include footer.pug
