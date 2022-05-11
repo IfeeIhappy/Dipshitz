@@ -1,4 +1,4 @@
-# Includes Doctor Strange: Spider-Man: No Way Home Trailer Released [Video]<br><br><img src="https://cdn.webtekno.com/media/cache/content_detail_v2/article/113928/spider-man-no-way-home-fragman-video-1629783955.jpg" alt="spiderman2" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
+# Includes Doctor Strange: Spider-Man: No Way Home Trailer Released [Video]<br><br><img src="https://cdn.glitch.global/8b6882ba-8f5f-42aa-92fb-9f961d3e6ef3/binary-code-greenjpg.jpg?v=1652278323305" alt="spiderman2" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
 
 Marvel has released the trailer for the long-awaited movie Spider-Man: No Way Home, which will appear as the third movie of the Spider-Man character in the MCU universe. The trailer clearly shows the multiverse connection and Doctor Strange, which is the theme of the 4th phase of the MCU. 
 
