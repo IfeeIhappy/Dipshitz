@@ -1,4 +1,4 @@
-# How to enable developer mode on Android<br><br><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM8GwAEBjdQ67EM74g48D3csMrfiG-wQ_0ww&usqp=CAU" alt="Logo2" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
+# Screen Shake Prank<br><br><img src="https://cdn.glitch.global/8b6882ba-8f5f-42aa-92fb-9f961d3e6ef3/Untitled(2).jpg?v=1652313327091" alt="Logo2" style="float: left; margin-right: 10px; width: 1000px; border-radius: 25px" />
 
 Here's a video about it!
   <video width="360" height="270" controls>

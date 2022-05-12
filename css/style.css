@@ -1,5 +1,5 @@
 /* Importing Open Sans from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One:ital,wght@0,400;0,600;0,800;1,400&display=swap");
 
 /* Editing the variables here will impact most of the design on your site! */
 :root {
@@ -9,7 +9,7 @@
   --link-hover: #2ecc71;
   --background-color: #121212;
   --font-color: #A9A9A9;
-  --font-family: "Open Sans", sans-serif;
+  --font-family: "Fredoka One", sans-serif;
   --container-width: 45rem;
   --font-size: 100%;
 }
