@@ -48,7 +48,7 @@ const site = {
   description: "Digital-Pointed Blog", // A brief description of your site, appears in search results
   url: "https://kelvin-cool-blog.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
   image: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", // The default image to show in search results or on social media
-  favicon: "https://cdn.glitch.global/8b6882ba-8f5f-42aa-92fb-9f961d3e6ef3/_Bookmark_Webpage-512.webp?v=1652315630373", //The tiny icon to show in your browser tab
+  favicon: "https://cdn.glitch.global/5b9695b7-23f8-4638-82a7-fa3c033b1516/favicon%203.ico?v=1652510709115", //The tiny icon to show in your browser tab
   header: { Home : "/", "Search 🔍": "/search"}, // Links to show on your site's header, using the format {"Text": "URL"}
   footer: { "All posts": "/all", "Search 🔍": "/search" , "Contact": "mailto:kelvinfan@my.com" }, // Links to show on your site's footer, using the format {"Text": "URL"}
   pagination: 5 // How many posts should we show on the index page at one time?
