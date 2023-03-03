@@ -43,10 +43,10 @@
   You'll also want to edit /pages/index.md, to personalize your home page.
 */
 const site = {
-  title: "<div  /></div>Kelvin's blog",
+  title: "<div  /></div>Dipshitz 🛹🖕",
   // Your site's title appears at the top of every page
   description: "Digital-Pointed Blog", // A brief description of your site, appears in search results
-  url: "https://kelvin-cool-blog.glitch.me", // Your site's URL! This is important, because if it's wrong your links won't work!
+  url: "https://sedonet.cf", // Your site's URL! This is important, because if it's wrong your links won't work!
   image: "https://cdn.glitch.com/9de5adc4-a490-40db-b228-5564679d0d47%2Fimages%20(9).jpeg?v=1629744106999", // The default image to show in search results or on social media
   favicon: "https://cdn.glitch.global/5b9695b7-23f8-4638-82a7-fa3c033b1516/favicon%203.ico?v=1652510709115", //The tiny icon to show in your browser tab
   header: { Home : "/", "Search 🔍": "/search"}, // Links to show on your site's header, using the format {"Text": "URL"}
